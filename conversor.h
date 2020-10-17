@@ -1,14 +1,28 @@
 #include <stdio.h>
 
-void converte(char *nomeArquivo) {}
+void converte(char *arq, char *newArquivo) {
+    FILE *arqBase = fopen(arq, "r");
+    FILE *arqDest = fopen(newArquivo, "w");
 
-int qtdInst(char *nomeArquivo){
+    char word[5]; // sizeoff dele é 7, num parece ser certo haushas
+    
+    //while(fgets(word, sizeof(word), arqBase) != NULL ){
+
+    //}
+    
+    
+    fclose(arqBase);
+    fclose(arqDest);
+}
+
+
+int qtdInst(char *nameArquivo){
     int quantidade = 0;
 
     FILE *arquivo;
-    arquivo = fopen(nomeArquivo, "r");
+    arquivo = fopen(nameArquivo, "r");
     if (arquivo == NULL){
-        printf("Erro na abertura do arquivo ", nomeArquivo);
+        printf("Erro na abertura do arquivo ", nameArquivo);
         return -1;
     }
 
