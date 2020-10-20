@@ -2,40 +2,37 @@
 #include <unistd.h>
 #include "conversor.h"
 
-#include <assert.h>     // p teste
+#include <assert.h> // p teste
 
-typedef struct instruction{
-    unsigned int opcode:5;
-    unsigned int destino:3;
-    unsigned int arg1:3;
-    unsigned int arg2:3;
-}instruction_t;
-
+typedef struct instruction
+{
+    unsigned int opcode : 5;
+    unsigned int destino : 3;
+    unsigned int arg1 : 3;
+    unsigned int arg2 : 3;
+} instruction_t;
 
 // processo de abrir o arquivo tudo bonitin
 // ignorei p ja abrir de um direto e ae ja focarmos logo nas etapas dele
-int main(){
+int main()
+{
     char *arq = "mnemonios.txt";
- 
-    int qtdInstrucao;
 
-    qtdInstrucao = qtdInst(arq);
+    int qtdInstrucao = qtdInst(arq);
+
     assert(qtdInstrucao == 3);
 
     // cria na memoria do tamanho das instruções com a struct
     instruction_t instrucao[qtdInstrucao];
 
-    instrucao[1].opcode = 0x12;     //  1 e 2  ->   0001.0010  -> 18 
-    instrucao[2].opcode = 0x05;     //  1 e 2  ->   0000.0101  -> 5
+    instrucao[1].opcode = 0x12; //  1 e 2  ->   0001.0010  -> 18
+    instrucao[2].opcode = 0x05; //  1 e 2  ->   0000.0101  -> 5
     printf("%d %d\n%d %d\n", instrucao[1].opcode, instrucao[1].destino, instrucao[2].opcode, instrucao[2].arg1);
-    
+
     //converte(arq, destino);
 
     return 0;
 }
-
-
-
 
 /*
 * - main.c  => Controla o scoreboarding, aqui são utilizadas todas as structs, conversões, etc.
