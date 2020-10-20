@@ -21,6 +21,7 @@ int main()
     // recebe as intruções no numero d 32 bit
     converte(arq, instrucoes, qtdInstrucao);
 
+    printf("\nArray: \n");
     for (int i=0; i<qtdInstrucao; i++){
         printf("%d\n", instrucoes[i]);
     }

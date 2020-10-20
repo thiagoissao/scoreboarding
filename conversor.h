@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int prepara(char inst[]){
+    
+}
+
 void converte(char *arq, unsigned int array[], int tamanho) {
 
     FILE *arqBase = fopen(arq, "r");
@@ -8,20 +12,20 @@ void converte(char *arq, unsigned int array[], int tamanho) {
 
     char word[32];
     while(fgets(word, sizeof(word), arqBase) != NULL ){
-        printf("%s --", word);
-        printf("%d", ponteiro);
 
-        // criar funcao p prepara a instrucao (word) pra escrever no array (com o ponteiro)
-
+        // funcao p prepara a instrucao (word) pra escrever no array (com o ponteiro)
+        *ponteiro = prepara(word);
+        
         ponteiro++;
     }
 
-    //leve teste d como funciona no array
-    *ponteiro = 1232;
-    ponteiro++;
-    *ponteiro = 45432;
-    ponteiro++;
-    *ponteiro = 8768667;
+    /* leve teste d como funciona no array
+      *ponteiro = 1232;
+      ponteiro++;
+      *ponteiro = 45432;
+      ponteiro++;
+      *ponteiro = 8768667;
+    */
     
     fclose(arqBase);
 }
