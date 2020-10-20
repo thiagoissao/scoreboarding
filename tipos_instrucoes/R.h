@@ -2,7 +2,7 @@
 
 typedef struct R
 {
-  unsigned int opcode : 6;
+  unsigned int op : 6;
   unsigned int rs : 5;    // first register operand
   unsigned int rt : 5;    // second register operand
   unsigned int rd : 5;    // register destination

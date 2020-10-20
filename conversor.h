@@ -1,18 +1,29 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-void converte(char *arq, char *newArquivo) {
+void converte(char *arq, unsigned int array[], int tamanho) {
+
     FILE *arqBase = fopen(arq, "r");
-    FILE *arqDest = fopen(newArquivo, "w");
+    int *ponteiro = array;
 
-    char word[5]; // sizeoff dele é 7, num parece ser certo haushas
-    
-    //while(fgets(word, sizeof(word), arqBase) != NULL ){
+    char word[32];
+    while(fgets(word, sizeof(word), arqBase) != NULL ){
+        printf("%s --", word);
+        printf("%d", ponteiro);
 
-    //}
-    
+        // criar funcao p prepara a instrucao (word) pra escrever no array (com o ponteiro)
+
+        ponteiro++;
+    }
+
+    //leve teste d como funciona no array
+    *ponteiro = 1232;
+    ponteiro++;
+    *ponteiro = 45432;
+    ponteiro++;
+    *ponteiro = 8768667;
     
     fclose(arqBase);
-    fclose(arqDest);
 }
 
 
