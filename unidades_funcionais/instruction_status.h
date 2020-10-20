@@ -3,14 +3,9 @@
 
 typedef struct instruction_status
 {
-  int instruction;
+  unsigned int instruction : 32;
   int issue;
   int readOperand;
   int execComp;
   int writeResult;
 } instruction_status_t;
-
-int getOpcode(int instruction)
-{
-  return 0;
-}
