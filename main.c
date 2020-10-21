@@ -26,6 +26,12 @@ int main()
         printf("%d\n", instrucoes[i]);
     }
 
+    int teste;
+    teste = 7;
+    printf("%d ", teste);
+    teste = teste<<1;
+    printf("%d ", teste);
+
 
     return 0;
 }

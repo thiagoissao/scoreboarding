@@ -1,20 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int prepara(char inst[]){
-    
+
+int converteArq(char *arq, char *destino){
+//    FILE *arqBase = fopen(arq, "r");
+//    FILE *arqDest = fopen(arq, "w");
 }
 
-void converte(char *arq, unsigned int array[], int tamanho) {
+void converte(char *arq, unsigned long int array[], int tamanho) {
 
     FILE *arqBase = fopen(arq, "r");
-    int *ponteiro = array;
+    long int *ponteiro = array;
 
     char word[32];
     while(fgets(word, sizeof(word), arqBase) != NULL ){
 
         // funcao p prepara a instrucao (word) pra escrever no array (com o ponteiro)
-        *ponteiro = prepara(word);
+        //*ponteiro = ;
         
         ponteiro++;
     }
