@@ -16,7 +16,7 @@ int main()
     assert(qtdInstrucao == 3);
 
     // cria na memoria do tamanho das instruções com a struct
-    unsigned int instrucoes[qtdInstrucao];
+    unsigned long int instrucoes[qtdInstrucao];
     
     // recebe as intruções no numero d 32 bit
     converte(arq, instrucoes, qtdInstrucao);
