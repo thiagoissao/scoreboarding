@@ -1,33 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void converteOp();
+void converteRs();
+void converteRt();
+void converteRd();
+void converteShamt();
+void converteFunct();
+void converteImmediate();
+void converteAddress();
 
-int converteArq(char *arq, char *destino){
-//    FILE *arqBase = fopen(arq, "r");
-//    FILE *arqDest = fopen(arq, "w");
-}
 
-void converte(char *arq, unsigned long int array[], int tamanho) {
+void converte(char *arq, unsigned int array[], int tamanho) {
 
     FILE *arqBase = fopen(arq, "r");
-    long int *ponteiro = array;
+    int *ponteiro = array;
+    unsigned int instrucao;
+    unsigned int funct = 50; // 110010 exemplo
 
     char word[32];
     while(fgets(word, sizeof(word), arqBase) != NULL ){
+        instrucao = 0;
 
-        // funcao p prepara a instrucao (word) pra escrever no array (com o ponteiro)
-        //*ponteiro = ;
+        converteFunct(&instrucao, funct);
+        *ponteiro = instrucao;
         
         ponteiro++;
     }
-
-    /* leve teste d como funciona no array
-      *ponteiro = 1232;
-      ponteiro++;
-      *ponteiro = 45432;
-      ponteiro++;
-      *ponteiro = 8768667;
-    */
     
     fclose(arqBase);
 }
@@ -52,4 +51,101 @@ int qtdInst(char *nameArquivo){
 
     fclose(arquivo);
     return quantidade;
+}
+
+void converteOp(unsigned int *inst, int atualizar){
+
+    unsigned int real = 0;
+
+    // OR entre a parte binario real e atualizar
+    real = real | atualizar;    
+    // 6 opcode = 6 - 32 bits = 26 para o deslocamento
+    real = real << 26;          
+
+    *inst = real;
+}
+
+void converteRs(unsigned int *inst, int atualizar){
+
+    unsigned int real = *inst;
+
+    real = real >> 26;
+    real = real << 5;
+    real = real | atualizar;
+    // 6 do opcode + 5 rs = 11 pronto - 32 total = 21
+    real = real << 21;              
+
+    *inst = real;
+}
+
+void converteRt(unsigned int *inst, int atualizar){
+
+    unsigned int real = *inst;
+
+    real = real >> 21;
+    real = real << 5;
+    real = real | atualizar;
+    // 6 do opcode + 5 rs + 5 rt = 16 pronto - 32 total = 16
+    real = real << 16;          
+    
+    *inst = real;
+}
+
+void converteRd(unsigned int *inst, int atualizar){
+
+    unsigned int real = *inst;
+
+    real = real >> 16;
+    real = real << 5;
+    real = real | atualizar;
+    // 6 do opcode + 5 rs + 5 rt + 5 rd = 21 pronto - 32 total = 11
+    real = real << 11;          
+    
+    *inst = real;
+}
+
+void converteShamt(unsigned int *inst, int atualizar){
+
+    unsigned int real = *inst;
+
+    real = real >> 11;
+    real = real << 5;
+    real = real | atualizar;
+    // 6 do opcode + 5 rs + 5 rt + 5 rd + 5 = 26 pronto - 32 total = 6
+    real = real << 6;         
+    
+    *inst = real;
+}
+
+void converteFunct(unsigned int *inst, int atualizar){
+
+    unsigned int real = *inst;
+
+    real = real >> 6;
+    real = real << 6;
+    real = real | atualizar;
+ 
+    *inst = real;
+}
+
+void converteImmediate(unsigned int *inst, int atualizar){
+
+    unsigned int real = *inst;
+
+    real = real >> 16;
+    real = real << 16;
+    real = real | atualizar;
+    
+    *inst = real;
+}
+
+void converteAddress(unsigned int *inst, int atualizar){
+
+    unsigned int real = *inst;
+
+    real = real >> 26;
+    real = real << 26;
+    real = real | atualizar;
+    
+    *inst = real;
 }
