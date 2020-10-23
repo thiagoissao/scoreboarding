@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int logicas(char op[])
+int getInstructionDecimal(char op[])
 {
     switch (op)
     {
