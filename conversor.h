@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tipos_instrucoes/i_types.h"
+#include "tipos_instrucoes/registers.h"
 
 void converteOp();
 void converteRs();
@@ -14,16 +15,16 @@ void converteAddress();
 
 void converte(char *arq, unsigned int array[], int tamanho)
 {
-
     FILE *arqBase = fopen(arq, "r");
     int *ponteiro = array;
-    unsigned int instrucao;
     unsigned int funct = 50; // 110010 exemplo
 
     char instruction[32];
     char *separators = " .,;";
     while (fgets(instruction, sizeof(instruction), arqBase) != NULL)
     {
+        int countParams = 0; //Contador de parâmetros
+        unsigned int encodedInstruction = 0;
         char *splitInstruction = strtok(instruction, separators);
         Instruction instructionType = getInstructionType(splitInstruction);
         unsigned int instructionDecimal = getInstructionDecimal(splitInstruction);
@@ -33,12 +34,26 @@ void converte(char *arq, unsigned int array[], int tamanho)
         {
             if (instructionType == R)
             {
+                if (countParams == 0) //opcode
+                    converteOp(&encodedInstruction, 0);
+                if (countParams == 1) //rs
+                    converteRs(&encodedInstruction, getRegisterDecimal(splitInstruction));
+                if (countParams == 2) //rt
+                    converteRt(&encodedInstruction, getRegisterDecimal(splitInstruction));
+                if (countParams == 3)
+                {
+                    //rd
+                    converteShamt(&encodedInstruction, 0);
+                    converteFunct(&encodedInstruction, splitInstruction);
+                }
+
                 printf("tipo R: %s\n", splitInstruction);
             }
             if (instructionType == I)
             {
                 printf("tipo I: %s\n", splitInstruction);
             }
+            countParams++;
             splitInstruction = strtok(NULL, separators);
         }
         // converteFunct(&instrucao, funct);
