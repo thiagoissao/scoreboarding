@@ -2,9 +2,7 @@
 #include <unistd.h>
 #include "conversor.h"
 
-#include <assert.h> // p teste
-
-
+#include <assert.h>
 
 // processo de abrir o arquivo tudo bonitin
 // ignorei p ja abrir de um direto e ae ja focarmos logo nas etapas dele
@@ -12,18 +10,19 @@ int main()
 {
     char *arq = "mnemonios.txt";
 
-    int qtdInstrucao = qtdInst(arq);
-    assert(qtdInstrucao == 3);
+    int numberOfInstructions = qtdInst(arq);
+    assert(numberOfInstructions == 3);
 
     // cria na memoria do tamanho das instruções com a struct
-    unsigned int instrucoes[qtdInstrucao];
-    
+    unsigned int instructionSet[numberOfInstructions];
+
     // recebe as intruções no numero d 32 bit
-    converte(arq, instrucoes, qtdInstrucao);
+    converte(arq, instructionSet, numberOfInstructions);
 
     printf("\nArray: \n");
-    for (int i=0; i<qtdInstrucao; i++){
-        printf("%d\n", instrucoes[i]);
+    for (int i = 0; i < numberOfInstructions; i++)
+    {
+        printf("%d\n", instructionSet[i]);
     }
 
     // maximo 32 bit = 4.294.967.295 'em tese' pq o ultimo bit..
@@ -31,7 +30,7 @@ int main()
 
     // TESTE =)
     unsigned int t2 = 0;
-    
+
     unsigned int op = 16;    // 010000  010000.11111.01111.01011.01010.110010
     unsigned int rs = 31;    // 11111
     unsigned int rt = 15;    // 01111
@@ -41,7 +40,7 @@ int main()
 
     converteOp(&t2, op);
     printf("Op: %d\n", t2);
-    
+
     converteRs(&t2, rs);
     printf("Rs: %d\n", t2);
 
@@ -54,7 +53,7 @@ int main()
 
     converteShamt(&t2, shamt);
     converteFunct(&t2, funct);
-    
+
     printf("\nFIM: %d", t2);
     //fim: 01000011111011110101101010110010 = 275733170 = 010000.00011.01111.01011.01010.110010
     //                                         deveria:   010000.11111.01111.01011.01010.110010

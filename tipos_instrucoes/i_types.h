@@ -1,18 +1,39 @@
-#include "R.h"
-#include "I.h"
-#include "J.h"
 #include <unistd.h>
+#include <string.h>
+#include "instructions_op.h"
 
-typedef enum i_types
+typedef enum Instruction
 {
-  R,
-  I,
-  J
-} i_types;
+  R = 0,
+  I = 1,
+  J = 2
+} Instruction;
 
-i_types getInstructionType(unsigned int instruction)
+Instruction getInstructionType(char *opcode)
 {
-  //Fazer a lógica para retornar o tipo da instrucao
   //R = 0; I = 1; J = 2
   //retorna um inteiro que representa o tipo
+  if (strcmp(opcode, ADD) == 0)
+    return R;
+  if (strcmp(opcode, ADDI) == 0)
+    return I;
+  if (strcmp(opcode, AND) == 0)
+    return R;
+  if (strcmp(opcode, ANDI) == 0)
+    return I;
+  if (strcmp(opcode, OR) == 0)
+    return R;
+  if (strcmp(opcode, ORI) == 0)
+    return I;
+  if (strcmp(opcode, SLT) == 0)
+    return R;
+  if (strcmp(opcode, SUB) == 0)
+    return R;
+  if (strcmp(opcode, MULT) == 0)
+    return R;
+  if (strcmp(opcode, DIV) == 0)
+    return R;
+  if (strcmp(opcode, LW) == 0)
+    return I;
+  return 0;
 }

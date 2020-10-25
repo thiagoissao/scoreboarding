@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "tipos_instrucoes/i_types.h"
 
 void converteOp();
 void converteRs();
@@ -18,15 +20,28 @@ void converte(char *arq, unsigned int array[], int tamanho)
     unsigned int instrucao;
     unsigned int funct = 50; // 110010 exemplo
 
-    char word[32];
-    while (fgets(word, sizeof(word), arqBase) != NULL)
+    char instruction[32];
+    char *separators = " .,;";
+    while (fgets(instruction, sizeof(instruction), arqBase) != NULL)
     {
-        instrucao = 0;
-
-        converteFunct(&instrucao, funct);
-        *ponteiro = instrucao;
-
-        ponteiro++;
+        char *splitInstruction = strtok(instruction, separators);
+        Instruction instructionType = getInstructionType(splitInstruction);
+        unsigned int instructionDecimal = getInstructionDecimal(splitInstruction);
+        printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", instructionDecimal);
+        splitInstruction = strtok(NULL, separators);
+        while (splitInstruction != NULL)
+        {
+            if (instructionType == R)
+            {
+                printf("tipo R: %s\n", splitInstruction);
+            }
+            if (instructionType == I)
+            {
+                printf("tipo I: %s\n", splitInstruction);
+            }
+            splitInstruction = strtok(NULL, separators);
+        }
+        // converteFunct(&instrucao, funct);
     }
 
     fclose(arqBase);
