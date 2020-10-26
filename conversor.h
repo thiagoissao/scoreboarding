@@ -10,8 +10,17 @@ void converteRt();
 void converteRd();
 void converteShamt();
 void converteFunct();
-void converteImmediate();
 void converteAddress();
+void converteImmediate();
+int desconverteOp();
+int desconverteRs();
+int desconverteRt();
+int desconverteRd();
+int desconverteShamt();
+int desconverteFunct();
+int desconverteAddress();
+int desconverteImmediate();
+
 
 void converter(char *archive, unsigned int *instructionsSet)
 {
@@ -108,7 +117,6 @@ int getInstructionsQuantity(char *nameArquivo)
 
 void converteOp(unsigned int *inst, int atualizar)
 {
-
     unsigned int real = 0;
 
     // OR entre a parte binario real e atualizar
@@ -121,7 +129,6 @@ void converteOp(unsigned int *inst, int atualizar)
 
 void converteRs(unsigned int *inst, int atualizar)
 {
-
     unsigned int real = *inst;
 
     real = real >> 26;
@@ -187,6 +194,18 @@ void converteFunct(unsigned int *inst, int atualizar)
     *inst = real;
 }
 
+void converteAddress(unsigned int *inst, int atualizar)
+{
+
+    unsigned int real = *inst;
+
+    real = real >> 26;
+    real = real << 26;
+    real = real | atualizar;
+
+    *inst = real;
+}
+
 void converteImmediate(unsigned int *inst, int atualizar)
 {
     unsigned int real = *inst;
@@ -198,14 +217,77 @@ void converteImmediate(unsigned int *inst, int atualizar)
     *inst = real;
 }
 
-void converteAddress(unsigned int *inst, int atualizar)
+int desconverteOp(unsigned int inst)
 {
+    return inst >> 26;
+}
 
-    unsigned int real = *inst;
+int desconverteRs(unsigned int inst)
+{
+    int real;
 
-    real = real >> 26;
-    real = real << 26;
-    real = real | atualizar;
+    inst = inst << 6;
+    real = inst >> 27;
 
-    *inst = real;
+    return real;
+}
+
+int desconverteRt(unsigned int inst)
+{
+    int real;
+
+    inst = inst << 11;
+    real = inst >> 27;
+
+    return real;
+}
+
+int desconverteRd(unsigned int inst)
+{
+    int real;
+
+    inst = inst << 16;
+    real = inst >> 27;
+
+    return real;
+}
+
+int desconverteShamt(unsigned int inst)
+{
+    int real;
+
+    inst = inst << 21;
+    real = inst >> 27;
+
+    return real;
+}
+
+int desconverteFunct(unsigned int inst)
+{
+    int real;
+
+    inst = inst << 26;
+    real = inst >> 27;
+
+    return real;
+}
+
+int desconverteAddress(unsigned int inst)
+{
+    int real;
+
+    inst = inst << 6;
+    real = inst >> 6;
+
+    return real;
+}
+
+int desconverteImmediate(unsigned int inst)
+{
+    int real;
+
+    inst = inst << 16;
+    real = inst >> 16;
+
+    return real;
 }
