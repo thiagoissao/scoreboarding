@@ -20,41 +20,51 @@ void converte(char *arq, unsigned int array[], int tamanho)
     unsigned int funct = 50; // 110010 exemplo
 
     char instruction[32];
-    char *separators = " .,;";
+    char *separators = " .,;'\n''\t''\r'";
     while (fgets(instruction, sizeof(instruction), arqBase) != NULL)
     {
-        int countParams = 0; //Contador de parâmetros
         unsigned int encodedInstruction = 0;
         char *splitInstruction = strtok(instruction, separators);
         Instruction instructionType = getInstructionType(splitInstruction);
-        unsigned int instructionDecimal = getInstructionDecimal(splitInstruction);
-        printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", instructionDecimal);
-        splitInstruction = strtok(NULL, separators);
-        while (splitInstruction != NULL)
-        {
-            if (instructionType == R)
-            {
-                if (countParams == 0) //opcode
-                    converteOp(&encodedInstruction, 0);
-                if (countParams == 1) //rs
-                    converteRs(&encodedInstruction, getRegisterDecimal(splitInstruction));
-                if (countParams == 2) //rt
-                    converteRt(&encodedInstruction, getRegisterDecimal(splitInstruction));
-                if (countParams == 3)
-                {
-                    //rd
-                    converteShamt(&encodedInstruction, 0);
-                    converteFunct(&encodedInstruction, splitInstruction);
-                }
+        unsigned int opcode = getOpcodeDecimal(splitInstruction);
 
-                printf("tipo R: %s\n", splitInstruction);
-            }
-            if (instructionType == I)
-            {
-                printf("tipo I: %s\n", splitInstruction);
-            }
-            countParams++;
+        printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", opcode);
+        splitInstruction = strtok(NULL, separators);
+
+        if (instructionType == R)
+        {
+            char *rdInstruction = splitInstruction;
             splitInstruction = strtok(NULL, separators);
+
+            char *rsInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            char *rtInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            unsigned int rs = getRegisterDecimal(rsInstruction);
+            unsigned int rt = getRegisterDecimal(rtInstruction);
+            unsigned int rd = getRegisterDecimal(rdInstruction);
+
+            converteOp(&encodedInstruction, 0);
+            converteRs(&encodedInstruction, rs);
+            converteRt(&encodedInstruction, rt);
+            converteRd(&encodedInstruction, rd);
+            converteShamt(&encodedInstruction, 0);
+            converteFunct(&encodedInstruction, opcode);
+
+            printf("Intruction Code rs: %i | rt: %i | rd: %i | funct: %i \n", rs, rt, rd, opcode);
+            printf("Instruction: %i\n", encodedInstruction);
+        }
+        if (instructionType == I)
+        {
+            while (splitInstruction != NULL)
+            {
+
+                printf("tipo I: %s\n", splitInstruction);
+
+                splitInstruction = strtok(NULL, separators);
+            }
         }
         // converteFunct(&instrucao, funct);
     }

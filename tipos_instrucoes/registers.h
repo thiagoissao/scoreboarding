@@ -1,103 +1,104 @@
 #include <stdio.h>
 #include <string.h>
 
-int getRegisterDecimal(char *opcode)
+unsigned int getRegisterDecimal(char *reg)
 {
-  if (strcmp(opcode, "$zero"))
+  if (strcmp(reg, "$zero") == 0)
     return 0;
 
-  if (strcmp(opcode, "$at"))
+  if (strcmp(reg, "$at") == 0)
     return 1;
 
-  if (strcmp(opcode, "$v0"))
+  if (strcmp(reg, "$v0") == 0)
     return 2;
 
-  if (strcmp(opcode, "$v1"))
+  if (strcmp(reg, "$v1") == 0)
     return 3;
 
-  if (strcmp(opcode, "$a0"))
+  if (strcmp(reg, "$a0") == 0)
     return 4;
 
-  if (strcmp(opcode, "$a1"))
+  if (strcmp(reg, "$a1") == 0)
     return 5;
 
-  if (strcmp(opcode, "$a2"))
+  if (strcmp(reg, "$a2") == 0)
     return 6;
 
-  if (strcmp(opcode, "$a3"))
+  if (strcmp(reg, "$a3") == 0)
     return 7;
 
-  if (strcmp(opcode, "$t0"))
+  if (strcmp(reg, "$t0") == 0)
     return 8;
 
-  if (strcmp(opcode, "$t1"))
+  if (strcmp(reg, "$t1") == 0)
     return 9;
 
-  if (strcmp(opcode, "$t2"))
+  if (strcmp(reg, "$t2") == 0)
     return 10;
 
-  if (strcmp(opcode, "$t3"))
+  if (strcmp(reg, "$t3") == 0)
     return 11;
 
-  if (strcmp(opcode, "$t4"))
+  if (strcmp(reg, "$t4") == 0)
     return 12;
 
-  if (strcmp(opcode, "$t5"))
+  if (strcmp(reg, "$t5") == 0)
     return 13;
 
-  if (strcmp(opcode, "$t6"))
+  if (strcmp(reg, "$t6") == 0)
     return 14;
 
-  if (strcmp(opcode, "$t7"))
+  if (strcmp(reg, "$t7") == 0)
     return 15;
 
-  if (strcmp(opcode, "$s0"))
+  if (strcmp(reg, "$s0") == 0)
     return 16;
 
-  if (strcmp(opcode, "$s1"))
+  if (strcmp(reg, "$s1") == 0)
     return 17;
 
-  if (strcmp(opcode, "$s2"))
+  if (strcmp(reg, "$s2") == 0)
     return 18;
 
-  if (strcmp(opcode, "$s3"))
+  if (strcmp(reg, "$s3") == 0)
     return 19;
 
-  if (strcmp(opcode, "$s4"))
+  if (strcmp(reg, "$s4") == 0)
     return 20;
 
-  if (strcmp(opcode, "$s5"))
+  if (strcmp(reg, "$s5") == 0)
     return 21;
 
-  if (strcmp(opcode, "$s6"))
+  if (strcmp(reg, "$s6") == 0)
     return 22;
 
-  if (strcmp(opcode, "$s7"))
+  if (strcmp(reg, "$s7") == 0)
     return 23;
 
-  if (strcmp(opcode, "$t8"))
+  if (strcmp(reg, "$t8") == 0)
     return 24;
 
-  if (strcmp(opcode, "$t9"))
+  if (strcmp(reg, "$t9") == 0)
     return 25;
 
-  if (strcmp(opcode, "$k0"))
+  if (strcmp(reg, "$k0") == 0)
     return 26;
 
-  if (strcmp(opcode, "$k1"))
+  if (strcmp(reg, "$k1") == 0)
     return 27;
 
-  if (strcmp(opcode, "$gp"))
+  if (strcmp(reg, "$gp") == 0)
     return 28;
 
-  if (strcmp(opcode, "$sp"))
+  if (strcmp(reg, "$sp") == 0)
     return 29;
 
-  if (strcmp(opcode, "$fp"))
+  if (strcmp(reg, "$fp") == 0)
     return 30;
 
-  if (strcmp(opcode, "$ra"))
+  if (strcmp(reg, "$ra") == 0)
     return 31;
 
-  return -1;
+  printf("Erro na leitura do registrador %s\n", reg);
+  return 0;
 }

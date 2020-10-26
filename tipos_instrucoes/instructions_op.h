@@ -13,7 +13,7 @@
 #define DIV "div"
 #define LW "lw"
 
-int getInstructionDecimal(char *opcode)
+unsigned int getOpcodeDecimal(char *opcode)
 {
     if (strcmp(opcode, ADD) == 0)
         return 32;
