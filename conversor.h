@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "tipos_instrucoes/i_types.h"
+#include "tipos_instrucoes/registers.h"
 
 void converteOp();
 void converteRs();
@@ -10,29 +13,77 @@ void converteFunct();
 void converteImmediate();
 void converteAddress();
 
-void converte(char *arq, unsigned int array[], int tamanho)
+void converter(char *archive, unsigned int *instructionsSet)
 {
+    FILE *archiveFile = fopen(archive, "r");
 
-    FILE *arqBase = fopen(arq, "r");
-    int *ponteiro = array;
-    unsigned int instrucao;
-    unsigned int funct = 50; // 110010 exemplo
-
-    char word[32];
-    while (fgets(word, sizeof(word), arqBase) != NULL)
+    int count = 0;
+    char instruction[32];
+    char *separators = " .,;'\n''\t''\r'";
+    while (fgets(instruction, sizeof(instruction), archiveFile) != NULL)
     {
-        instrucao = 0;
+        unsigned int encodedInstruction = 0;
+        char *splitInstruction = strtok(instruction, separators);
+        Instruction instructionType = getInstructionType(splitInstruction);
+        unsigned int opcode = getOpcodeDecimal(splitInstruction);
 
-        converteFunct(&instrucao, funct);
-        *ponteiro = instrucao;
+        printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", opcode);
+        splitInstruction = strtok(NULL, separators);
 
-        ponteiro++;
+        if (instructionType == R)
+        {
+            char *rdInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            char *rsInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            char *rtInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            unsigned int rs = getRegisterDecimal(rsInstruction);
+            unsigned int rt = getRegisterDecimal(rtInstruction);
+            unsigned int rd = getRegisterDecimal(rdInstruction);
+
+            converteOp(&encodedInstruction, 0);
+            converteRs(&encodedInstruction, rs);
+            converteRt(&encodedInstruction, rt);
+            converteRd(&encodedInstruction, rd);
+            converteShamt(&encodedInstruction, 0);
+            converteFunct(&encodedInstruction, opcode);
+
+            printf("Instruction: %i\n\n", encodedInstruction);
+        }
+        if (instructionType == I)
+        {
+            char *rsInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            char *rtInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            char *immediateInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            unsigned int rs = getRegisterDecimal(rsInstruction);
+            unsigned int rt = getRegisterDecimal(rtInstruction);
+            unsigned int immediate = atoi(immediateInstruction);
+
+            converteOp(&encodedInstruction, opcode);
+            converteRs(&encodedInstruction, rs);
+            converteRt(&encodedInstruction, rt);
+            converteImmediate(&encodedInstruction, immediate);
+
+            printf("Instruction: %i\n\n", encodedInstruction);
+        }
+        instructionsSet[count] = encodedInstruction;
+        count++;
     }
 
-    fclose(arqBase);
+    fclose(archiveFile);
 }
 
-int qtdInst(char *nameArquivo)
+int getInstructionsQuantity(char *nameArquivo)
 {
     int quantidade = 0;
 
@@ -138,7 +189,6 @@ void converteFunct(unsigned int *inst, int atualizar)
 
 void converteImmediate(unsigned int *inst, int atualizar)
 {
-
     unsigned int real = *inst;
 
     real = real >> 16;
