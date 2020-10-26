@@ -13,15 +13,14 @@ void converteFunct();
 void converteImmediate();
 void converteAddress();
 
-void converte(char *arq, unsigned int array[], int tamanho)
+void converter(char *archive, unsigned int *instructionsSet)
 {
-    FILE *arqBase = fopen(arq, "r");
-    int *ponteiro = array;
-    unsigned int funct = 50; // 110010 exemplo
+    FILE *archiveFile = fopen(archive, "r");
 
+    int count = 0;
     char instruction[32];
     char *separators = " .,;'\n''\t''\r'";
-    while (fgets(instruction, sizeof(instruction), arqBase) != NULL)
+    while (fgets(instruction, sizeof(instruction), archiveFile) != NULL)
     {
         unsigned int encodedInstruction = 0;
         char *splitInstruction = strtok(instruction, separators);
@@ -53,7 +52,6 @@ void converte(char *arq, unsigned int array[], int tamanho)
             converteShamt(&encodedInstruction, 0);
             converteFunct(&encodedInstruction, opcode);
 
-            printf("Intruction Code rs: %i | rt: %i | rd: %i | funct: %i \n", rs, rt, rd, opcode);
             printf("Instruction: %i\n\n", encodedInstruction);
         }
         if (instructionType == I)
@@ -76,15 +74,16 @@ void converte(char *arq, unsigned int array[], int tamanho)
             converteRt(&encodedInstruction, rt);
             converteImmediate(&encodedInstruction, immediate);
 
-            printf("Intruction Code opcode: %i | rs: %i | rt: %i | immediate: %i \n", opcode, rs, rt, immediate);
             printf("Instruction: %i\n\n", encodedInstruction);
         }
+        instructionsSet[count] = encodedInstruction;
+        count++;
     }
 
-    fclose(arqBase);
+    fclose(archiveFile);
 }
 
-int qtdInst(char *nameArquivo)
+int getInstructionsQuantity(char *nameArquivo)
 {
     int quantidade = 0;
 
