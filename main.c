@@ -11,7 +11,7 @@ int main()
     char *arq = "mnemonios.txt";
 
     int numberOfInstructions = qtdInst(arq);
-    assert(numberOfInstructions == 3);
+    assert(numberOfInstructions == 4);
 
     // cria na memoria do tamanho das instruções com a struct
     unsigned int instructionSet[numberOfInstructions];

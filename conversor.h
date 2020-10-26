@@ -54,19 +54,31 @@ void converte(char *arq, unsigned int array[], int tamanho)
             converteFunct(&encodedInstruction, opcode);
 
             printf("Intruction Code rs: %i | rt: %i | rd: %i | funct: %i \n", rs, rt, rd, opcode);
-            printf("Instruction: %i\n", encodedInstruction);
+            printf("Instruction: %i\n\n", encodedInstruction);
         }
         if (instructionType == I)
         {
-            while (splitInstruction != NULL)
-            {
+            char *rsInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
 
-                printf("tipo I: %s\n", splitInstruction);
+            char *rtInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
 
-                splitInstruction = strtok(NULL, separators);
-            }
+            char *immediateInstruction = splitInstruction;
+            splitInstruction = strtok(NULL, separators);
+
+            unsigned int rs = getRegisterDecimal(rsInstruction);
+            unsigned int rt = getRegisterDecimal(rtInstruction);
+            unsigned int immediate = atoi(immediateInstruction);
+
+            converteOp(&encodedInstruction, opcode);
+            converteRs(&encodedInstruction, rs);
+            converteRt(&encodedInstruction, rt);
+            converteImmediate(&encodedInstruction, immediate);
+
+            printf("Intruction Code opcode: %i | rs: %i | rt: %i | immediate: %i \n", opcode, rs, rt, immediate);
+            printf("Instruction: %i\n\n", encodedInstruction);
         }
-        // converteFunct(&instrucao, funct);
     }
 
     fclose(arqBase);
@@ -178,7 +190,6 @@ void converteFunct(unsigned int *inst, int atualizar)
 
 void converteImmediate(unsigned int *inst, int atualizar)
 {
-
     unsigned int real = *inst;
 
     real = real >> 16;
