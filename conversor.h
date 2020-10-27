@@ -21,7 +21,6 @@ int desconverteFunct();
 int desconverteAddress();
 int desconverteImmediate();
 
-
 void converter(char *archive, unsigned int *instructionsSet)
 {
     FILE *archiveFile = fopen(archive, "r");
@@ -107,7 +106,6 @@ int getInstructionsQuantity(char *nameArquivo)
     char line[50]; // apenas para armazenamento previo
     while (fgets(line, sizeof(line), arquivo) != NULL)
     {
-        //printf(line);
         quantidade++;
     }
 
@@ -267,7 +265,7 @@ int desconverteFunct(unsigned int inst)
     int real;
 
     inst = inst << 26;
-    real = inst >> 27;
+    real = inst >> 26;
 
     return real;
 }

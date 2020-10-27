@@ -7,19 +7,38 @@ int main()
 {
     char *archive = "mnemonios.txt";
 
+    //Quantidade de instruções no programa
     int numberOfInstructions = getInstructionsQuantity(archive);
     assert(numberOfInstructions == 4);
 
     // Cria na memória um array com o inteiro de cada instrução
     unsigned int instructionSet[numberOfInstructions];
 
-    // Converte o conjunto das instruções para inteiro e armazena no
-    // array passado por referência
+    // Converte o conjunto das instruções para inteiro e armazena no array passado por referência
     converter(archive, instructionSet);
+
+    // Contador para o ciclo de clock
+    long int clock = 0;
 
     printf("==== Conjunto de instruções: ==== \n");
     for (int i = 0; i < numberOfInstructions; i++)
     {
+        unsigned int instruction = instructionSet[i];
+        unsigned int opcode = desconverteOp(instruction);
+        unsigned int rs = desconverteRs(instruction);
+        unsigned int rt = desconverteRt(instruction);
+
+        if (opcode == R)
+        {
+            unsigned int rd = desconverteRd(instruction);
+            unsigned int shamt = desconverteShamt(instruction);
+            unsigned int funct = desconverteFunct(instruction);
+            //execute(instruction, functional_unit_status, instruction_status, register_result_status)
+        }
+        else //tipo I
+        {
+            unsigned int immediate = desconverteImmediate(instruction);
+        }
         printf("%i: %d\n", i, instructionSet[i]);
     }
     return 0;
