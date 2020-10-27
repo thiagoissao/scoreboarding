@@ -1,3 +1,6 @@
+#ifndef INSTRUCTION_STATUS_H
+#define INSTRUCTION_STATUS_H
+
 #include <stdio.h>
 #include <unistd.h>
 
@@ -9,3 +12,5 @@ typedef struct instruction_status
   int execComp;
   int writeResult;
 } instruction_status_t;
+
+#endif

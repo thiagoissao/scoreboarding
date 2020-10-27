@@ -1,3 +1,6 @@
+#ifndef I_TYPES_H
+#define I_TYPES_H
+
 #include <unistd.h>
 #include <string.h>
 #include "instructions_op.h"
@@ -37,3 +40,5 @@ Instruction getInstructionType(char *opcode)
     return I;
   return 0;
 }
+
+#endif

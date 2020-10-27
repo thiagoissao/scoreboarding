@@ -2,6 +2,10 @@
 #include <unistd.h>
 #include <assert.h>
 #include "conversor.h"
+#include "processador.c"
+#include "unidades_funcionais/functional_unit_status.h"
+#include "unidades_funcionais/instruction_status.h"
+#include "unidades_funcionais/register_result_status.h"
 
 int main()
 {
@@ -20,25 +24,23 @@ int main()
     // Contador para o ciclo de clock
     long int clock = 0;
 
+    // Status das instruções
+    instruction_status_t instruction_status;
+
+    // Status das unidades funcionais
+    functional_unit_status_t functional_unit_status;
+
+    // Status dos registradores
+    register_result_status_t register_result_status;
+
     printf("==== Conjunto de instruções: ==== \n");
     for (int i = 0; i < numberOfInstructions; i++)
     {
-        unsigned int instruction = instructionSet[i];
-        unsigned int opcode = desconverteOp(instruction);
-        unsigned int rs = desconverteRs(instruction);
-        unsigned int rt = desconverteRt(instruction);
-
-        if (opcode == R)
-        {
-            unsigned int rd = desconverteRd(instruction);
-            unsigned int shamt = desconverteShamt(instruction);
-            unsigned int funct = desconverteFunct(instruction);
-            //execute(instruction, functional_unit_status, instruction_status, register_result_status)
-        }
-        else //tipo I
-        {
-            unsigned int immediate = desconverteImmediate(instruction);
-        }
+        execute(
+            instructionSet[i],
+            functional_unit_status,
+            instruction_status,
+            register_result_status);
         printf("%i: %d\n", i, instructionSet[i]);
     }
     return 0;
