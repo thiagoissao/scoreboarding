@@ -21,7 +21,7 @@ int main()
     converter(archive, instructionSet);
 
     // Contador para o ciclo de clock
-    long int clock = 0;
+    unsigned int clock = 0;
 
     // Status das instruções
     instruction_status_t instruction_status; //TENTAR FAZER UM ARRAY DINÂMICO - SEM TAMANHO FIXO
