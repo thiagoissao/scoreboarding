@@ -12,7 +12,7 @@ unsigned int getRegisterDecimal(char *reg)
   if (strcmp(reg, "F3") == 0)
     return 3;
 
-  if (strcmp(reg, "$F4") == 0)
+  if (strcmp(reg, "F4") == 0)
     return 4;
 
   if (strcmp(reg, "F5") == 0)
