@@ -36,8 +36,10 @@ Instruction getInstructionType(char *opcode)
     return R;
   if (strcmp(opcode, DIV) == 0)
     return R;
-  if (strcmp(opcode, LW) == 0)
+  if (strcmp(opcode, LI) == 0)
     return I;
+  if (strcmp(opcode, MOVE) == 0)
+    return R;
   return 0;
 }
 

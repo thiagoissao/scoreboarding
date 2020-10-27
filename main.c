@@ -12,8 +12,7 @@ int main()
     char *archive = "mnemonios.txt";
 
     //Quantidade de instruções no programa
-    int numberOfInstructions = getInstructionsQuantity(archive);
-    assert(numberOfInstructions == 4);
+    int numberOfInstructions = 10; //PARAMETRIZAR DEPOIS Ex: -m 300000
 
     // Cria na memória um array com o inteiro de cada instrução
     unsigned int instructionSet[numberOfInstructions];
