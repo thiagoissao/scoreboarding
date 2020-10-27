@@ -24,13 +24,13 @@ int main()
     long int clock = 0;
 
     // Status das instruções
-    instruction_status_t instruction_status;
+    instruction_status_t instruction_status; //TENTAR FAZER UM ARRAY DINÂMICO - SEM TAMANHO FIXO
 
     // Status das unidades funcionais
-    functional_unit_status_t functional_unit_status;
+    functional_unit_status_t functional_unit_status; //TENTAR FAZER UM ARRAY DINÂMICO - SEM TAMANHO FIXO
 
     // Status dos registradores
-    register_result_status_t register_result_status;
+    register_result_status_t register_result_status; //TENTAR FAZER UM ARRAY DINÂMICO - SEM TAMANHO FIXO
 
     printf("==== Conjunto de instruções: ==== \n");
     for (int i = 0; i < numberOfInstructions; i++)
