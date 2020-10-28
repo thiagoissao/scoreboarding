@@ -28,16 +28,11 @@ void print_list_instruction_status(instruction_status_linked_t *head)
   }
 }
 
-void print_list_register_result_status(register_result_status_linked_t *head)
+void print_table_register_result_status(register_result_status_table_t *table)
 {
-  register_result_status_linked_t *current = head;
-
   printf("\n====== register_result_status =======\n");
-  while (current != NULL)
-  {
-    printf("%d\n", current->register_result_status.a0);
-    current = current->next;
-  }
+  printf("a0: %s\n", table->a0 == 0 ? "mult1" : "mult2");
+  printf("a1: %s\n", table->a1 == 0 ? "mult1" : "mult2");
 }
 
 int main()
@@ -72,28 +67,14 @@ int main()
 
   print_list_functional_unit(fu_table);
 
-  instruction_status_linked_t *head2 = (instruction_status_linked_t *)malloc(sizeof(instruction_status_linked_t));
-  head2->instruction_status.issue = 1;
+  register_result_status_table_t *rr_table = (register_result_status_table_t *)malloc(sizeof(register_result_status_table_t));
+  rr_table->a0 = mult1;
+  rr_table->a1 = mult2;
 
-  instruction_status_t instr_s;
-  instr_s.issue = 2;
-
-  push_instruction_status(head2, instr_s);
-
-  print_list_instruction_status(head2);
-
-  register_result_status_linked_t *head3 = (register_result_status_linked_t *)malloc(sizeof(register_result_status_linked_t));
-  head3->register_result_status.a0 = 0;
-
-  register_result_status_t reg_res;
-  reg_res.a0 = 1;
-
-  push_register_result_status(head3, reg_res);
-
-  print_list_register_result_status(head3);
+  print_table_register_result_status(rr_table);
 
   free(fu_table);
   free(head2);
-  free(head3);
+  free(rr_table);
   return 0;
 }

@@ -19,6 +19,18 @@ typedef struct instruction_status_linked
   struct instruction_status_linked *next;
 } instruction_status_linked_t;
 
+void init_instruction_status_table(instruction_status_t *table, unsigned int *instruction_set, int numberOfInstructions)
+{
+  for (int i = 0; i < numberOfInstructions; i++)
+  {
+    table[i].instruction = instruction_set[i];
+    table[i].issue = -1;
+    table[i].readOperand = -1;
+    table[i].execComp = -1;
+    table[i].writeResult = -1;
+  }
+}
+
 void push_instruction_status(instruction_status_linked_t *head, instruction_status_t instr_s)
 {
   instruction_status_linked_t *current = head;

@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include "./units.h"
 
-typedef struct register_result_status
+typedef struct register_result_status_table
 {
   int clock;
   UnitInstruction_t zero;
@@ -40,24 +40,6 @@ typedef struct register_result_status
   UnitInstruction_t sp;
   UnitInstruction_t fp;
   UnitInstruction_t ra;
-} register_result_status_t;
-
-typedef struct register_result_status_linked
-{
-  register_result_status_t register_result_status;
-  struct register_result_status_linked *next;
-} register_result_status_linked_t;
-
-void push_register_result_status(register_result_status_linked_t *head, register_result_status_t reg_res)
-{
-  register_result_status_linked_t *current = head;
-  while (current->next != NULL)
-  {
-    current = current->next;
-  }
-  current->next = (register_result_status_linked_t *)malloc(sizeof(register_result_status_linked_t));
-  current->next->register_result_status = reg_res;
-  current->next->next = NULL;
-}
+} register_result_status_table_t;
 
 #endif
