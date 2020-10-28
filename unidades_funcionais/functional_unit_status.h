@@ -30,15 +30,14 @@ typedef struct functional_unit_status_linked
 
 void push_functional_unit_status(functional_unit_status_linked_t *head, functional_unit_status_t fu)
 {
-  // functional_unit_status_linked_t *current = head;
-  printf("%p\n", head);
-  // while (current->next != NULL)
-  // {
-  //   current = current->next;
-  // }
-  // current->next = (functional_unit_status_linked_t *)malloc(sizeof(functional_unit_status_linked_t));
-  // current->next->functional_unit_status = fu;
-  // current->next->next = NULL;
+  functional_unit_status_linked_t *current = head;
+  while (current->next != NULL)
+  {
+    current = current->next;
+  }
+  current->next = (functional_unit_status_linked_t *)malloc(sizeof(functional_unit_status_linked_t));
+  current->next->functional_unit_status = fu;
+  current->next->next = NULL;
 }
 
 #endif
