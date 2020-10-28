@@ -7,9 +7,9 @@
 
 void execute(
     unsigned int instruction,
-    functional_unit_status_t functional_unit_status,
-    instruction_status_t instruction_status,
-    register_result_status_t register_result_status)
+    functional_unit_status_table_t *fu_status_table,
+    instruction_status_linked_t *inst_status_list,
+    register_result_status_linked_t *rr_status_list)
 {
   unsigned int opcode = desconverteOp(instruction);
   unsigned int rs = desconverteRs(instruction);

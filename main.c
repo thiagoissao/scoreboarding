@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "conversor.h"
 #include "processador.c"
 #include "unidades_funcionais/functional_unit_status.h"
@@ -23,25 +24,29 @@ int main()
     // Contador para o ciclo de clock
     unsigned int clock = 0;
 
-    // Status das instruções
-    instruction_status_t instruction_status; //TENTAR FAZER UM ARRAY DINÂMICO - SEM TAMANHO FIXO
-
     // Status das unidades funcionais
-    functional_unit_status_t functional_unit_status; //TENTAR FAZER UM ARRAY DINÂMICO - SEM TAMANHO FIXO
+    functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
+
+    // Status das instruções
+    instruction_status_linked_t *inst_status_list = (instruction_status_linked_t *)malloc(sizeof(instruction_status_linked_t));
 
     // Status dos registradores
-    register_result_status_t register_result_status; //TENTAR FAZER UM ARRAY DINÂMICO - SEM TAMANHO FIXO
+    register_result_status_linked_t *rr_status_list = (register_result_status_linked_t *)malloc(sizeof(register_result_status_linked_t));
 
-    printf("==== Conjunto de instruções: ==== \n");
+    printf("==== Conjunto de instruções ==== \n");
     for (int i = 0; i < numberOfInstructions; i++)
     {
         execute(
             instructionSet[i],
-            functional_unit_status,
-            instruction_status,
-            register_result_status);
+            fu_status_table,
+            inst_status_list,
+            rr_status_list);
         printf("%i: %d\n", i, instructionSet[i]);
     }
+
+    free(fu_status_table);
+    free(inst_status_list);
+    free(rr_status_list);
     return 0;
 }
 

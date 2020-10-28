@@ -22,22 +22,20 @@ typedef struct functional_unit_status
   bool fj_Rk;
 } functional_unit_status_t;
 
-typedef struct functional_unit_status_linked
+typedef struct functional_unit_status_table
 {
-  functional_unit_status_t functional_unit_status;
-  struct functional_unit_status_linked *next;
-} functional_unit_status_linked_t;
-
-void push_functional_unit_status(functional_unit_status_linked_t *head, functional_unit_status_t fu)
-{
-  functional_unit_status_linked_t *current = head;
-  while (current->next != NULL)
-  {
-    current = current->next;
-  }
-  current->next = (functional_unit_status_linked_t *)malloc(sizeof(functional_unit_status_linked_t));
-  current->next->functional_unit_status = fu;
-  current->next->next = NULL;
-}
+  functional_unit_status_t add;
+  functional_unit_status_t addi;
+  functional_unit_status_t and;
+  functional_unit_status_t andi;
+  functional_unit_status_t or ;
+  functional_unit_status_t ori;
+  functional_unit_status_t slt;
+  functional_unit_status_t sub;
+  functional_unit_status_t mult;
+  functional_unit_status_t div;
+  functional_unit_status_t li;
+  functional_unit_status_t move;
+} functional_unit_status_table_t;
 
 #endif
