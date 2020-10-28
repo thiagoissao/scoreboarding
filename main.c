@@ -25,6 +25,7 @@ int main()
 
     // Status das unidades funcionais
     functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
+    init_funcional_unit_status_table(fu_status_table);
 
     // Status das instruções e inicialização
     instruction_status_t inst_status_table[numberOfInstructions];
@@ -33,11 +34,19 @@ int main()
     // Status dos registradores
     register_result_status_table_t *rr_status_table = (register_result_status_table_t *)malloc(sizeof(register_result_status_table_t));
 
+    //fu_status_table->addi.busy = true;
+    //printf("1 teste e %d\n", fu_status_table->addi.busy);
+    //fu_status_table->addi.busy = true;
+    //printf("2 teste e %d\n", fu_status_table->addi.busy);
+    //verifyFuStatus(8, fu_status_table);
+    //printf("3 teste e %d\n", fu_status_table->addi.busy);
+
     executeScoreboarding(
         numberOfInstructions,
         fu_status_table,
         inst_status_table,
-        rr_status_table);
+        rr_status_table
+    );
 
     free(fu_status_table);
     free(rr_status_table);

@@ -38,7 +38,7 @@ void converter(char *archive, unsigned int *instructionsSet)
         Instruction instructionType = getInstructionType(splitInstruction);
         unsigned int opcode = getOpcodeDecimal(splitInstruction);
 
-        printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", opcode);
+        //printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", opcode);
         splitInstruction = strtok(NULL, separators);
 
         if (instructionType == R)
@@ -63,7 +63,7 @@ void converter(char *archive, unsigned int *instructionsSet)
             converteShamt(&encodedInstruction, 0);
             converteFunct(&encodedInstruction, opcode);
 
-            printf("Instruction: %i\n\n", encodedInstruction);
+            //printf("Instruction: %i\n\n", encodedInstruction);
         }
         if (instructionType == I)
         {
@@ -85,7 +85,7 @@ void converter(char *archive, unsigned int *instructionsSet)
             converteRt(&encodedInstruction, rt);
             converteImmediate(&encodedInstruction, immediate);
 
-            printf("Instruction: %i\n\n", encodedInstruction);
+            //printf("Instruction: %i\n\n", encodedInstruction);
         }
         instructionsSet[count] = encodedInstruction;
         count++;
