@@ -74,7 +74,6 @@ int main()
   print_table_register_result_status(rr_table);
 
   free(fu_table);
-  free(head2);
   free(rr_table);
   return 0;
 }
