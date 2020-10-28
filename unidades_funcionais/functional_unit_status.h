@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "./units.h"
 #include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct functional_unit_status
 {
@@ -20,5 +21,24 @@ typedef struct functional_unit_status
   bool fj_Rj;
   bool fj_Rk;
 } functional_unit_status_t;
+
+typedef struct functional_unit_status_linked
+{
+  functional_unit_status_t functional_unit_status;
+  struct functional_unit_status_linked *next;
+} functional_unit_status_linked_t;
+
+void push_functional_unit_status(functional_unit_status_linked_t *head, functional_unit_status_t fu)
+{
+  // functional_unit_status_linked_t *current = head;
+  printf("%p\n", head);
+  // while (current->next != NULL)
+  // {
+  //   current = current->next;
+  // }
+  // current->next = (functional_unit_status_linked_t *)malloc(sizeof(functional_unit_status_linked_t));
+  // current->next->functional_unit_status = fu;
+  // current->next->next = NULL;
+}
 
 #endif
