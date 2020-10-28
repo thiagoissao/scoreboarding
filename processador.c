@@ -11,25 +11,24 @@ unsigned int clock;
 
 void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_status_table){
   bool isR;
-  unsigned int rs = desconverteRs(instruction);
-  unsigned int rt = desconverteRt(instruction);
-  unsigned int opcode = desconverteOp(instruction);
+  unsigned int funct, rs, rt, opcode, rd, shamt;
+  
+  rs = desconverteRs(instruction);
+  rt = desconverteRt(instruction);
+  opcode = desconverteOp(instruction);
 
   isR = (opcode == R);
   if (isR)
   {
-    unsigned int rd = desconverteRd(instruction);
-    unsigned int shamt = desconverteShamt(instruction);
-    unsigned int funct = desconverteFunct(instruction);
+    rd = desconverteRd(instruction);
+    shamt = desconverteShamt(instruction);
+    funct = desconverteFunct(instruction);
   }
 
   // preencher Bush / op / Fi / Fj / Fk / Qj / Qk / Rj / Rk
 
   setBusy(fu_status_table, opcode);
-
-  // nosso functional ta meio bugado 
-  
-  //isR ? setOp(fu_status_table, funct) : setOp(fu_status_table, opcode);
+  isR ? setOp(fu_status_table, funct) : setOp(fu_status_table, opcode);
   //setFi
   //setFj
   //setFk
@@ -62,12 +61,13 @@ void executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
 {
   unsigned int opcode = desconverteOp(instruction);
   unsigned int funct = desconverteFunct(instruction);
-
   bool isR = (opcode == R);
-  // verifica disponibilidade do opcode na FU
+
+  // verifica disponibilidade da sessao dele na FU
   bool canProceed = isR ? !getBusy(fu_status_table, funct) : !getBusy(fu_status_table, opcode);
   
   // se pode proceder pra Issue
+  printf("Segue? %d\n", canProceed);
   if (canProceed){ 
     inst_status_table->issue = clock; // atualiza o clock no status na tabela d inst
     preencheFU(instruction, fu_status_table); // preenche tabela FU
@@ -103,6 +103,7 @@ void executeScoreboarding(
   {
     printf("Inicio scoreboarding\n");
     executeIssue(inst_status_table[0].instruction, inst_status_table, fu_status_table, rr_status_table);
+    executeIssue(inst_status_table[1].instruction, inst_status_table, fu_status_table, rr_status_table);
 
     readOperands(inst_status_table[0].instruction);
     executeOperands(inst_status_table[0].instruction);

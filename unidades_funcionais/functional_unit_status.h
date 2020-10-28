@@ -35,42 +35,42 @@ void setOp(functional_unit_status_table_t *fu_status_table, unsigned int opcode)
   switch (opcode)
   {
   case 32: // add
-    fu_status_table->add.busy = !fu_status_table->add.busy;
+    fu_status_table->add.op = !fu_status_table->add.op;
     break;
   case 8: //addi
-    fu_status_table->add.busy = !fu_status_table->add.busy;
+    fu_status_table->add.op = !fu_status_table->add.op;
     break;
   case 36: //and
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+    fu_status_table->integer.op = !fu_status_table->integer.op;
     break;
   case 12: //andi
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+    fu_status_table->integer.op = !fu_status_table->integer.op;
     break;
   case 37: //or
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+    fu_status_table->integer.op = !fu_status_table->integer.op;
     break;
   case 13: //ori
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+    fu_status_table->integer.op = !fu_status_table->integer.op;
     break;
   case 42: //slt
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+    fu_status_table->integer.op = !fu_status_table->integer.op;
     break;
   case 34: //sub
-    fu_status_table->add.busy = !fu_status_table->add.busy;
+    fu_status_table->add.op = !fu_status_table->add.op;
     break;
   case 24: //mult1 arrumar
-    fu_status_table->mult1.busy = !fu_status_table->mult1.busy;
+    fu_status_table->mult1.op = !fu_status_table->mult1.op;
   case 25: //mult2 arrumar 
-    fu_status_table->mult2.busy = !fu_status_table->mult2.busy;
+    fu_status_table->mult2.op = !fu_status_table->mult2.op;
     break;
   case 1: //LI -> arrumar
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+    fu_status_table->integer.op = !fu_status_table->integer.op;
     break;
   case 2: //mov -> arrumar
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+    fu_status_table->integer.op = !fu_status_table->integer.op;
     break;
   default:
-    printf("Erro mudança no Busy correspondente\n");
+    printf("Erro mudança no op correspondente\n");
   }
 }
 
