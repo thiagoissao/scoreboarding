@@ -1,4 +1,4 @@
 ADDI $t0, $t1, 2
 ADDI $t3, $t2, 50
 ADD $s0, $s3, $s4
-MULT $s2, $gp, F9
+MULT $s2, $gp, $s4
