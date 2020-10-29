@@ -31,92 +31,81 @@ typedef struct functional_unit_status_table
   functional_unit_status_t divide;
 } functional_unit_status_table_t;
 
-void setOp(functional_unit_status_table_t *fu_status_table, unsigned int opcode){
-  switch (opcode)
-  {
-  case 32: // add
-    fu_status_table->add.op = !fu_status_table->add.op;
-    break;
-  case 8: //addi
-    fu_status_table->add.op = !fu_status_table->add.op;
-    break;
-  case 36: //and
-    fu_status_table->integer.op = !fu_status_table->integer.op;
-    break;
-  case 12: //andi
-    fu_status_table->integer.op = !fu_status_table->integer.op;
-    break;
-  case 37: //or
-    fu_status_table->integer.op = !fu_status_table->integer.op;
-    break;
-  case 13: //ori
-    fu_status_table->integer.op = !fu_status_table->integer.op;
-    break;
-  case 42: //slt
-    fu_status_table->integer.op = !fu_status_table->integer.op;
-    break;
-  case 34: //sub
-    fu_status_table->add.op = !fu_status_table->add.op;
-    break;
-  case 24: //mult1 arrumar
-    fu_status_table->mult1.op = !fu_status_table->mult1.op;
-  case 25: //mult2 arrumar 
-    fu_status_table->mult2.op = !fu_status_table->mult2.op;
-    break;
-  case 1: //LI -> arrumar
-    fu_status_table->integer.op = !fu_status_table->integer.op;
-    break;
-  case 2: //mov -> arrumar
-    fu_status_table->integer.op = !fu_status_table->integer.op;
-    break;
-  default:
-    printf("Erro mudança no op correspondente\n");
-  }
-}
+void setInstFu(functional_unit_status_table_t *fu_status_table, unsigned int opcode, 
+  unsigned int rd, unsigned int rs, unsigned int rt){
+  
+  UnitInstruction_t typeOp;
 
-void setBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcode){
-  switch (opcode)
+  typeOp = getTypeOp(opcode);
+
+  switch (typeOp)
   {
-  case 32: // add
-    fu_status_table->add.busy = !fu_status_table->add.busy;
+  case 0: //mult1
+    fu_status_table->mult1.busy    = !fu_status_table->mult1.busy;
+    fu_status_table->mult1.op      = opcode;
+    fu_status_table->mult1.dest_Fi = rd;
+    fu_status_table->mult1.s1_Fj   = rd;
+    fu_status_table->mult1.s2_Fk   = rt;
+    fu_status_table->mult1.fu_Qj   = 1;
+    fu_status_table->mult1.fu_Qk   = 1;
+    fu_status_table->mult1.fj_Rj   = 1;
+    fu_status_table->mult1.fj_Rk   = 1;
+    //fu_status_table->mult1.time = 1; n entedi o q mais
     break;
-  case 8: //addi
-    fu_status_table->add.busy = !fu_status_table->add.busy;
+
+  case 1: //mult2
+    fu_status_table->mult2.busy    = !fu_status_table->mult2.busy;
+    fu_status_table->mult2.op      = opcode;
+    fu_status_table->mult2.dest_Fi = rd;
+    fu_status_table->mult2.s1_Fj   = rd;
+    fu_status_table->mult2.s2_Fk   = rt;
+    fu_status_table->mult2.fu_Qj   = 1;
+    fu_status_table->mult2.fu_Qk   = 1;
+    fu_status_table->mult2.fj_Rj   = 1;
+    fu_status_table->mult2.fj_Rk   = 1;
     break;
-  case 36: //and
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+
+  case 2: // add
+    fu_status_table->add.busy      = !fu_status_table->add.busy;
+    fu_status_table->add.op        = opcode;
+    fu_status_table->add.dest_Fi   = rd;
+    fu_status_table->add.s1_Fj     = rd;
+    fu_status_table->add.s2_Fk     = rt;
+    fu_status_table->add.fu_Qj     = 1;
+    fu_status_table->add.fu_Qk     = 1;
+    fu_status_table->add.fj_Rj     = 1;
+    fu_status_table->add.fj_Rk     = 1;
     break;
-  case 12: //andi
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+  
+  case 3: //divide
+    fu_status_table->divide.busy    = !fu_status_table->divide.busy;
+    fu_status_table->divide.op      = opcode;
+    fu_status_table->divide.dest_Fi = rd;
+    fu_status_table->divide.s1_Fj   = rd;
+    fu_status_table->divide.s2_Fk   = rt;
+    fu_status_table->divide.fu_Qj   = 1;
+    fu_status_table->divide.fu_Qk   = 1;
+    fu_status_table->divide.fj_Rj   = 1;
+    fu_status_table->divide.fj_Rk   = 1;
     break;
-  case 37: //or
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
+
+  case 4: //integer
+    fu_status_table->integer.busy   = !fu_status_table->integer.busy;
+    fu_status_table->integer.op     = opcode;
+    fu_status_table->integer.dest_Fi= rd;
+    fu_status_table->integer.s1_Fj  = rd;
+    fu_status_table->integer.s2_Fk  = rt;
+    fu_status_table->integer.fu_Qj  = 1;
+    fu_status_table->integer.fu_Qk  = 1;
+    fu_status_table->integer.fj_Rj  = 1;
+    fu_status_table->integer.fj_Rk  = 1;
     break;
-  case 13: //ori
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
-    break;
-  case 42: //slt
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
-    break;
-  case 34: //sub
-    fu_status_table->add.busy = !fu_status_table->add.busy;
-    break;
-  case 24: //mult1 -> arrumar
-    fu_status_table->mult1.busy = !fu_status_table->mult1.busy;
-    break;
-  case 25: //mult2 -> arrumar se pa
-    fu_status_table->mult2.busy = !fu_status_table->mult2.busy;
-    break;
-  case 1: //LI -> arrumar
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
-    break;
-  case 2: //mov -> arrumar
-    fu_status_table->integer.busy = !fu_status_table->integer.busy;
-    break;
-  default:
-    printf("Erro mudança no Busy correspondente\n");
+
+  default: // vazio
+    printf("Erro na inserção no FU\n");
   }
-}
+
+  }
 
 bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcode){
   switch (opcode)
@@ -152,29 +141,29 @@ bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcod
 }
 
 void init_funcional_unit_status_table(functional_unit_status_table_t *fu_status_table){
-  fu_status_table->add.time     = -1;
-  fu_status_table->add.name     = 2;
-  fu_status_table->add.busy     = false;
-  fu_status_table->add.op       = 0;
-  fu_status_table->add.dest_Fi  = 0;
-  fu_status_table->add.s1_Fj    = 0;
-  fu_status_table->add.s2_Fk    = 0;
-  fu_status_table->add.fu_Qj    = 0; // deveria ter um sem nada
-  fu_status_table->add.fu_Qk    = 0; // deveria ter um sem nada
-  fu_status_table->add.fj_Rj    = false;
-  fu_status_table->add.fj_Rk    = false;
+  fu_status_table->add.time      = -1;
+  fu_status_table->add.name      = 2;
+  fu_status_table->add.busy      = false;
+  fu_status_table->add.op        = 0;
+  fu_status_table->add.dest_Fi   = 0;
+  fu_status_table->add.s1_Fj     = 0;
+  fu_status_table->add.s2_Fk     = 0;
+  fu_status_table->add.fu_Qj     = 0; // deveria ter um sem nada
+  fu_status_table->add.fu_Qk     = 0; // deveria ter um sem nada
+  fu_status_table->add.fj_Rj     = false;
+  fu_status_table->add.fj_Rk     = false;
 
-  fu_status_table->mult1.time     = -1;
-  fu_status_table->mult1.name     = 2;
-  fu_status_table->mult1.busy     = false;
-  fu_status_table->mult1.op       = 0;
-  fu_status_table->mult1.dest_Fi  = 0;
-  fu_status_table->mult1.s1_Fj    = 0;
-  fu_status_table->mult1.s2_Fk    = 0;
-  fu_status_table->mult1.fu_Qj    = 0; // deveria ter um sem nada
-  fu_status_table->mult1.fu_Qk    = 0; // deveria ter um sem nada
-  fu_status_table->mult1.fj_Rj    = false;
-  fu_status_table->mult1.fj_Rk    = false;
+  fu_status_table->mult1.time    = -1;
+  fu_status_table->mult1.name    = 2;
+  fu_status_table->mult1.busy    = false;
+  fu_status_table->mult1.op      = 0;
+  fu_status_table->mult1.dest_Fi = 0;
+  fu_status_table->mult1.s1_Fj   = 0;
+  fu_status_table->mult1.s2_Fk   = 0;
+  fu_status_table->mult1.fu_Qj   = 0; // deveria ter um sem nada
+  fu_status_table->mult1.fu_Qk   = 0; // deveria ter um sem nada
+  fu_status_table->mult1.fj_Rj   = false;
+  fu_status_table->mult1.fj_Rk   = false;
 
   fu_status_table->mult2.time    = -1;
   fu_status_table->mult2.name    = 2;
@@ -188,29 +177,29 @@ void init_funcional_unit_status_table(functional_unit_status_table_t *fu_status_
   fu_status_table->mult2.fj_Rj   = false;
   fu_status_table->mult2.fj_Rk   = false;
 
-  fu_status_table->divide.time      = -1;
-  fu_status_table->divide.name      = 2;
-  fu_status_table->divide.busy      = false;
-  fu_status_table->divide.op        = 0;
-  fu_status_table->divide.dest_Fi   = 0;
-  fu_status_table->divide.s1_Fj     = 0;
-  fu_status_table->divide.s2_Fk     = 0;
-  fu_status_table->divide.fu_Qj     = 0; // deveria ter um sem nada
-  fu_status_table->divide.fu_Qk     = 0; // deveria ter um sem nada
-  fu_status_table->divide.fj_Rj     = false;
-  fu_status_table->divide.fj_Rk     = false;
+  fu_status_table->divide.time   = -1;
+  fu_status_table->divide.name   = 2;
+  fu_status_table->divide.busy   = false;
+  fu_status_table->divide.op     = 0;
+  fu_status_table->divide.dest_Fi= 0;
+  fu_status_table->divide.s1_Fj  = 0;
+  fu_status_table->divide.s2_Fk  = 0;
+  fu_status_table->divide.fu_Qj  = 0; // deveria ter um sem nada
+  fu_status_table->divide.fu_Qk  = 0; // deveria ter um sem nada
+  fu_status_table->divide.fj_Rj  = false;
+  fu_status_table->divide.fj_Rk  = false;
 
-  fu_status_table->integer.time     = -1;
-  fu_status_table->integer.name     = 2;
-  fu_status_table->integer.busy     = false;
-  fu_status_table->integer.op       = 0;
-  fu_status_table->integer.dest_Fi  = 0;
-  fu_status_table->integer.s1_Fj    = 0;
-  fu_status_table->integer.s2_Fk    = 0;
-  fu_status_table->integer.fu_Qj    = 0; // deveria ter um sem nada
-  fu_status_table->integer.fu_Qk    = 0; // deveria ter um sem nada
-  fu_status_table->integer.fj_Rj    = false;
-  fu_status_table->integer.fj_Rk    = false;
+  fu_status_table->integer.time    = -1;
+  fu_status_table->integer.name    = 2;
+  fu_status_table->integer.busy    = false;
+  fu_status_table->integer.op      = 0;
+  fu_status_table->integer.dest_Fi = 0;
+  fu_status_table->integer.s1_Fj   = 0;
+  fu_status_table->integer.s2_Fk   = 0;
+  fu_status_table->integer.fu_Qj   = 0; // deveria ter um sem nada
+  fu_status_table->integer.fu_Qk   = 0; // deveria ter um sem nada
+  fu_status_table->integer.fj_Rj   = false;
+  fu_status_table->integer.fj_Rk   = false;
 }
 
 #endif

@@ -6,7 +6,7 @@
 
 typedef struct instruction_status
 {
-  unsigned int instruction : 32;
+  unsigned int instruction;
   int issue;
   int readOperand;
   int execComp;
