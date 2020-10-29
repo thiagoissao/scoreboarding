@@ -141,7 +141,7 @@ bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcod
   }
 }
 
-void init_funcional_unit_status_table(functional_unit_status_table_t *fu_status_table)
+void init_functional_unit_status_table(functional_unit_status_table_t *fu_status_table)
 {
   fu_status_table->add.time = -1;
   fu_status_table->add.name = add;

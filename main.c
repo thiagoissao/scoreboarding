@@ -23,16 +23,17 @@ int main()
     // Converte o conjunto das instruções para inteiro e armazena no array passado por referência
     converter(archive, instruction_set);
 
-    // Status das unidades funcionais
+    // Status das unidades funcionais e inicialização
     functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
-    init_funcional_unit_status_table(fu_status_table);
+    init_functional_unit_status_table(fu_status_table);
 
     // Status das instruções e inicialização
     instruction_status_t inst_status_table[numberOfInstructions];
     init_instruction_status_table(inst_status_table, instruction_set, numberOfInstructions);
 
-    // Status dos registradores
+    // Status dos registradores e inicialização
     register_result_status_table_t *rr_status_table = (register_result_status_table_t *)malloc(sizeof(register_result_status_table_t));
+    init_register_status_table(rr_status_table);
 
     //fu_status_table->addi.busy = true;
     //printf("1 teste e %d\n", fu_status_table->addi.busy);
