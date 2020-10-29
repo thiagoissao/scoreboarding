@@ -11,15 +11,15 @@ unsigned int clock;
 
 void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_status_table){
   bool isR;
-  unsigned int funct, rs, rt, opcode, rd, shamt;
+  unsigned int funct, rs, rt, opcode, rd, shamt, immediate;
   
-  rs     = desconverteRs(instruction);
-  rt     = desconverteRt(instruction);
-  opcode = desconverteOp(instruction);
+  rs        = desconverteRs(instruction);
+  rt        = desconverteRt(instruction);
+  opcode    = desconverteOp(instruction);
+  immediate = desconverteImmediate(instruction);
+  isR       = (opcode == R);
 
-  isR = (opcode == R);
-  if (isR)
-  {
+  if (isR){
     rd    = desconverteRd(instruction);
     shamt = desconverteShamt(instruction);
     funct = desconverteFunct(instruction);
@@ -67,7 +67,7 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
     inst_status_table->issue = clock; // atualiza o clock no status na tabela d inst
     preencheFU(instruction, fu_status_table); // preenche tabela FU
     preencheRegStatus(instruction, rr_status_table); // preenche tab dos Reg
-
+    printf("na fu: %d\n", fu_status_table->add.op);
     return true;
   }
   else 
