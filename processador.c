@@ -27,7 +27,10 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   }
 
   //verifica Rk e Rj e passar pra preencher tb
-  setInstFu(fu_status_table, opcode, rd, rs, rt);
+  if (isR)
+    setInstFu(fu_status_table, funct, rd, rs, rt);
+  else
+    setInstFu(fu_status_table, opcode, rd, rs, rt);
   // preencher Bush / op / Fi / Fj / Fk / Qj / Qk / Rj / Rk
 }
 

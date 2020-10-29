@@ -36,18 +36,17 @@ void setInstFu(functional_unit_status_table_t *fu_status_table, unsigned int opc
 {
 
   UnitInstruction_t typeOp;
-
   typeOp = getTypeOp(opcode);
 
   switch (typeOp)
   {
-  case 0: //mult1
+  case mult1:
     fu_status_table->mult1.busy = !fu_status_table->mult1.busy;
     fu_status_table->mult1.op = opcode;
     fu_status_table->mult1.dest_Fi = rd;
     fu_status_table->mult1.s1_Fj = rs;
     fu_status_table->mult1.s2_Fk = rt;
-    fu_status_table->mult1.fu_Qj = 1;
+    fu_status_table->mult1.fu_Qj = 1; //
     fu_status_table->mult1.fu_Qk = 1;
     fu_status_table->mult1.fj_Rj = 1;
     fu_status_table->mult1.fj_Rk = 1;
@@ -55,7 +54,7 @@ void setInstFu(functional_unit_status_table_t *fu_status_table, unsigned int opc
     //fu_status_table->mult1.time = 1; n entedi o q mais
     break;
 
-  case 1: //mult2
+  case mult2:
     fu_status_table->mult2.busy = !fu_status_table->mult2.busy;
     fu_status_table->mult2.op = opcode;
     fu_status_table->mult2.dest_Fi = rd;
@@ -68,7 +67,7 @@ void setInstFu(functional_unit_status_table_t *fu_status_table, unsigned int opc
     fu_status_table->mult2.name = mult2;
     break;
 
-  case 2: // add
+  case add:
     fu_status_table->add.busy = !fu_status_table->add.busy;
     fu_status_table->add.op = opcode;
     fu_status_table->add.dest_Fi = rd;
@@ -81,7 +80,7 @@ void setInstFu(functional_unit_status_table_t *fu_status_table, unsigned int opc
     fu_status_table->add.name = add;
     break;
 
-  case 3: //divide
+  case divide:
     fu_status_table->divide.busy = !fu_status_table->divide.busy;
     fu_status_table->divide.op = opcode;
     fu_status_table->divide.dest_Fi = rd;
@@ -94,7 +93,7 @@ void setInstFu(functional_unit_status_table_t *fu_status_table, unsigned int opc
     fu_status_table->divide.name = divide;
     break;
 
-  case 4: //integer
+  case log:
     fu_status_table->log.busy = !fu_status_table->log.busy;
     fu_status_table->log.op = opcode;
     fu_status_table->log.dest_Fi = rd;
