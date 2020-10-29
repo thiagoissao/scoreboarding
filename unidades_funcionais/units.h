@@ -9,41 +9,41 @@ typedef enum UnitInstruction
   mult2 = 1,
   add = 2,
   divide = 3,
-  integer = 4 // d onde log
+  log = 4
 } UnitInstruction_t;
 
 UnitInstruction_t getTypeOp(unsigned int opcode)
 {
   switch (opcode)
-    {
-    case 32: // add
-      return add;
-    case 8: //addi
-      return add;
-    case 36: //and
-      return integer;
-    case 12: //andi
-      return integer;
-    case 37: //or
-      return integer;
-    case 13: //ori
-      return integer;
-    case 42: //slt
-      return integer;
-    case 34: //sub
-      return add;
-    case 24: //mult1 arrumar
-      return mult1;
-    case 25: //mult2 arrumar 
-      return mult2;
-    case 1: //LI -> arrumar
-      return integer;
-    case 2: //mov -> arrumar
-      return integer;
-    default:
-      printf("Erro em Units.h\n");
-      return empty;
-    }
+  {
+  case ADD_DECIMAL: // add
+    return add;
+  case ADDI_DECIMAL: //addi
+    return add;
+  case AND_DECIMAL: //and
+    return log;
+  case ANDI_DECIMAL: //andi
+    return log;
+  case OR_DECIMAL: //or
+    return log;
+  case ORI_DECIMAL: //ori
+    return log;
+  case SLT_DECIMAL: //slt
+    return log;
+  case SUB_DECIMAL: //sub
+    return add;
+  case MULT_DECIMAL: //mult1 ou mult2 arrumar
+    return mult1;
+  case DIV_DECIMAL:
+    return divide;
+  case LI_DECIMAL: //LI -> arrumar
+    return log;
+  case MOVE_DECIMAL: //mov -> arrumar
+    return log;
+  default:
+    printf("Erro em Units.h\n");
+    return empty;
+  }
 }
 
 #endif

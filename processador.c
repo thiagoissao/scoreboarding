@@ -8,19 +8,20 @@
 
 unsigned int clock;
 
-
-void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_status_table){
+void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_status_table)
+{
   bool isR;
   unsigned int funct, rs, rt, opcode, rd, shamt, immediate;
-  
-  rs        = desconverteRs(instruction);
-  rt        = desconverteRt(instruction);
-  opcode    = desconverteOp(instruction);
-  immediate = desconverteImmediate(instruction);
-  isR       = (opcode == R);
 
-  if (isR){
-    rd    = desconverteRd(instruction);
+  rs = desconverteRs(instruction);
+  rt = desconverteRt(instruction);
+  opcode = desconverteOp(instruction);
+  immediate = desconverteImmediate(instruction);
+  isR = (opcode == R);
+
+  if (isR)
+  {
+    rd = desconverteRd(instruction);
     shamt = desconverteShamt(instruction);
     funct = desconverteFunct(instruction);
   }
@@ -30,13 +31,13 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   // preencher Bush / op / Fi / Fj / Fk / Qj / Qk / Rj / Rk
 }
 
-void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table){
-
+void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table)
+{
 }
 
 bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int size)
 {
-  if (clock == 3) 
+  if (clock == 3)
     return true;
   else
     return false;
@@ -51,26 +52,27 @@ bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int 
   return true;
 }
 
-bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_table, 
-              functional_unit_status_table_t *fu_status_table, register_result_status_table_t *rr_status_table)
+bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_table,
+                  functional_unit_status_table_t *fu_status_table, register_result_status_table_t *rr_status_table)
 {
   unsigned int opcode = desconverteOp(instruction);
-  unsigned int funct  = desconverteFunct(instruction);
+  unsigned int funct = desconverteFunct(instruction);
 
   bool isR = (opcode == R);
 
   // verifica disponibilidade da sessao da operacao na FU
   bool canProceed = isR ? !getBusy(fu_status_table, funct) : !getBusy(fu_status_table, opcode);
-  
-  printf("Segue? %d\n", canProceed);
-  if (canProceed){ 
-    inst_status_table->issue = clock; // atualiza o clock no status na tabela d inst
-    preencheFU(instruction, fu_status_table); // preenche tabela FU
+
+  printf("Segue? %s\n", canProceed ? "Sim" : "Não");
+  if (canProceed)
+  {
+    inst_status_table->issue = clock;                // atualiza o clock no status na tabela d inst
+    preencheFU(instruction, fu_status_table);        // preenche tabela FU
     preencheRegStatus(instruction, rr_status_table); // preenche tab dos Reg
     printf("na fu: %d\n", fu_status_table->add.op);
     return true;
   }
-  else 
+  else
     return false;
 }
 
@@ -97,14 +99,13 @@ void executeScoreboarding(
   unsigned int instAtual = 0;
   bool allWasWrited = false;
 
-
   while (!allWasWrited)
   {
     printf("\nInicio clock\n");
     printf("Busy add: %d\n", fu_status_table->add.busy);
-    
+
     if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table))
-      instAtual++;    // se a atual iniciou pra issue a inst pode ir pra proxima
+      instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
 
     printf("Busy add: %d\n", fu_status_table->add.busy);
 
