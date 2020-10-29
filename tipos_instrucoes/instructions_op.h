@@ -14,6 +14,13 @@
 #define LI "LI"
 #define MOVE "MOVE"
 
+#define EMPTY_FU_DECIMAL -1
+#define MULT1_FU_DECIMAL 0
+#define MULT2_FU_DECIMAL 1
+#define ADD_FU_DECIMAL 2
+#define DIVIDE_FU_DECIMAL 3
+#define LOG_FU_DECIMAL 4
+
 #define ADD_DECIMAL 32
 #define ADDI_DECIMAL 8
 #define AND_DECIMAL 36
