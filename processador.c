@@ -107,8 +107,24 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   
 }
 
-void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table)
+void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table, bool isR)
 {
+  unsigned int opcode, registrador;
+  UnitInstruction_t typeOp;
+
+  if (isR){
+    opcode = desconverteFunct(instruction);
+    registrador = desconverteRd(instruction);
+  }
+  else{
+    opcode = desconverteOp(instruction);
+    registrador = desconverteRs(instruction);
+  }
+  
+  typeOp = getTypeOp(opcode);
+
+  setRegistrador(rr_status_table, registrador, typeOp);
+  printf("Reg t0: %d\nReg s0: %d\n", rr_status_table->t0, rr_status_table->s2);
 }
 
 bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int size)
@@ -144,7 +160,7 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
   {
     inst_status_table->issue = clock;                // atualiza o clock no status na tabela d inst
     preencheFU(instruction, fu_status_table);        // preenche tabela FU
-    preencheRegStatus(instruction, rr_status_table); // preenche tab dos Reg
+    preencheRegStatus(instruction, rr_status_table, isR); // preenche tab dos Reg
     return true;
   }
   else

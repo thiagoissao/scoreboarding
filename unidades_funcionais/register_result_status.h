@@ -77,4 +77,112 @@ void init_register_status_table(register_result_status_table_t *rr_status_table)
   rr_status_table->ra = empty;
 }
 
+void setRegistrador(register_result_status_table_t *rr_status_table, unsigned int registrador, UnitInstruction_t typeOp)
+{
+  switch (registrador)
+  {
+  case zero_dec:
+    rr_status_table->at = typeOp;
+    break;
+  case at_dec:
+    rr_status_table->at = typeOp;
+    break;
+  case v0_dec:
+    rr_status_table->v0 = typeOp;
+    break;
+  case v1_dec:
+    rr_status_table->v1 = typeOp;
+    break;
+  case a0_dec:
+    rr_status_table->a0 = typeOp;
+    break;
+  case a1_dec:
+    rr_status_table->a1 = typeOp;
+    break;
+  case a2_dec:
+    rr_status_table->a2 = typeOp;
+    break;
+  case a3_dec:
+    rr_status_table->a3 = typeOp;
+    break;
+  case t0_dec:
+    rr_status_table->t0 = typeOp;
+    break;
+  case t1_dec:
+    rr_status_table->t1 = typeOp;
+    break;
+  case t2_dec:
+    rr_status_table->t2 = typeOp;
+    break;
+  case t3_dec:
+    rr_status_table->t3 = typeOp;
+    break;
+  case t4_dec:
+    rr_status_table->t4 = typeOp;
+    break;
+  case t5_dec:
+    rr_status_table->t5 = typeOp;
+    break;
+  case t6_dec:
+    rr_status_table->t6 = typeOp;
+    break;
+  case t7_dec:
+    rr_status_table->t7 = typeOp;
+    break;
+  case s0_dec:
+    rr_status_table->s0 = typeOp;
+    break;
+  case s1_dec:
+    rr_status_table->s1 = typeOp;
+    break;
+  case s2_dec:
+    rr_status_table->s2 = typeOp;
+    break;
+  case s3_dec:
+    rr_status_table->s3 = typeOp;
+    break;
+  case s4_dec:
+    rr_status_table->s4 = typeOp;
+    break;
+  case s5_dec:
+    rr_status_table->s5 = typeOp;
+    break;
+  case s6_dec:
+    rr_status_table->s6 = typeOp;
+    break;
+  case s7_dec:
+    rr_status_table->s7 = typeOp;
+    break;
+  case t8_dec:
+    rr_status_table->t8 = typeOp;
+    break;
+  case t9_dec:
+    rr_status_table->t9 = typeOp;
+    break;
+  case k0_dec:
+    rr_status_table->k0 = typeOp;
+    break;
+  case k1_dec:
+    rr_status_table->k1 = typeOp;
+    break;
+  case gp_dec:
+    rr_status_table->gp = typeOp;
+    break;
+  case sp_dec:
+    rr_status_table->sp = typeOp;
+    break;
+  case fp_dec:
+    rr_status_table->fp = typeOp;
+    break;
+  case ra_dec:
+    rr_status_table->ra = typeOp;
+    break;
+
+  default:
+    printf("Erro ao inserir na tabela do registrador!");
+    break;
+  }
+  
+}
+
 #endif
