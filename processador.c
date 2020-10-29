@@ -100,10 +100,10 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   dependenciaQK, dependenciaQJ = isR ? verifyDependency(fu_status_table, typeOp, rs, rt, opcode) : verifyDependency(fu_status_table, typeOp, rs, rt, funct);
 
   if (isR)
-    setInstFu(fu_status_table, typeOp, funct, rd, rs, rt, dependenciaQJ, dependenciaQK);
+    setInstFu(fu_status_table, typeOp, funct, rd, rs, rt, dependenciaQJ, dependenciaQK, 1);
   else
-    setInstFu(fu_status_table, typeOp, opcode, rd, rs, rt, dependenciaQJ, dependenciaQK);
-  // preencher Bush / op / Fi / Fj / Fk / Qj / Qk / Rj / Rk
+    setInstFu(fu_status_table, typeOp, opcode, rd, rs, rt, dependenciaQJ, dependenciaQK, 1);
+  // preenche Bush / op / Fi / Fj / Fk / Rj / Rk / Qj / Qk / time
   
 }
 
