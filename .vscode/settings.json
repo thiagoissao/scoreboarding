@@ -2,6 +2,14 @@
   "C_Cpp.errorSquiggles": "Disabled",
   "files.associations": {
     "type_traits": "cpp",
-    "typeinfo": "cpp"
+    "typeinfo": "cpp",
+    "*.tcc": "cpp",
+    "functional": "cpp",
+    "bitset": "cpp",
+    "string_view": "cpp",
+    "random": "cpp",
+    "iosfwd": "cpp",
+    "limits": "cpp",
+    "streambuf": "cpp"
   }
 }
