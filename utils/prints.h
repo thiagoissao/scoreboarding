@@ -1,3 +1,6 @@
+#ifndef PRINTS_H
+#define PRINTS_H
+
 #include <stdbool.h>
 #include <stdio.h>
 #include "../unidades_funcionais/functional_unit_status.h"
@@ -6,12 +9,7 @@
 #include "../tipos_instrucoes/instructions_op.h"
 #include "../tipos_instrucoes/registers.h"
 #include "../tipos_instrucoes/i_types.h"
-
-bool isR(unsigned int instr)
-{
-  unsigned int opcode = desconverteOp(instr);
-  return opcode == R;
-}
+#include "../utils/validations.h"
 
 void print_instructions(instruction_status_t *table, int size)
 {
@@ -116,3 +114,5 @@ void print_functional_unit(functional_unit_status_table_t *table)
          table->log.fj_Rj,
          table->log.fj_Rk);
 }
+
+#endif

@@ -5,6 +5,8 @@
 #include "unidades_funcionais/register_result_status.h"
 #include "tipos_instrucoes/i_types.h"
 #include "conversor.h"
+#include "utils/prints.h"
+#include "utils/validations.h"
 
 void executeScoreboarding();
 void writeResult();
@@ -36,7 +38,8 @@ void executeScoreboarding(
   while (!allWasWrited)
   {
     printf("\n---------Inicio clock--------\n");
-    printf("Busy Add Ocupado: %s\n", fu_status_table->add.busy ? "Sim" : "Não");
+
+    print_functional_unit(fu_status_table);
 
     if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
@@ -48,13 +51,11 @@ void executeScoreboarding(
     printf("----------Fim clock----------\n");
     allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
     clock += 1;
-    printf("%i\n", inst_status_table[0].instruction);
   }
 }
 
 void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_status_table)
 {
-  bool isR;
   UnitInstruction_t dependenciaQK, dependenciaQJ, typeOp;
   unsigned int funct, rs, rt, opcode, rd, shamt, immediate;
 
@@ -62,9 +63,8 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   rt = desconverteRt(instruction);
   opcode = desconverteOp(instruction);
   //immediate = desconverteImmediate(instruction);
-  isR = (opcode == R);
 
-  if (isR)
+  if (isR(instruction))
   {
     rd = desconverteRd(instruction);
     shamt = desconverteShamt(instruction);
@@ -80,21 +80,21 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   }
 
   //verifica Rk e Rj e passar pra preencher tb
-  dependenciaQK, dependenciaQJ = isR ? verifyDependency(fu_status_table, typeOp, rs, rt, opcode) : verifyDependency(fu_status_table, typeOp, rs, rt, funct);
+  dependenciaQK, dependenciaQJ = isR(instruction) ? verifyDependency(fu_status_table, typeOp, rs, rt, opcode) : verifyDependency(fu_status_table, typeOp, rs, rt, funct);
 
-  if (isR)
+  if (isR(instruction))
     setInstFu(fu_status_table, typeOp, funct, rd, rs, rt, dependenciaQJ, dependenciaQK, 1);
   else
     setInstFu(fu_status_table, typeOp, opcode, rd, rs, rt, dependenciaQJ, dependenciaQK, 1);
   // preenche Bush / op / Fi / Fj / Fk / Rj / Rk / Qj / Qk / time
 }
 
-void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table, bool isR)
+void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table, bool isRType)
 {
   unsigned int opcode, registrador;
   UnitInstruction_t typeOp;
 
-  if (isR)
+  if (isRType)
   {
     opcode = desconverteFunct(instruction);
     registrador = desconverteRd(instruction);
@@ -134,17 +134,15 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
   unsigned int opcode = desconverteOp(instruction);
   unsigned int funct = desconverteFunct(instruction);
 
-  bool isR = (opcode == R);
-
   // verifica disponibilidade da sessao da operacao na FU
-  bool canProceed = isR ? !getBusy(fu_status_table, funct) : !getBusy(fu_status_table, opcode);
+  bool canProceed = isR(instruction) ? !getBusy(fu_status_table, funct) : !getBusy(fu_status_table, opcode);
 
   printf("Segue? %s\n", canProceed ? "Sim" : "Não");
   if (canProceed)
   {
-    inst_status_table[instAtual].issue = clock;           // atualiza o clock no status na tabela d inst
-    preencheFU(instruction, fu_status_table);             // preenche tabela FU
-    preencheRegStatus(instruction, rr_status_table, isR); // preenche tab dos Reg
+    inst_status_table[instAtual].issue = clock;                        // atualiza o clock no status na tabela d inst
+    preencheFU(instruction, fu_status_table);                          // preenche tabela FU
+    preencheRegStatus(instruction, rr_status_table, isR(instruction)); // preenche tab dos Reg
     return true;
   }
   else
@@ -207,7 +205,7 @@ UnitInstruction_t verifyDependency(functional_unit_status_table_t *fu_status_tab
       dependenciaQK = LOG_FU_DECIMAL;
   }
 
-  printf("\n--> dependencia QK: %d\n--> dependencia QJ: %d\n", dependenciaQK, dependenciaQJ);
+  // printf("\n--> dependencia QK: %d\n--> dependencia QJ: %d\n", dependenciaQK, dependenciaQJ);
 
   return dependenciaQK, dependenciaQJ;
 }
