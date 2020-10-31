@@ -19,7 +19,7 @@ unsigned int clock;
 
 // EXEMPLO INSTRUCAO //
 //  ADD  = R[RD] = R[RS] + R[RT]
-// 
+//
 //  ADDI = R[RS] = [RT]  + Imediate
 
 void executeScoreboarding(
@@ -36,7 +36,7 @@ void executeScoreboarding(
   while (!allWasWrited)
   {
     printf("\n---------Inicio clock--------\n");
-    printf("Busy Add Ocupado: %s\n", fu_status_table->add.busy ? "Sim" : "Não" );
+    printf("Busy Add Ocupado: %s\n", fu_status_table->add.busy ? "Sim" : "Não");
 
     if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
@@ -48,6 +48,7 @@ void executeScoreboarding(
     printf("----------Fim clock----------\n");
     allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
     clock += 1;
+    printf("%i\n", inst_status_table[0].instruction);
   }
 }
 
@@ -70,13 +71,14 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
     funct = desconverteFunct(instruction);
     typeOp = getTypeOp(funct);
   }
-  else{
+  else
+  {
     typeOp = getTypeOp(opcode);
     rd = rs;
     rs = rt;
     rt = 0;
   }
-  
+
   //verifica Rk e Rj e passar pra preencher tb
   dependenciaQK, dependenciaQJ = isR ? verifyDependency(fu_status_table, typeOp, rs, rt, opcode) : verifyDependency(fu_status_table, typeOp, rs, rt, funct);
 
@@ -85,7 +87,6 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   else
     setInstFu(fu_status_table, typeOp, opcode, rd, rs, rt, dependenciaQJ, dependenciaQK, 1);
   // preenche Bush / op / Fi / Fj / Fk / Rj / Rk / Qj / Qk / time
-  
 }
 
 void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table, bool isR)
@@ -93,15 +94,17 @@ void preencheRegStatus(unsigned int instruction, register_result_status_table_t 
   unsigned int opcode, registrador;
   UnitInstruction_t typeOp;
 
-  if (isR){
+  if (isR)
+  {
     opcode = desconverteFunct(instruction);
     registrador = desconverteRd(instruction);
   }
-  else{
+  else
+  {
     opcode = desconverteOp(instruction);
     registrador = desconverteRs(instruction);
   }
-  
+
   typeOp = getTypeOp(opcode);
 
   setRegistrador(rr_status_table, registrador, typeOp);
@@ -139,8 +142,8 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
   printf("Segue? %s\n", canProceed ? "Sim" : "Não");
   if (canProceed)
   {
-    inst_status_table[instAtual].issue = clock;                // atualiza o clock no status na tabela d inst
-    preencheFU(instruction, fu_status_table);        // preenche tabela FU
+    inst_status_table[instAtual].issue = clock;           // atualiza o clock no status na tabela d inst
+    preencheFU(instruction, fu_status_table);             // preenche tabela FU
     preencheRegStatus(instruction, rr_status_table, isR); // preenche tab dos Reg
     return true;
   }
@@ -148,18 +151,19 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
     return false;
 }
 
-UnitInstruction_t verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp, 
-                  unsigned int fjAtual, unsigned int fkAtual, unsigned int opcode)
+UnitInstruction_t verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp,
+                                   unsigned int fjAtual, unsigned int fkAtual, unsigned int opcode)
 {
   UnitInstruction_t dependenciaQJ, dependenciaQK;
-  
+
   dependenciaQJ = empty;
   dependenciaQK = empty;
 
-  // fiquei meio incerto se isso realmente da certo, pq ele verifica na ordem da tabela 
+  // fiquei meio incerto se isso realmente da certo, pq ele verifica na ordem da tabela
   // e nao das instrucoes, sera q tem como criar uma dependecia que não é a dele realmente
 
-  if (fu_status_table->add.busy && typeOp != ADD_FU_DECIMAL){ 
+  if (fu_status_table->add.busy && typeOp != ADD_FU_DECIMAL)
+  {
     if (fu_status_table->add.dest_Fi == fjAtual)
       dependenciaQJ = ADD_FU_DECIMAL;
 
@@ -167,7 +171,8 @@ UnitInstruction_t verifyDependency(functional_unit_status_table_t *fu_status_tab
       dependenciaQK = ADD_FU_DECIMAL;
   }
 
-  if (fu_status_table->mult1.busy && typeOp != MULT1_FU_DECIMAL){
+  if (fu_status_table->mult1.busy && typeOp != MULT1_FU_DECIMAL)
+  {
     if (fu_status_table->mult1.dest_Fi == fjAtual)
       dependenciaQJ = MULT1_FU_DECIMAL;
 
@@ -175,7 +180,8 @@ UnitInstruction_t verifyDependency(functional_unit_status_table_t *fu_status_tab
       dependenciaQK = MULT1_FU_DECIMAL;
   }
 
-  if (fu_status_table->mult2.busy && typeOp != MULT2_FU_DECIMAL){
+  if (fu_status_table->mult2.busy && typeOp != MULT2_FU_DECIMAL)
+  {
     if (fu_status_table->mult2.dest_Fi == fjAtual)
       dependenciaQJ = MULT2_FU_DECIMAL;
 
@@ -183,15 +189,17 @@ UnitInstruction_t verifyDependency(functional_unit_status_table_t *fu_status_tab
       dependenciaQK = MULT2_FU_DECIMAL;
   }
 
-  if (fu_status_table->divide.busy && typeOp != DIVIDE_FU_DECIMAL){
+  if (fu_status_table->divide.busy && typeOp != DIVIDE_FU_DECIMAL)
+  {
     if (fu_status_table->divide.dest_Fi == fjAtual)
       dependenciaQJ = DIVIDE_FU_DECIMAL;
 
     if (fu_status_table->divide.dest_Fi == fkAtual)
-      dependenciaQK = DIVIDE_FU_DECIMAL;  
+      dependenciaQK = DIVIDE_FU_DECIMAL;
   }
 
-  if (fu_status_table->log.busy && typeOp != LOG_FU_DECIMAL){
+  if (fu_status_table->log.busy && typeOp != LOG_FU_DECIMAL)
+  {
     if (fu_status_table->log.dest_Fi == fjAtual)
       dependenciaQJ = LOG_FU_DECIMAL;
 
@@ -216,7 +224,7 @@ void writeResult(unsigned int instruction)
 {
 }
 
-  /*
+/*
     Help do scoreboarding
     ------------------------------------------------------------------
     1-

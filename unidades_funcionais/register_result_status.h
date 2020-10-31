@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "./units.h"
+#include "../tipos_instrucoes/registers.h"
 
 typedef struct register_result_status_table
 {
@@ -42,7 +43,8 @@ typedef struct register_result_status_table
   UnitInstruction_t ra;
 } register_result_status_table_t;
 
-void init_register_status_table(register_result_status_table_t *rr_status_table){
+void init_register_status_table(register_result_status_table_t *rr_status_table)
+{
   rr_status_table->zero = empty;
   rr_status_table->at = empty;
   rr_status_table->v0 = empty;
@@ -182,7 +184,6 @@ void setRegistrador(register_result_status_table_t *rr_status_table, unsigned in
     printf("Erro ao inserir na tabela do registrador!");
     break;
   }
-  
 }
 
 #endif

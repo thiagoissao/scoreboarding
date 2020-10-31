@@ -1,6 +1,7 @@
 #ifndef UNITS_H
 #define UNITS_H
 #include "./functional_unit_status.h"
+#include "../tipos_instrucoes/instructions_op.h"
 
 typedef enum UnitInstruction
 {
