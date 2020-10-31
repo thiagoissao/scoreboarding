@@ -48,10 +48,6 @@ int main()
         inst_status_table,
         rr_status_table);
 
-    printf("%i\n", inst_status_table[0].instruction);
-    printf("%i\n", inst_status_table[1].instruction);
-    printf("%i\n", inst_status_table[2].instruction);
-
     free(fu_status_table);
     free(rr_status_table);
     return 0;
