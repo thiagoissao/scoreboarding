@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "../unidades_funcionais/instruction_status.h"
+#include "../unidades_funcionais/functional_unit_status.h"
 #include "./prints.h"
 #include <stdlib.h>
 
@@ -25,6 +26,10 @@ int main()
     inst_table[i].writeResult = 100;
   }
 
-  print_instructions_complete(inst_table, size);
+  functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
+  init_functional_unit_status_table(fu_status_table);
+
+  // print_instructions_complete(inst_table, size);
+  print_functional_unit(fu_status_table);
   return 0;
 }
