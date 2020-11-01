@@ -242,6 +242,6 @@ unsigned int getRegisterDecimal(char *reg)
     return 31;
 
   printf("Erro na leitura do registrador %s\n", reg);
-  return 0;
+  return -1;
 }
 #endif
