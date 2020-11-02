@@ -7,13 +7,13 @@
 #include "conversor.h"
 #include "utils/prints.h"
 #include "utils/validations.h"
-
+void defineNextStep();
 void executeScoreboarding();
 void writeResult();
-void readOperands();
 void executeOperands();
 void preencheFU();
 void verifyDependency();
+bool readOperands();
 bool executeIssue();
 bool verifyIfAllWasWrited();
 
@@ -33,25 +33,42 @@ void executeScoreboarding(
   // inicializa
   clock = 1;
   unsigned int instAtual = 0;
-  bool allWasWrited = false;
+  bool allWasWrited = false, allWasRead;
 
   while (!allWasWrited)
   {
-    printf("\n---------Inicio clock--------\n");
+    printf("\n\n----------------------------------Inicio clock------------------------------------------\n");
     print_instructions_complete(inst_status_table, numberOfInstructions);
     printf("\n");
     print_functional_unit(fu_status_table);
 
-    if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
+    if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual)){
+      inst_status_table[instAtual].nextStep = false;
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
+    }
 
-    readOperands(inst_status_table[0].instruction);
+    //allWasRead = false;
+    for (int j = 0; j<instAtual; j++){
+      if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1)
+        readOperands(inst_status_table, fu_status_table, j);
+    }
+
+    //allWasRead = 
+
     executeOperands(inst_status_table[0].instruction);
     writeResult(inst_status_table[0].instruction);
 
-    printf("\n----------Fim clock----------\n\n");
+    defineNextStep(inst_status_table, instAtual);
+    printf("\n----------------------------------Fim clock-----------------------------------------------\n");
     allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
     clock += 1;
+  }
+}
+
+void defineNextStep(instruction_status_t *inst_status_table, unsigned int numberInst){
+  int i;
+  for (i = 0; i< numberInst; i++){
+    inst_status_table[i].nextStep = true;
   }
 }
 
@@ -113,7 +130,7 @@ void preencheRegStatus(unsigned int instruction, register_result_status_table_t 
 
 bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int size)
 {
-  if (clock == 3)
+  if (clock == 5)
     return true;
   else
     return false;
@@ -206,8 +223,39 @@ void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstr
   // printf("\n--> dependencia QK: %d\n--> dependencia QJ: %d\n", dependenciaQK, dependenciaQJ);
 }
 
-void readOperands(unsigned int instruction)
+bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, unsigned int idInstrucao)
 {
+  /*
+  espere até que não haja riscos de dados, então leia os operandos
+      Condições de espera: 
+        (1) todos os operandos de origem estão disponíveis
+      
+      Ações: 
+        (1) a unidade de função lê operandos de registro e inicia a execução do próximo ciclo
+  */
+  unsigned int instruction = inst_status_table[idInstrucao].instruction;
+  UnitInstruction_t typeOp;
+  unsigned int funct, opcode;
+
+  opcode = desconverteOp(instruction);
+  
+  if (isR(instruction)){
+    funct = desconverteFunct(instruction);
+    typeOp = getTypeOp(funct);
+  }
+  else typeOp = getTypeOp(opcode);
+
+  bool canProceed = operandsDisponiveis(fu_status_table, typeOp);
+
+  if (!canProceed) return false;
+
+  if (inst_status_table[idInstrucao].nextStep){
+    inst_status_table[idInstrucao].readOperand = clock;
+    inst_status_table[idInstrucao].nextStep = false;
+    return true;
+  }
+
+  return false;
 }
 
 void executeOperands(unsigned int instruction)
