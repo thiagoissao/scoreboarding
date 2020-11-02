@@ -29,7 +29,7 @@ void print_instructions_complete(instruction_status_t *table, int size)
   {
     if (isR(table[i].instruction))
     {
-      printf("%s, $%s, $%s, $%s\t  %i\t\t%i\t\t    %i\t\t%i\n",
+      printf("%4s $%3s,$%3s,$%3s\t  %1i\t\t %4i\t %12i\t %12i\n",
              opcodeToString(desconverteFunct(table[i].instruction)),
              registerToString(desconverteRd(table[i].instruction)),
              registerToString(desconverteRs(table[i].instruction)),
@@ -41,7 +41,7 @@ void print_instructions_complete(instruction_status_t *table, int size)
     }
     else
     {
-      printf("%s, $%s, $%s, %i\t  %i\t\t%i\t\t    %i\t\t%i\n",
+      printf("%4s $%3s,$%3s, %3i\t  %1i\t\t %4i\t %12i\t %12i\n",
              opcodeToString(desconverteOp(table[i].instruction)),
              registerToString(desconverteRs(table[i].instruction)),
              registerToString(desconverteRt(table[i].instruction)),
@@ -52,6 +52,7 @@ void print_instructions_complete(instruction_status_t *table, int size)
              table[i].writeResult);
     }
   }
+  //printf("----------------------------------------------------------------------------------------\n");
 }
 
 void print_functional_unit(functional_unit_status_table_t *table)

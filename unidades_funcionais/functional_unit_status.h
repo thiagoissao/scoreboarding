@@ -121,7 +121,7 @@ void setInstFu(functional_unit_status_table_t *fu_status_table, UnitInstruction_
 
 bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcode)
 {
-
+  // verificar por aq se pa se ta escrevendo no msm destino rsrs
   UnitInstruction_t typeOp;
 
   typeOp = getTypeOp(opcode);

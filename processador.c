@@ -38,7 +38,8 @@ void executeScoreboarding(
   while (!allWasWrited)
   {
     printf("\n---------Inicio clock--------\n");
-
+    print_instructions_complete(inst_status_table, numberOfInstructions);
+    printf("\n");
     print_functional_unit(fu_status_table);
 
     if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
@@ -48,7 +49,7 @@ void executeScoreboarding(
     executeOperands(inst_status_table[0].instruction);
     writeResult(inst_status_table[0].instruction);
 
-    printf("----------Fim clock----------\n");
+    printf("\n----------Fim clock----------\n\n");
     allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
     clock += 1;
   }
@@ -108,7 +109,6 @@ void preencheRegStatus(unsigned int instruction, register_result_status_table_t 
   typeOp = getTypeOp(opcode);
 
   setRegistrador(rr_status_table, registrador, typeOp);
-  printf("Reg t0: %d\nReg s0: %d\n", rr_status_table->t0, rr_status_table->s2);
 }
 
 bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int size)
@@ -137,7 +137,6 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
   // verifica disponibilidade da sessao da operacao na FU
   bool canProceed = isR(instruction) ? !getBusy(fu_status_table, funct) : !getBusy(fu_status_table, opcode);
 
-  printf("Segue? %s\n", canProceed ? "Sim" : "Não");
   if (canProceed)
   {
     inst_status_table[instAtual].issue = clock;                        // atualiza o clock no status na tabela d inst
