@@ -41,6 +41,8 @@ void executeScoreboarding(
     print_instructions_complete(inst_status_table, numberOfInstructions);
     printf("\n");
     print_functional_unit(fu_status_table);
+    printf("\n");
+    print_register_result(rr_status_table);
 
     if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
@@ -149,8 +151,8 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
 }
 
 void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp,
-                                   unsigned int fjAtual, unsigned int fkAtual, unsigned int opcode, 
-                                   UnitInstruction_t *dependenciaQJ, UnitInstruction_t *dependenciaQK)
+                      unsigned int fjAtual, unsigned int fkAtual, unsigned int opcode,
+                      UnitInstruction_t *dependenciaQJ, UnitInstruction_t *dependenciaQK)
 {
   *dependenciaQJ = empty;
   *dependenciaQK = empty;
