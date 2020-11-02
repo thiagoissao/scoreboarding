@@ -57,8 +57,8 @@ void print_instructions_complete(instruction_status_t *table, int size)
 void print_functional_unit(functional_unit_status_table_t *table)
 {
   printf("\n2) STATUS DAS UNIDADES FUNCIONAIS\n");
-  printf("UF\t\t| Busy \t| Op \t| Fi \t| Fj \t| Fk \t| Qi \t| Qj \t\t| Ri \t| Rj\n");
-  printf("%i Mult1 | %3s \t| %3s \t| %3s \t| %3s \t| %3s \t| %3i \t| %5i \t| %3i \t| %3i\n",
+  printf("UF\t|Busy\t| Op\t| Fi\t| Fj\t| Fk\t| Qj\t| Qk\t| Rj\t| Rk\n");
+  printf("%i Mult1 | %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4i \t| %4i \t| %4s \t| %4s\n",
          table->mult1.time,
          table->mult1.busy ? "Yes" : "No",
          opcodeToString(table->mult1.op),
@@ -67,9 +67,9 @@ void print_functional_unit(functional_unit_status_table_t *table)
          registerToString(table->mult1.s2_Fk),
          table->mult1.fu_Qj,
          table->mult1.fu_Qk,
-         table->mult1.fj_Rj,
-         table->mult1.fj_Rk);
-  printf("%i Mult2 | %3s \t| %3s \t| %3s \t| %3s \t| %3s \t| %3i \t| %5i \t| %3i \t| %3i\n",
+         table->mult1.fj_Rj ? "Yes" : "No",
+         table->mult1.fj_Rk ? "Yes" : "No");
+  printf("%i Mult2 | %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4i \t| %4i \t| %4s \t| %4s\n",
          table->mult2.time,
          table->mult2.busy ? "Yes" : "No",
          opcodeToString(table->mult2.op),
@@ -78,9 +78,9 @@ void print_functional_unit(functional_unit_status_table_t *table)
          registerToString(table->mult2.s2_Fk),
          table->mult2.fu_Qj,
          table->mult2.fu_Qk,
-         table->mult2.fj_Rj,
-         table->mult2.fj_Rk);
-  printf("%i Add   | %3s \t| %3s \t| %3s \t| %3s \t| %3s \t| %3i \t| %5i \t| %3i \t| %3i\n",
+         table->mult2.fj_Rj ? "Yes" : "No",
+         table->mult2.fj_Rk ? "Yes" : "No");
+  printf("%i Add   | %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4i \t| %4i \t| %4s \t| %4s\n",
          table->add.time,
          table->add.busy ? "Yes" : "No",
          opcodeToString(table->add.op),
@@ -89,9 +89,9 @@ void print_functional_unit(functional_unit_status_table_t *table)
          registerToString(table->add.s2_Fk),
          table->add.fu_Qj,
          table->add.fu_Qk,
-         table->add.fj_Rj,
-         table->add.fj_Rk); 
-  printf("%i Div   | %3s \t| %3s \t| %3s \t| %3s \t| %3s \t| %3i \t| %5i \t| %3i \t| %3i\n",
+         table->add.fj_Rj ? "Yes" : "No",
+         table->add.fj_Rk ? "Yes" : "No"); 
+  printf("%i Div   | %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4i \t| %4i \t| %4s \t| %4s\n",
          table->divide.time,
          table->divide.busy ? "Yes" : "No",
          opcodeToString(table->divide.op),
@@ -100,9 +100,9 @@ void print_functional_unit(functional_unit_status_table_t *table)
          registerToString(table->divide.s2_Fk),
          table->divide.fu_Qj,
          table->divide.fu_Qk,
-         table->divide.fj_Rj,
-         table->divide.fj_Rk);
-  printf("%i Log   | %3s \t| %3s \t| %3s \t| %3s \t| %3s \t| %3i \t| %5i \t| %3i \t| %3i\n",
+         table->divide.fj_Rj ? "Yes" : "No",
+         table->divide.fj_Rk ? "Yes" : "No");
+  printf("%i Log   | %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4i \t| %4i \t| %4s \t| %4s\n",
          table->log.time,
          table->log.busy ? "Yes" : "No",
          opcodeToString(table->log.op),
@@ -111,8 +111,8 @@ void print_functional_unit(functional_unit_status_table_t *table)
          registerToString(table->log.s2_Fk),
          table->log.fu_Qj,
          table->log.fu_Qk,
-         table->log.fj_Rj,
-         table->log.fj_Rk);
+         table->log.fj_Rj ? "Yes" : "No",
+         table->log.fj_Rk ? "Yes" : "No");
 }
 
 #endif

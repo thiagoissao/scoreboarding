@@ -13,9 +13,9 @@ void writeResult();
 void readOperands();
 void executeOperands();
 void preencheFU();
+void verifyDependency();
 bool executeIssue();
 bool verifyIfAllWasWrited();
-UnitInstruction_t verifyDependency();
 
 unsigned int clock;
 
@@ -80,7 +80,7 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   }
 
   //verifica Rk e Rj e passar pra preencher tb
-  dependenciaQK, dependenciaQJ = isR(instruction) ? verifyDependency(fu_status_table, typeOp, rs, rt, opcode) : verifyDependency(fu_status_table, typeOp, rs, rt, funct);
+  isR(instruction) ? verifyDependency(fu_status_table, typeOp, rs, rt, opcode, &dependenciaQJ, &dependenciaQK) : verifyDependency(fu_status_table, typeOp, rs, rt, funct, &dependenciaQJ, &dependenciaQK);
 
   if (isR(instruction))
     setInstFu(fu_status_table, typeOp, funct, rd, rs, rt, dependenciaQJ, dependenciaQK, 1);
@@ -149,13 +149,12 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
     return false;
 }
 
-UnitInstruction_t verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp,
-                                   unsigned int fjAtual, unsigned int fkAtual, unsigned int opcode)
+void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp,
+                                   unsigned int fjAtual, unsigned int fkAtual, unsigned int opcode, 
+                                   UnitInstruction_t *dependenciaQJ, UnitInstruction_t *dependenciaQK)
 {
-  UnitInstruction_t dependenciaQJ, dependenciaQK;
-
-  dependenciaQJ = empty;
-  dependenciaQK = empty;
+  *dependenciaQJ = empty;
+  *dependenciaQK = empty;
 
   // fiquei meio incerto se isso realmente da certo, pq ele verifica na ordem da tabela
   // e nao das instrucoes, sera q tem como criar uma dependecia que não é a dele realmente
@@ -163,51 +162,49 @@ UnitInstruction_t verifyDependency(functional_unit_status_table_t *fu_status_tab
   if (fu_status_table->add.busy && typeOp != ADD_FU_DECIMAL)
   {
     if (fu_status_table->add.dest_Fi == fjAtual)
-      dependenciaQJ = ADD_FU_DECIMAL;
+      *dependenciaQJ = ADD_FU_DECIMAL;
 
     if (fu_status_table->add.dest_Fi == fkAtual)
-      dependenciaQK = ADD_FU_DECIMAL;
+      *dependenciaQK = ADD_FU_DECIMAL;
   }
 
   if (fu_status_table->mult1.busy && typeOp != MULT1_FU_DECIMAL)
   {
     if (fu_status_table->mult1.dest_Fi == fjAtual)
-      dependenciaQJ = MULT1_FU_DECIMAL;
+      *dependenciaQJ = MULT1_FU_DECIMAL;
 
     if (fu_status_table->mult1.dest_Fi == fkAtual)
-      dependenciaQK = MULT1_FU_DECIMAL;
+      *dependenciaQK = MULT1_FU_DECIMAL;
   }
 
   if (fu_status_table->mult2.busy && typeOp != MULT2_FU_DECIMAL)
   {
     if (fu_status_table->mult2.dest_Fi == fjAtual)
-      dependenciaQJ = MULT2_FU_DECIMAL;
+      *dependenciaQJ = MULT2_FU_DECIMAL;
 
     if (fu_status_table->mult2.dest_Fi == fkAtual)
-      dependenciaQK = MULT2_FU_DECIMAL;
+      *dependenciaQK = MULT2_FU_DECIMAL;
   }
 
   if (fu_status_table->divide.busy && typeOp != DIVIDE_FU_DECIMAL)
   {
     if (fu_status_table->divide.dest_Fi == fjAtual)
-      dependenciaQJ = DIVIDE_FU_DECIMAL;
+      *dependenciaQJ = DIVIDE_FU_DECIMAL;
 
     if (fu_status_table->divide.dest_Fi == fkAtual)
-      dependenciaQK = DIVIDE_FU_DECIMAL;
+      *dependenciaQK = DIVIDE_FU_DECIMAL;
   }
 
   if (fu_status_table->log.busy && typeOp != LOG_FU_DECIMAL)
   {
     if (fu_status_table->log.dest_Fi == fjAtual)
-      dependenciaQJ = LOG_FU_DECIMAL;
+      *dependenciaQJ = LOG_FU_DECIMAL;
 
     if (fu_status_table->log.dest_Fi == fkAtual)
-      dependenciaQK = LOG_FU_DECIMAL;
+      *dependenciaQK = LOG_FU_DECIMAL;
   }
 
   // printf("\n--> dependencia QK: %d\n--> dependencia QJ: %d\n", dependenciaQK, dependenciaQJ);
-
-  return dependenciaQK, dependenciaQJ;
 }
 
 void readOperands(unsigned int instruction)
