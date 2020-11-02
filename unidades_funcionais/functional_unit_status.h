@@ -3,9 +3,10 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "./units.h"
 #include <stdbool.h>
 #include <stdlib.h>
+#include "./units.h"
+#include "../tipos_instrucoes/registers.h"
 
 typedef struct functional_unit_status
 {
@@ -154,9 +155,9 @@ void init_functional_unit_status_table(functional_unit_status_table_t *fu_status
   fu_status_table->add.time = 1;
   fu_status_table->add.busy = false;
   fu_status_table->add.op = 0;
-  fu_status_table->add.dest_Fi = -1;
-  fu_status_table->add.s1_Fj = -1;
-  fu_status_table->add.s2_Fk = -1;
+  fu_status_table->add.dest_Fi = zero_dec;
+  fu_status_table->add.s1_Fj = zero_dec;
+  fu_status_table->add.s2_Fk = zero_dec;
   fu_status_table->add.fu_Qj = empty;
   fu_status_table->add.fu_Qk = empty;
   fu_status_table->add.fj_Rj = true;
@@ -166,9 +167,9 @@ void init_functional_unit_status_table(functional_unit_status_table_t *fu_status
   fu_status_table->mult1.time = 1;
   fu_status_table->mult1.busy = false;
   fu_status_table->mult1.op = 0;
-  fu_status_table->mult1.dest_Fi = -1;
-  fu_status_table->mult1.s1_Fj = -1;
-  fu_status_table->mult1.s2_Fk = -1;
+  fu_status_table->mult1.dest_Fi = zero_dec;
+  fu_status_table->mult1.s1_Fj = zero_dec;
+  fu_status_table->mult1.s2_Fk = zero_dec;
   fu_status_table->mult1.fu_Qj = empty;
   fu_status_table->mult1.fu_Qk = empty;
   fu_status_table->mult1.fj_Rj = true;
@@ -178,9 +179,9 @@ void init_functional_unit_status_table(functional_unit_status_table_t *fu_status
   fu_status_table->mult2.time = 1;
   fu_status_table->mult2.busy = false;
   fu_status_table->mult2.op = 0;
-  fu_status_table->mult2.dest_Fi = -1;
-  fu_status_table->mult2.s1_Fj = -1;
-  fu_status_table->mult2.s2_Fk = -1;
+  fu_status_table->mult2.dest_Fi = zero_dec;
+  fu_status_table->mult2.s1_Fj = zero_dec;
+  fu_status_table->mult2.s2_Fk = zero_dec;
   fu_status_table->mult2.fu_Qj = empty;
   fu_status_table->mult2.fu_Qk = empty;
   fu_status_table->mult2.fj_Rj = true;
@@ -190,9 +191,9 @@ void init_functional_unit_status_table(functional_unit_status_table_t *fu_status
   fu_status_table->divide.time = 1;
   fu_status_table->divide.busy = false;
   fu_status_table->divide.op = 0;
-  fu_status_table->divide.dest_Fi = -1;
-  fu_status_table->divide.s1_Fj = -1;
-  fu_status_table->divide.s2_Fk = -1;
+  fu_status_table->divide.dest_Fi = zero_dec;
+  fu_status_table->divide.s1_Fj = zero_dec;
+  fu_status_table->divide.s2_Fk = zero_dec;
   fu_status_table->divide.fu_Qj = empty;
   fu_status_table->divide.fu_Qk = empty;
   fu_status_table->divide.fj_Rj = true;
@@ -202,9 +203,9 @@ void init_functional_unit_status_table(functional_unit_status_table_t *fu_status
   fu_status_table->log.time = 1;
   fu_status_table->log.busy = false;
   fu_status_table->log.op = 0;
-  fu_status_table->log.dest_Fi = -1;
-  fu_status_table->log.s1_Fj = -1;
-  fu_status_table->log.s2_Fk = -1;
+  fu_status_table->log.dest_Fi = zero_dec;
+  fu_status_table->log.s1_Fj = zero_dec;
+  fu_status_table->log.s2_Fk = zero_dec;
   fu_status_table->log.fu_Qj = empty;
   fu_status_table->log.fu_Qk = empty;
   fu_status_table->log.fj_Rj = true;

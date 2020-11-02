@@ -75,7 +75,7 @@ char *registerToString(unsigned int reg)
   switch (reg)
   {
   case zero_dec:
-    return zero_reg;
+    return "";
   case at_dec:
     return at_reg;
   case v0_dec:
