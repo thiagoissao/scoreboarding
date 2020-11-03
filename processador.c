@@ -37,39 +37,39 @@ void executeScoreboarding(
 
   while (!allWasWrited)
   {
-    printf("\n\n----------------------------------Inicio clock------------------------------------------\n");
+    printf("\n\n---------------------------------- CICLO %i ------------------------------------------\n", clock);
     print_instructions_complete(inst_status_table, numberOfInstructions);
     printf("\n");
     print_functional_unit(fu_status_table);
     printf("\n");
     print_register_result(rr_status_table);
 
-    if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual)){
+    if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
+    {
       inst_status_table[instAtual].nextStep = false;
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
     }
 
-    //allWasRead = false;
-    for (int j = 0; j<instAtual; j++){
+    for (int j = 0; j < instAtual; j++)
+    {
       if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1)
         readOperands(inst_status_table, fu_status_table, j);
     }
-
-    //allWasRead = 
 
     executeOperands(inst_status_table[0].instruction);
     writeResult(inst_status_table[0].instruction);
 
     defineNextStep(inst_status_table, instAtual);
-    printf("\n----------------------------------Fim clock-----------------------------------------------\n");
     allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
     clock += 1;
   }
 }
 
-void defineNextStep(instruction_status_t *inst_status_table, unsigned int numberInst){
+void defineNextStep(instruction_status_t *inst_status_table, unsigned int numberInst)
+{
   int i;
-  for (i = 0; i< numberInst; i++){
+  for (i = 0; i < numberInst; i++)
+  {
     inst_status_table[i].nextStep = true;
   }
 }
@@ -174,9 +174,6 @@ void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstr
   *dependenciaQJ = empty;
   *dependenciaQK = empty;
 
-  // fiquei meio incerto se isso realmente da certo, pq ele verifica na ordem da tabela
-  // e nao das instrucoes, sera q tem como criar uma dependecia que não é a dele realmente
-
   if (fu_status_table->add.busy && typeOp != ADD_FU_DECIMAL)
   {
     if (fu_status_table->add.dest_Fi == fjAtual)
@@ -221,8 +218,6 @@ void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstr
     if (fu_status_table->log.dest_Fi == fkAtual)
       *dependenciaQK = LOG_FU_DECIMAL;
   }
-
-  // printf("\n--> dependencia QK: %d\n--> dependencia QJ: %d\n", dependenciaQK, dependenciaQJ);
 }
 
 bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, unsigned int idInstrucao)
@@ -240,18 +235,22 @@ bool readOperands(instruction_status_t *inst_status_table, functional_unit_statu
   unsigned int funct, opcode;
 
   opcode = desconverteOp(instruction);
-  
-  if (isR(instruction)){
+
+  if (isR(instruction))
+  {
     funct = desconverteFunct(instruction);
     typeOp = getTypeOp(funct);
   }
-  else typeOp = getTypeOp(opcode);
+  else
+    typeOp = getTypeOp(opcode);
 
   bool canProceed = operandsDisponiveis(fu_status_table, typeOp);
 
-  if (!canProceed) return false;
+  if (!canProceed)
+    return false;
 
-  if (inst_status_table[idInstrucao].nextStep){
+  if (inst_status_table[idInstrucao].nextStep)
+  {
     inst_status_table[idInstrucao].readOperand = clock;
     inst_status_table[idInstrucao].nextStep = false;
     return true;
