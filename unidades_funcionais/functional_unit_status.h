@@ -212,4 +212,60 @@ void init_functional_unit_status_table(functional_unit_status_table_t *fu_status
   fu_status_table->log.fj_Rk = true;
 }
 
+bool operandsDisponiveis(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp){
+  bool dependenciaRJ, dependenciaRK;
+
+  switch (typeOp)
+  {
+  case mult1:
+    dependenciaRJ = fu_status_table->mult1.fj_Rj;
+    dependenciaRK = fu_status_table->mult1.fj_Rk;
+
+    if (dependenciaRJ && dependenciaRK)
+      return true;
+    else
+      return false;
+
+  case mult2:
+    dependenciaRJ = fu_status_table->mult2.fj_Rj;
+    dependenciaRK = fu_status_table->mult2.fj_Rk;
+
+    if (dependenciaRJ && dependenciaRK)
+      return true;
+    else
+      return false;
+
+  case add:
+    dependenciaRJ = fu_status_table->add.fj_Rj;
+    dependenciaRK = fu_status_table->add.fj_Rk;
+
+    if (dependenciaRJ && dependenciaRK)
+      return true;
+    else
+      return false;
+
+  case divide:
+    dependenciaRJ = fu_status_table->divide.fj_Rj;
+    dependenciaRK = fu_status_table->divide.fj_Rk;
+
+    if (dependenciaRJ && dependenciaRK)
+      return true;
+    else
+      return false;
+
+  case log:
+    dependenciaRJ = fu_status_table->log.fj_Rj;
+    dependenciaRK = fu_status_table->log.fj_Rk;
+
+    if (dependenciaRJ && dependenciaRK)
+      return true;
+    else
+      return false;
+
+  default:
+    printf("Erro na verificacao da dependencia do operando!");
+    break;
+  }
+}
+
 #endif
