@@ -15,7 +15,7 @@ int main()
     char *archive = "mnemonios.txt";
 
     //Quantidade de instruções no programa
-    int numberOfInstructions = 4; //PARAMETRIZAR DEPOIS Ex: -m 300000
+    int numberOfInstructions = 5; //PARAMETRIZAR DEPOIS Ex: -m 300000
 
     // Cria na memória um array com o inteiro de cada instrução
     unsigned int instruction_set[numberOfInstructions];

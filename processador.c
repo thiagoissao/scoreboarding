@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 #include "unidades_funcionais/functional_unit_status.h"
 #include "unidades_funcionais/instruction_status.h"
 #include "unidades_funcionais/register_result_status.h"
@@ -7,6 +8,8 @@
 #include "conversor.h"
 #include "utils/prints.h"
 #include "utils/validations.h"
+#include "utils/canProceedToIssue.h"
+
 void defineNextStep();
 void executeScoreboarding();
 void writeResult();
@@ -150,11 +153,9 @@ bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int 
 bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_table,
                   functional_unit_status_table_t *fu_status_table, register_result_status_table_t *rr_status_table, unsigned int instAtual)
 {
-  unsigned int opcode = desconverteOp(instruction);
-  unsigned int funct = desconverteFunct(instruction);
 
   // verifica disponibilidade da sessao da operacao na FU
-  bool canProceed = isR(instruction) ? !getBusy(fu_status_table, funct) : !getBusy(fu_status_table, opcode);
+  bool canProceed = canProceedToIssue(instruction, fu_status_table, rr_status_table);
 
   if (canProceed)
   {
