@@ -15,9 +15,10 @@
 
 void print_instructions(instruction_status_t *table, int size)
 {
+  int i;
   printf("\n1) STATUS DAS INSTRUÇÕES\n");
   printf("\t\tEmissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
-  for (int i = 0; i < size; i++)
+  for (i = 0; i < size; i++)
   {
     printf("%i\t%i\t\t%i\t\t    %i\t\t%i\n", table[i].instruction, table[i].issue, table[i].readOperand, table[i].execComp, table[i].writeResult);
   }
@@ -25,9 +26,10 @@ void print_instructions(instruction_status_t *table, int size)
 
 void print_instructions_complete(instruction_status_t *table, int size)
 {
+  int i;
   printf("\n1) STATUS DAS INSTRUÇÕES\n");
   printf("\t\t      Emissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
-  for (int i = 0; i < size; i++)
+  for (i = 0; i < size; i++)
   {
     if (isR(table[i].instruction))
     {

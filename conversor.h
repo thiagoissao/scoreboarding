@@ -28,12 +28,14 @@ void converter(char *archive, unsigned int *instructionsSet)
 {
     FILE *archiveFile = fopen(archive, "r");
 
-    int count = 0;
+    int count;
+    count = 0;
     char instruction[32];
     char *separators = " .,;'\n''\t''\r'";
     while (fgets(instruction, sizeof(instruction), archiveFile) != NULL)
     {
-        unsigned int encodedInstruction = 0;
+        unsigned int encodedInstruction;
+        encodedInstruction = 0;
         char *splitInstruction = strtok(instruction, separators);
         Instruction instructionType = getInstructionType(splitInstruction);
         unsigned int opcode = getOpcodeDecimal(splitInstruction);
@@ -96,7 +98,8 @@ void converter(char *archive, unsigned int *instructionsSet)
 
 int getInstructionsQuantity(char *nameArquivo)
 {
-    int quantidade = 0;
+    int quantidade;
+    quantidade = 0;
 
     FILE *arquivo;
     arquivo = fopen(nameArquivo, "r");
@@ -118,7 +121,8 @@ int getInstructionsQuantity(char *nameArquivo)
 
 void converteOp(unsigned int *inst, int atualizar)
 {
-    unsigned int real = 0;
+    unsigned int real;
+    real = 0;
 
     // OR entre a parte binario real e atualizar
     real = real | atualizar;
@@ -130,7 +134,8 @@ void converteOp(unsigned int *inst, int atualizar)
 
 void converteRs(unsigned int *inst, int atualizar)
 {
-    unsigned int real = *inst;
+    unsigned int real;
+    real = *inst;
 
     real = real >> 26;
     real = real << 5;
@@ -143,8 +148,8 @@ void converteRs(unsigned int *inst, int atualizar)
 
 void converteRt(unsigned int *inst, int atualizar)
 {
-
-    unsigned int real = *inst;
+    unsigned int real;
+    real = *inst;
 
     real = real >> 21;
     real = real << 5;
@@ -157,8 +162,8 @@ void converteRt(unsigned int *inst, int atualizar)
 
 void converteRd(unsigned int *inst, int atualizar)
 {
-
-    unsigned int real = *inst;
+    unsigned int real;
+    real = *inst;
 
     real = real >> 16;
     real = real << 5;
@@ -171,8 +176,8 @@ void converteRd(unsigned int *inst, int atualizar)
 
 void converteShamt(unsigned int *inst, int atualizar)
 {
-
-    unsigned int real = *inst;
+    unsigned int real;
+    real = *inst;
 
     real = real >> 11;
     real = real << 5;
@@ -185,8 +190,8 @@ void converteShamt(unsigned int *inst, int atualizar)
 
 void converteFunct(unsigned int *inst, int atualizar)
 {
-
-    unsigned int real = *inst;
+    unsigned int real;
+    real = *inst;
 
     real = real >> 6;
     real = real << 6;
@@ -197,8 +202,8 @@ void converteFunct(unsigned int *inst, int atualizar)
 
 void converteAddress(unsigned int *inst, int atualizar)
 {
-
-    unsigned int real = *inst;
+    unsigned int real;
+    real = *inst;
 
     real = real >> 26;
     real = real << 26;
@@ -209,7 +214,8 @@ void converteAddress(unsigned int *inst, int atualizar)
 
 void converteImmediate(unsigned int *inst, int atualizar)
 {
-    unsigned int real = *inst;
+    unsigned int real;
+    real = *inst;
 
     real = real >> 16;
     real = real << 16;

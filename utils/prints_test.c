@@ -6,10 +6,10 @@
 
 int main()
 {
-  int size = 10;
+  int size = 10, i;
   instruction_status_t inst_table[size];
 
-  for (int i = 0; i < size / 2; i++)
+  for (i = 0; i < size / 2; i++)
   {
     inst_table[i].instruction = 18124824; //ADDI $t0, $t1, 2
     inst_table[i].issue = 0;
@@ -17,7 +17,7 @@ int main()
     inst_table[i].execComp = 2;
     inst_table[i].writeResult = 4;
   }
-  for (int i = 5; i < size; i++)
+  for (i = 5; i < size; i++)
   {
     inst_table[i].instruction = 554237954; //ADDI $t0, $t1, 2
     inst_table[i].issue = 5;

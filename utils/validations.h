@@ -7,7 +7,9 @@
 
 bool isR(unsigned int instr)
 {
-  unsigned int opcode = desconverteOp(instr);
+  unsigned int opcode;
+  opcode = desconverteOp(instr);
+  
   return opcode == R;
 }
 
