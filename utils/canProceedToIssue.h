@@ -134,9 +134,9 @@ bool canProceedToIssue(
   //Verifica se está a unidade está ocupada
   if (isTypeR)
   {
-    return !getBusy(fu_status_table, funct);
+    return !getBusy(fu_status_table, funct) && !wawDependency;
   }
-  return !getBusy(fu_status_table, opcode);
+  return !getBusy(fu_status_table, opcode) && !wawDependency;
 }
 
 #endif

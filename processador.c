@@ -41,11 +41,6 @@ void executeScoreboarding(
   while (!allWasWrited)
   {
     printf("\n\n---------------------------------- CICLO %i ------------------------------------------\n", clock);
-    print_instructions_complete(inst_status_table, numberOfInstructions);
-    printf("\n");
-    print_functional_unit(fu_status_table);
-    printf("\n");
-    print_register_result(rr_status_table);
 
     if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
     {
@@ -61,6 +56,13 @@ void executeScoreboarding(
 
     executeOperands(inst_status_table[0].instruction);
     writeResult(inst_status_table[0].instruction);
+
+
+    print_instructions_complete(inst_status_table, numberOfInstructions);
+    printf("\n");
+    print_functional_unit(fu_status_table);
+    printf("\n");
+    print_register_result(rr_status_table);
 
     defineNextStep(inst_status_table, instAtual);
     allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
