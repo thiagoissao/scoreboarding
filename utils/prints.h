@@ -15,46 +15,48 @@
 
 void print_instructions(instruction_status_t *table, int size)
 {
-       printf("\n1) STATUS DAS INSTRUÇÕES\n");
-       printf("\t\tEmissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
-       for (int i = 0; i < size; i++)
-       {
-              printf("%i\t%i\t\t%i\t\t    %i\t\t%i\n", table[i].instruction, table[i].issue, table[i].readOperand, table[i].execComp, table[i].writeResult);
-       }
+  int i;
+  printf("\n1) STATUS DAS INSTRUÇÕES\n");
+  printf("\t\tEmissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
+  for (i = 0; i < size; i++)
+  {
+    printf("%i\t%i\t\t%i\t\t    %i\t\t%i\n", table[i].instruction, table[i].issue, table[i].readOperand, table[i].execComp, table[i].writeResult);
+  }
 }
 
 void print_instructions_complete(instruction_status_t *table, int size)
 {
-       printf("\n1) STATUS DAS INSTRUÇÕES\n");
-       printf("\t\t      Emissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
-       for (int i = 0; i < size; i++)
-       {
-              if (isR(table[i].instruction))
-              {
-                     printf("%4s %3s, %3s, %3s\t  %1i\t\t %4i\t %12i\t %12i\n",
-                            opcodeToString(desconverteFunct(table[i].instruction)),
-                            registerToString(desconverteRd(table[i].instruction)),
-                            registerToString(desconverteRs(table[i].instruction)),
-                            registerToString(desconverteRt(table[i].instruction)),
-                            table[i].issue,
-                            table[i].readOperand,
-                            table[i].execComp,
-                            table[i].writeResult);
-              }
-              else
-              {
-                     printf("%4s %3s, %3s, %3i\t  %1i\t\t %4i\t %12i\t %12i\n",
-                            opcodeToString(desconverteOp(table[i].instruction)),
-                            registerToString(desconverteRs(table[i].instruction)),
-                            registerToString(desconverteRt(table[i].instruction)),
-                            desconverteImmediate(table[i].instruction),
-                            table[i].issue,
-                            table[i].readOperand,
-                            table[i].execComp,
-                            table[i].writeResult);
-              }
-       }
-       //printf("----------------------------------------------------------------------------------------\n");
+  int i;
+  printf("\n1) STATUS DAS INSTRUÇÕES\n");
+  printf("\t\t      Emissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
+  for (i = 0; i < size; i++)
+  {
+    if (isR(table[i].instruction))
+    {
+      printf("%4s $%3s,$%3s,$%3s\t  %1i\t\t %4i\t %12i\t %12i\n",
+             opcodeToString(desconverteFunct(table[i].instruction)),
+             registerToString(desconverteRd(table[i].instruction)),
+             registerToString(desconverteRs(table[i].instruction)),
+             registerToString(desconverteRt(table[i].instruction)),
+             table[i].issue,
+             table[i].readOperand,
+             table[i].execComp,
+             table[i].writeResult);
+    }
+    else
+    {
+      printf("%4s $%3s,$%3s, %3i\t  %1i\t\t %4i\t %12i\t %12i\n",
+             opcodeToString(desconverteOp(table[i].instruction)),
+             registerToString(desconverteRs(table[i].instruction)),
+             registerToString(desconverteRt(table[i].instruction)),
+             desconverteImmediate(table[i].instruction),
+             table[i].issue,
+             table[i].readOperand,
+             table[i].execComp,
+             table[i].writeResult);
+    }
+  }
+  //printf("----------------------------------------------------------------------------------------\n");
 }
 
 void print_functional_unit(functional_unit_status_table_t *table)
