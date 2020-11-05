@@ -12,7 +12,6 @@ typedef struct instruction_status
   int readOperand;
   int execComp;
   int writeResult;
-  bool nextStep;
 } instruction_status_t;
 
 typedef struct instruction_status_linked
@@ -30,7 +29,6 @@ void init_instruction_status_table(instruction_status_t *table, unsigned int *in
     table[i].readOperand = -1;
     table[i].execComp = -1;
     table[i].writeResult = -1;
-    table[i].nextStep = true;
   }
 }
 

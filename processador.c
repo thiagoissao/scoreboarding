@@ -39,6 +39,9 @@ void executeScoreboarding(
   clock = 1;
   unsigned int instAtual = 0;
   bool allWasWrited = false, allWasRead;
+  bool nextStep[numberOfInstructions];
+
+  defineNextStep(nextStep, numberOfInstructions);
 
   while (!allWasWrited)
   {
@@ -46,14 +49,14 @@ void executeScoreboarding(
 
     if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
     {
-      inst_status_table[instAtual].nextStep = false;
+      nextStep[instAtual] = false;
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
     }
 
     for (int j = 0; j < instAtual; j++)
     {
       if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1)
-        readOperands(inst_status_table, fu_status_table, j);
+        readOperands(inst_status_table, fu_status_table, nextStep, j);
     }
 
     executeOperands(inst_status_table[0].instruction);
@@ -67,18 +70,18 @@ void executeScoreboarding(
     printf("\n");
     print_register_database(register_database);
 
-    defineNextStep(inst_status_table, instAtual);
+    defineNextStep(nextStep, instAtual);
     allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
     clock += 1;
   }
 }
 
-void defineNextStep(instruction_status_t *inst_status_table, unsigned int numberInst)
+void defineNextStep(bool *nextStep, unsigned int numberInst)
 {
   int i;
   for (i = 0; i < numberInst; i++)
   {
-    inst_status_table[i].nextStep = true;
+    nextStep[i] = true;
   }
 }
 
@@ -226,7 +229,8 @@ void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstr
   }
 }
 
-bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, unsigned int idInstrucao)
+bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, 
+          bool *nextStep, unsigned int idInstrucao)
 {
   /*
   espere até que não haja riscos de dados, então leia os operandos
@@ -255,10 +259,10 @@ bool readOperands(instruction_status_t *inst_status_table, functional_unit_statu
   if (!canProceed)
     return false;
 
-  if (inst_status_table[idInstrucao].nextStep)
+  if (nextStep[idInstrucao])
   {
     inst_status_table[idInstrucao].readOperand = clock;
-    inst_status_table[idInstrucao].nextStep = false;
+    nextStep[idInstrucao] = false;
     return true;
   }
 
