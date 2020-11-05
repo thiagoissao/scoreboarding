@@ -27,6 +27,8 @@ int main()
     // Cria na memória um array para armazenar a configuração do scoreboarding
     int numberOfConfigs = count_configs(config);
     config_t configurations[numberOfConfigs];
+    config_converter(config, configurations);
+    print_config(configurations, numberOfConfigs);
 
     // Cria na memória um array com o inteiro de cada instrução
     unsigned int instruction_set[numberOfInstructions];

@@ -13,6 +13,16 @@
 #include "../tipos_instrucoes/i_types.h"
 #include "../utils/validations.h"
 #include "../unidades_funcionais/units.h"
+#include "../config/config.h"
+
+void print_config(config_t *config, int size)
+{
+       printf("\n-------------- CONFIGURATIONS --------------------\n");
+       for (int i = 0; i < size; i++)
+       {
+              printf("Instrução: %s => %i ciclos\n", config[size].name, config[size].value);
+       }
+}
 
 void print_instructions(instruction_status_t *table, int size)
 {

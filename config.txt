@@ -1,4 +1,5 @@
-MULT = 10
+MULT1 = 10
+MULT2 = 10
 ADD = 2
 DIV = 16
 LOG = 1
