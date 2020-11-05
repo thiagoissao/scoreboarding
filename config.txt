@@ -1,0 +1,4 @@
+MULT = 10
+ADD = 2
+DIV = 16
+LOG = 1

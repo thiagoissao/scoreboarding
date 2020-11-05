@@ -6,6 +6,7 @@
 #include "../unidades_funcionais/functional_unit_status.h"
 #include "../unidades_funcionais/instruction_status.h"
 #include "../unidades_funcionais/register_result_status.h"
+#include "../unidades_funcionais/register_database.h"
 #include "../conversor.h"
 #include "../tipos_instrucoes/instructions_op.h"
 #include "../tipos_instrucoes/registers.h"
@@ -15,48 +16,48 @@
 
 void print_instructions(instruction_status_t *table, int size)
 {
-  int i;
-  printf("\n1) STATUS DAS INSTRUÇÕES\n");
-  printf("\t\tEmissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
-  for (i = 0; i < size; i++)
-  {
-    printf("%i\t%i\t\t%i\t\t    %i\t\t%i\n", table[i].instruction, table[i].issue, table[i].readOperand, table[i].execComp, table[i].writeResult);
-  }
+       int i;
+       printf("\n1) STATUS DAS INSTRUÇÕES\n");
+       printf("\t\tEmissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
+       for (i = 0; i < size; i++)
+       {
+              printf("%i\t%i\t\t%i\t\t    %i\t\t%i\n", table[i].instruction, table[i].issue, table[i].readOperand, table[i].execComp, table[i].writeResult);
+       }
 }
 
 void print_instructions_complete(instruction_status_t *table, int size)
 {
-  int i;
-  printf("\n1) STATUS DAS INSTRUÇÕES\n");
-  printf("\t\t      Emissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
-  for (i = 0; i < size; i++)
-  {
-    if (isR(table[i].instruction))
-    {
-      printf("%4s $%3s,$%3s,$%3s\t  %1i\t\t %4i\t %12i\t %12i\n",
-             opcodeToString(desconverteFunct(table[i].instruction)),
-             registerToString(desconverteRd(table[i].instruction)),
-             registerToString(desconverteRs(table[i].instruction)),
-             registerToString(desconverteRt(table[i].instruction)),
-             table[i].issue,
-             table[i].readOperand,
-             table[i].execComp,
-             table[i].writeResult);
-    }
-    else
-    {
-      printf("%4s $%3s,$%3s, %3i\t  %1i\t\t %4i\t %12i\t %12i\n",
-             opcodeToString(desconverteOp(table[i].instruction)),
-             registerToString(desconverteRs(table[i].instruction)),
-             registerToString(desconverteRt(table[i].instruction)),
-             desconverteImmediate(table[i].instruction),
-             table[i].issue,
-             table[i].readOperand,
-             table[i].execComp,
-             table[i].writeResult);
-    }
-  }
-  //printf("----------------------------------------------------------------------------------------\n");
+       int i;
+       printf("\n1) STATUS DAS INSTRUÇÕES\n");
+       printf("\t\t      Emissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
+       for (i = 0; i < size; i++)
+       {
+              if (isR(table[i].instruction))
+              {
+                     printf("%4s %3s, %3s, %3s\t  %1i\t\t %4i\t %12i\t %12i\n",
+                            opcodeToString(desconverteFunct(table[i].instruction)),
+                            registerToString(desconverteRd(table[i].instruction)),
+                            registerToString(desconverteRs(table[i].instruction)),
+                            registerToString(desconverteRt(table[i].instruction)),
+                            table[i].issue,
+                            table[i].readOperand,
+                            table[i].execComp,
+                            table[i].writeResult);
+              }
+              else
+              {
+                     printf("%4s $%3s,$%3s, %3i\t  %1i\t\t %4i\t %12i\t %12i\n",
+                            opcodeToString(desconverteOp(table[i].instruction)),
+                            registerToString(desconverteRs(table[i].instruction)),
+                            registerToString(desconverteRt(table[i].instruction)),
+                            desconverteImmediate(table[i].instruction),
+                            table[i].issue,
+                            table[i].readOperand,
+                            table[i].execComp,
+                            table[i].writeResult);
+              }
+       }
+       //printf("----------------------------------------------------------------------------------------\n");
 }
 
 void print_functional_unit(functional_unit_status_table_t *table)
@@ -191,6 +192,80 @@ void print_register_result(register_result_status_table_t *table)
               typeOpToString(table->sp),
               typeOpToString(table->fp),
               typeOpToString(table->ra));
+}
+
+void print_register_database(register_database_t *table)
+{
+       char *formatRegName = "%s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t\n";
+       char *format = "%i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t\n";
+       printf("\n4) BANCO DE REGISTRADORES\n");
+       printf(formatRegName,
+              zero_reg,
+              at_reg,
+              v0_reg,
+              v1_reg,
+              a0_reg,
+              a1_reg,
+              a2_reg,
+              a3_reg,
+              t0_reg,
+              t1_reg,
+              t2_reg,
+              t3_reg,
+              t4_reg,
+              t5_reg,
+              t6_reg,
+              t7_reg,
+              s0_reg,
+              s1_reg,
+              s2_reg,
+              s3_reg,
+              s4_reg,
+              s5_reg,
+              s6_reg,
+              s7_reg,
+              t8_reg,
+              t9_reg,
+              k0_reg,
+              k1_reg,
+              gp_reg,
+              sp_reg,
+              fp_reg,
+              ra_reg);
+       printf("\n");
+       printf(format,
+              table->zero,
+              table->at,
+              table->v0,
+              table->v1,
+              table->a0,
+              table->a1,
+              table->a2,
+              table->a3,
+              table->t0,
+              table->t1,
+              table->t2,
+              table->t3,
+              table->t4,
+              table->t5,
+              table->t6,
+              table->t7,
+              table->s0,
+              table->s1,
+              table->s2,
+              table->s3,
+              table->s4,
+              table->s5,
+              table->s6,
+              table->s7,
+              table->t8,
+              table->t9,
+              table->k0,
+              table->k1,
+              table->gp,
+              table->sp,
+              table->fp,
+              table->ra);
 }
 
 #endif

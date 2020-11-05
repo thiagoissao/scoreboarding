@@ -8,14 +8,20 @@
 #include "unidades_funcionais/functional_unit_status.h"
 #include "unidades_funcionais/instruction_status.h"
 #include "unidades_funcionais/register_result_status.h"
+#include "unidades_funcionais/register_database.h"
 #include "utils/prints.h"
+
+//Parametrizar depois
+#define PROGRAM "mnemonios.txt"
+#define CONFIG "config.txt"
+#define CICLOS 5
 
 int main()
 {
-    char *archive = "mnemonios.txt";
+    char *archive = PROGRAM;
 
     //Quantidade de instruções no programa
-    int numberOfInstructions = 5; //PARAMETRIZAR DEPOIS Ex: -m 300000
+    int numberOfInstructions = CICLOS;
 
     // Cria na memória um array com o inteiro de cada instrução
     unsigned int instruction_set[numberOfInstructions];
@@ -35,6 +41,10 @@ int main()
     register_result_status_table_t *rr_status_table = (register_result_status_table_t *)malloc(sizeof(register_result_status_table_t));
     init_register_status_table(rr_status_table);
 
+    // Banco de registradores e inicialização
+    register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
+    init_register_database(register_database);
+
     //fu_status_table->addi.busy = true;
     //printf("1 teste e %d\n", fu_status_table->addi.busy);
     //fu_status_table->addi.busy = true;
@@ -46,7 +56,8 @@ int main()
         numberOfInstructions,
         fu_status_table,
         inst_status_table,
-        rr_status_table);
+        rr_status_table,
+        register_database);
 
     free(fu_status_table);
     free(rr_status_table);

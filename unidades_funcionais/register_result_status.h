@@ -79,7 +79,7 @@ void init_register_status_table(register_result_status_table_t *rr_status_table)
   rr_status_table->ra = empty;
 }
 
-void setRegistrador(register_result_status_table_t *rr_status_table, unsigned int registrador, UnitInstruction_t typeOp)
+void setRegisterResult(register_result_status_table_t *rr_status_table, unsigned int registrador, UnitInstruction_t typeOp)
 {
   switch (registrador)
   {
@@ -181,7 +181,7 @@ void setRegistrador(register_result_status_table_t *rr_status_table, unsigned in
     break;
 
   default:
-    printf("Erro ao inserir na tabela do registrador!");
+    printf("Erro ao inserir na tabela do status do registrador!");
     break;
   }
 }

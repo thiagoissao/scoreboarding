@@ -4,6 +4,7 @@
 #include "unidades_funcionais/functional_unit_status.h"
 #include "unidades_funcionais/instruction_status.h"
 #include "unidades_funcionais/register_result_status.h"
+#include "unidades_funcionais/register_database.h"
 #include "tipos_instrucoes/i_types.h"
 #include "conversor.h"
 #include "utils/prints.h"
@@ -31,7 +32,8 @@ void executeScoreboarding(
     unsigned int numberOfInstructions,
     functional_unit_status_table_t *fu_status_table,
     instruction_status_t *inst_status_table,
-    register_result_status_table_t *rr_status_table)
+    register_result_status_table_t *rr_status_table,
+    register_database_t *register_database)
 {
   // inicializa
   clock = 1;
@@ -40,7 +42,7 @@ void executeScoreboarding(
 
   while (!allWasWrited)
   {
-    printf("\n\n---------------------------------- CICLO %i ------------------------------------------\n", clock);
+    printf("\n\n-------------------------------------------------------- CICLO %i -----------------------------------------------------------------\n", clock);
 
     if (executeIssue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
     {
@@ -57,12 +59,13 @@ void executeScoreboarding(
     executeOperands(inst_status_table[0].instruction);
     writeResult(inst_status_table[0].instruction);
 
-
     print_instructions_complete(inst_status_table, numberOfInstructions);
     printf("\n");
     print_functional_unit(fu_status_table);
     printf("\n");
     print_register_result(rr_status_table);
+    printf("\n");
+    print_register_database(register_database);
 
     defineNextStep(inst_status_table, instAtual);
     allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
@@ -132,7 +135,7 @@ void preencheRegStatus(unsigned int instruction, register_result_status_table_t 
 
   typeOp = getTypeOp(opcode);
 
-  setRegistrador(rr_status_table, registrador, typeOp);
+  setRegisterResult(rr_status_table, registrador, typeOp);
 }
 
 bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int size)
