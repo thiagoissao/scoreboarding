@@ -1,5 +1,5 @@
 ADDI $t0, $t1, 2
-MULT $t0, $s2, $s4
+MULT $t1, $t0, $s4
 DIV $t3, $ra, $fp
 ADDI $t3, $t2, 50
 ADD $s0, $s3, $s4
