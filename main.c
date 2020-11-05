@@ -10,6 +10,8 @@
 #include "unidades_funcionais/register_result_status.h"
 #include "unidades_funcionais/register_database.h"
 #include "utils/prints.h"
+#include "config/config.h"
+#include "config/config_converter.h"
 
 //Parametrizar depois
 #define PROGRAM "mnemonios.txt"
@@ -18,10 +20,13 @@
 
 int main()
 {
+    char *config = CONFIG;
     char *archive = PROGRAM;
-
-    //Quantidade de instruções no programa
     int numberOfInstructions = CICLOS;
+
+    // Cria na memória um array para armazenar a configuração do scoreboarding
+    int numberOfConfigs = count_configs(config);
+    config_t configurations[numberOfConfigs];
 
     // Cria na memória um array com o inteiro de cada instrução
     unsigned int instruction_set[numberOfInstructions];
@@ -44,13 +49,6 @@ int main()
     // Banco de registradores e inicialização
     register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
     init_register_database(register_database);
-
-    //fu_status_table->addi.busy = true;
-    //printf("1 teste e %d\n", fu_status_table->addi.busy);
-    //fu_status_table->addi.busy = true;
-    //printf("2 teste e %d\n", fu_status_table->addi.busy);
-    //verifyFuStatus(8, fu_status_table);
-    //printf("3 teste e %d\n", fu_status_table->addi.busy);
 
     executeScoreboarding(
         numberOfInstructions,
