@@ -5,6 +5,7 @@
 #include "unidades_funcionais/instruction_status.h"
 #include "unidades_funcionais/register_result_status.h"
 #include "unidades_funcionais/register_database.h"
+#include "config/config.h"
 #include "tipos_instrucoes/i_types.h"
 #include "conversor.h"
 #include "utils/prints.h"
@@ -29,6 +30,7 @@ unsigned int clock;
 //  ADDI = R[RS] = [RT]  + Imediate
 
 void executeScoreboarding(
+    config_t *config,
     unsigned int numberOfInstructions,
     functional_unit_status_table_t *fu_status_table,
     instruction_status_t *inst_status_table,
@@ -100,11 +102,11 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
     rd = desconverteRd(instruction);
     shamt = desconverteShamt(instruction);
     funct = desconverteFunct(instruction);
-    typeOp = getTypeOp(funct);
+    typeOp = getTypeOp(funct, fu_status_table);
   }
   else
   {
-    typeOp = getTypeOp(opcode);
+    typeOp = getTypeOp(opcode, fu_status_table);
     rd = rs;
     rs = rt;
     rt = 0;
@@ -120,7 +122,11 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   // preenche Bush / op / Fi / Fj / Fk / Rj / Rk / Qj / Qk / time
 }
 
-void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table, bool isRType)
+void preencheRegStatus(
+    unsigned int instruction,
+    register_result_status_table_t *rr_status_table,
+    functional_unit_status_table_t *fu_status_table,
+    bool isRType)
 {
   unsigned int opcode, registrador;
   UnitInstruction_t typeOp;
@@ -136,7 +142,7 @@ void preencheRegStatus(unsigned int instruction, register_result_status_table_t 
     registrador = desconverteRs(instruction);
   }
 
-  typeOp = getTypeOp(opcode);
+  typeOp = getTypeOp(opcode, fu_status_table);
 
   setRegisterResult(rr_status_table, registrador, typeOp);
 }
@@ -167,9 +173,9 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
 
   if (canProceed)
   {
-    inst_status_table[instAtual].issue = clock;                        // atualiza o clock no status na tabela d inst
-    preencheFU(instruction, fu_status_table);                          // preenche tabela FU
-    preencheRegStatus(instruction, rr_status_table, isR(instruction)); // preenche tab dos Reg
+    inst_status_table[instAtual].issue = clock;                                         // atualiza o clock no status na tabela d inst
+    preencheFU(instruction, fu_status_table);                                           // preenche tabela FU
+    preencheRegStatus(instruction, rr_status_table, fu_status_table, isR(instruction)); // preenche tab dos Reg
     return true;
   }
   else
@@ -229,8 +235,8 @@ void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstr
   }
 }
 
-bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, 
-          bool *nextStep, unsigned int idInstrucao)
+bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
+                  bool *nextStep, unsigned int idInstrucao)
 {
   /*
   espere até que não haja riscos de dados, então leia os operandos
@@ -249,10 +255,10 @@ bool readOperands(instruction_status_t *inst_status_table, functional_unit_statu
   if (isR(instruction))
   {
     funct = desconverteFunct(instruction);
-    typeOp = getTypeOp(funct);
+    typeOp = getTypeOp(funct, fu_status_table);
   }
   else
-    typeOp = getTypeOp(opcode);
+    typeOp = getTypeOp(opcode, fu_status_table);
 
   bool canProceed = operandsDisponiveis(fu_status_table, typeOp);
 

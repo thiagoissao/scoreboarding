@@ -50,9 +50,9 @@ int main()
 
     // Banco de registradores e inicialização
     register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
-    init_register_database(register_database);
 
     executeScoreboarding(
+        configurations,
         numberOfInstructions,
         fu_status_table,
         inst_status_table,

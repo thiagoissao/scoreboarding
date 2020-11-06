@@ -119,36 +119,6 @@ void setInstFu(functional_unit_status_table_t *fu_status_table, UnitInstruction_
   }
 }
 
-bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcode)
-{
-  // verificar por aq se pa se ta escrevendo no msm destino rsrs
-  UnitInstruction_t typeOp;
-
-  typeOp = getTypeOp(opcode);
-
-  switch (typeOp)
-  {
-  case 0: //mult1
-    return fu_status_table->mult1.busy;
-
-  case 1: //mult2
-    return fu_status_table->mult2.busy;
-
-  case 2: // add
-    return fu_status_table->add.busy;
-
-  case 3: //divide
-    return fu_status_table->divide.busy;
-
-  case 4: //integer
-    return fu_status_table->log.busy;
-
-  default: // vazio
-    printf("Erro em getBusy da FU\n");
-    return false;
-  }
-}
-
 void init_functional_unit_status_table(functional_unit_status_table_t *fu_status_table)
 {
   fu_status_table->add.name = add;
@@ -212,7 +182,8 @@ void init_functional_unit_status_table(functional_unit_status_table_t *fu_status
   fu_status_table->log.fj_Rk = true;
 }
 
-bool operandsDisponiveis(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp){
+bool operandsDisponiveis(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp)
+{
   bool dependenciaRJ, dependenciaRK;
 
   switch (typeOp)
@@ -265,6 +236,74 @@ bool operandsDisponiveis(functional_unit_status_table_t *fu_status_table, UnitIn
   default:
     printf("Erro na verificacao da dependencia do operando!");
     break;
+  }
+}
+
+UnitInstruction_t getTypeOp(unsigned int opcode, functional_unit_status_table_t *fu_table)
+{
+  switch (opcode)
+  {
+  case ADD_DECIMAL: // add
+    return add;
+  case ADDI_DECIMAL: //addi
+    return add;
+  case AND_DECIMAL: //and
+    return log;
+  case ANDI_DECIMAL: //andi
+    return log;
+  case OR_DECIMAL: //or
+    return log;
+  case ORI_DECIMAL: //ori
+    return log;
+  case SLT_DECIMAL: //slt
+    return log;
+  case SUB_DECIMAL: //sub
+    return add;
+  case MULT_DECIMAL:
+  { //mult1 ou mult2 arrumar
+    if (fu_table->mult1.busy)
+    {
+      return mult2;
+    }
+    return mult1;
+  }
+  case DIV_DECIMAL:
+    return divide;
+  case LI_DECIMAL: //LI -> arrumar
+    return log;
+  case MOVE_DECIMAL: //mov -> arrumar
+    return log;
+  default:
+    printf("Erro em Units.h\n");
+    return empty;
+  }
+}
+
+bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcode)
+{
+  // verificar por aq se pa se ta escrevendo no msm destino rsrs
+  UnitInstruction_t typeOp = getTypeOp(opcode, fu_status_table);
+
+  switch (typeOp)
+  {
+  case 0: //mult1
+    return fu_status_table->mult1.busy;
+
+  case 1: //mult2
+    return fu_status_table->mult2.busy;
+
+  case 2: // add
+    return fu_status_table->add.busy;
+
+  case 3: //divide
+    return fu_status_table->divide.busy;
+
+  case 4: //integer
+    return fu_status_table->log.busy;
+
+  default: // vazio
+    printf("Erro em getBusy da FU\n");
+    return false;
   }
 }
 
