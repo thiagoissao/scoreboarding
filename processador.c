@@ -30,6 +30,7 @@ unsigned int clock;
 //  ADDI = R[RS] = [RT]  + Imediate
 
 void executeScoreboarding(
+    int config_size,
     config_t *config,
     unsigned int numberOfInstructions,
     functional_unit_status_table_t *fu_status_table,

@@ -5,8 +5,10 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include "./units.h"
 #include "../tipos_instrucoes/registers.h"
+#include "../config/config.h"
 
 typedef struct functional_unit_status
 {
@@ -304,6 +306,40 @@ bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcod
   default: // vazio
     printf("Erro em getBusy da FU\n");
     return false;
+  }
+}
+
+void setTimeToFu(unsigned int opcode, functional_unit_status_table_t *fu_status_table, config_t *config, int config_size)
+{
+  unsigned int unit = getTypeOp(opcode, fu_status_table); //add -> 2
+  //Procura o tempo no arquivo de configuração
+  int time = 1;
+  for (int i = 0; i < config_size; i++)
+  {
+    if (opcode == config[i].opcode)
+    {
+      time = config[i].value;
+    }
+  }
+  if (unit == mult1)
+  {
+    fu_status_table->mult1.time = time;
+  }
+  if (unit == mult2)
+  {
+    fu_status_table->mult2.time = time;
+  }
+  if (unit == add)
+  {
+    fu_status_table->add.time = time;
+  }
+  if (unit == divide)
+  {
+    fu_status_table->divide.time = time;
+  }
+  if (unit == log)
+  {
+    fu_status_table->log.time = time;
   }
 }
 
