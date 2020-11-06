@@ -14,12 +14,14 @@
 
 void defineNextStep();
 void executeScoreboarding();
-void writeResult();
-void executeOperands();
 void preencheFU();
 void verifyDependency();
+bool verifyRAW();
+bool writeResult();
 bool readOperands();
 bool executeIssue();
+bool operaLatencia();
+bool executeOperands();
 bool verifyIfAllWasWrited();
 
 unsigned int clock;
@@ -40,9 +42,8 @@ void executeScoreboarding(
 {
   // inicializa
   clock = 1;
-  unsigned int instAtual = 0;
-  bool allWasWrited = false, allWasRead;
-  bool nextStep[numberOfInstructions];
+  unsigned int instAtual = 0, j;
+  bool nextStep[numberOfInstructions], allWasWrited = false, allWasRead;
 
   defineNextStep(nextStep, numberOfInstructions);
 
@@ -56,14 +57,23 @@ void executeScoreboarding(
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
     }
 
-    for (int j = 0; j < instAtual; j++)
+    for (j = 0; j < instAtual; j++)
     {
       if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1)
         readOperands(inst_status_table, fu_status_table, nextStep, j);
     }
 
-    executeOperands(inst_status_table[0].instruction);
-    writeResult(inst_status_table[0].instruction);
+    for (j = 0; j < instAtual; j++)
+    {
+      if (inst_status_table[j].readOperand != -1 && inst_status_table[j].execComp == -1)
+        executeOperands(inst_status_table, fu_status_table, nextStep, j);
+    }
+
+    for (j = 0; j < instAtual; j++)
+    {
+      if (inst_status_table[j].execComp != -1 && inst_status_table[j].writeResult == -1)
+        writeResult(inst_status_table, fu_status_table, nextStep, j);
+    }
 
     print_instructions_complete(inst_status_table, numberOfInstructions);
     printf("\n");
@@ -150,7 +160,7 @@ void preencheRegStatus(
 
 bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int size)
 {
-  if (clock == 5)
+  if (clock == 6)
     return true;
   else
     return false;
@@ -276,12 +286,157 @@ bool readOperands(instruction_status_t *inst_status_table, functional_unit_statu
   return false;
 }
 
-void executeOperands(unsigned int instruction)
+bool executeOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
+                     bool *nextStep, unsigned int idInstrucao)
 {
+  /*3-
+    Execution - opera em operandos (EX)
+      Ações: 
+        (1) A unidade funcional inicia a execução ao receber operandos. 
+            Quando o resultado estiver pronto, ele notifica o placar de que concluiu a execução.
+  */
+  unsigned int instruction = inst_status_table[idInstrucao].instruction;
+  UnitInstruction_t typeOp;
+  unsigned int funct, opcode;
+  bool canProceed;
+
+  if (!nextStep[idInstrucao])
+    return false;
+
+  opcode = desconverteOp(instruction);
+
+  if (isR(instruction))
+  {
+    funct = desconverteFunct(instruction);
+    typeOp = getTypeOp(funct, fu_status_table);
+  }
+  else
+    typeOp = getTypeOp(opcode, fu_status_table);
+
+  // seta time
+  // execute operacao em alguma hr
+
+  canProceed = operaLatencia(fu_status_table, typeOp);
+  // se for a ultima latencia/time ele retorna 0 (true) se nao, ele diminui e retorna false
+
+  if (canProceed)
+    inst_status_table[idInstrucao].execComp = clock;
+
+  nextStep[idInstrucao] = false;
+  return true;
 }
 
-void writeResult(unsigned int instruction)
+bool operaLatencia(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp)
 {
+  switch (typeOp)
+  {
+  case mult1:
+    fu_status_table->mult1.time -= 1;
+    if (fu_status_table->mult1.time == 0)
+      return true;
+
+    return false;
+
+  case mult2:
+    fu_status_table->mult2.time -= 1;
+    if (fu_status_table->mult2.time == 0)
+      return true;
+
+    return false;
+
+  case add:
+    fu_status_table->add.time -= 1;
+    if (fu_status_table->add.time == 0)
+      return true;
+
+    return false;
+
+  case divide:
+    fu_status_table->divide.time -= 1;
+    if (fu_status_table->divide.time == 0)
+      return true;
+
+    return false;
+
+  case log:
+    fu_status_table->log.time -= 1;
+    if (fu_status_table->log.time == 0)
+      return true;
+
+    return false;
+
+  default:
+    printf("Erro ao operar latencia!");
+    return false;
+  }
+}
+
+bool writeResult(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
+                 bool *nextStep, unsigned int idInstrucao)
+{
+  /*
+  Write Resulta - execução final (WB)
+      Condição de espera: 
+            nenhuma outra instrução / FU vai ler o registrador de destino da instrução
+  */
+  unsigned int instruction = inst_status_table[idInstrucao].instruction;
+  bool canProceed;
+
+  UnitInstruction_t typeOp; // se pa funcao p substituir esse processo ou ja definir o type d cada instrucao no inicio
+  unsigned int funct, opcode;
+
+  if (!nextStep[idInstrucao])
+    return false;
+
+  opcode = desconverteOp(instruction);
+
+  if (isR(instruction))
+  {
+    funct = desconverteFunct(instruction);
+    typeOp = getTypeOp(funct, fu_status_table);
+  }
+  else
+    typeOp = getTypeOp(opcode, fu_status_table);
+
+  canProceed = verifyRAW(fu_status_table, typeOp);
+
+  if (canProceed)
+  {
+    printf("\nPrestes a terminar -> %d\n", clock);
+
+    // escreve
+    inst_status_table[idInstrucao].writeResult = clock;
+    // atualizar o registrador -> setar o dele
+    // atualizar as tabela -> setar o dele
+    return true;
+  }
+
+  return false;
+}
+
+bool verifyRAW(functional_unit_status_table_t *fu_status_table,
+               UnitInstruction_t typeOp, unsigned idInstrucaoAtual)
+{
+  unsigned int Fj, Fk, idComparacao;
+  Fj = getReadF(fu_status_table, typeOp, true);
+  Fk = getReadF(fu_status_table, typeOp, false);
+
+  // achar solucao melhor, deve verificar apenas as das instrucoes q veio antes dele
+  // tava vendo pelo FU todo, sem contar a ordem d instrucao
+
+  if (fu_status_table->mult1.busy && typeOp != mult1 && (fu_status_table->mult1.s1_Fj == Fj || fu_status_table->mult1.s2_Fk == Fk))
+    return false;
+  if (fu_status_table->mult2.busy && typeOp != mult2 && (fu_status_table->mult2.s1_Fj == Fj || fu_status_table->mult2.s2_Fk == Fk))
+    return false;
+  if (fu_status_table->add.busy && typeOp != add && (fu_status_table->add.s1_Fj == Fj || fu_status_table->add.s2_Fk == Fk))
+    return false;
+  if (fu_status_table->divide.busy && typeOp != divide && (fu_status_table->divide.s1_Fj == Fj || fu_status_table->divide.s2_Fk == Fk))
+    return false;
+  if (fu_status_table->log.busy && typeOp != log && (fu_status_table->log.s1_Fj == Fj || fu_status_table->log.s2_Fk == Fk))
+    return false;
+  // SE (ta ocupado  &&  diferente do FU dele  &&  (mesmo Fj ou mesmo FK))
+
+  return true;
 }
 
 /*
@@ -318,9 +473,9 @@ void writeResult(unsigned int instruction)
       Ações: 
             Escreva o registro e atualize o placar
             
-            Exemplo de WAR: DIVD F0, F2, F4ADDD
-                            F10, F0, F8
-                            SUB DF8, F8, F14
+            Exemplo de WAR: DIVD F0, F2, F4
+                            ADDD F10, F0, F8
+                            SUBD F8, F8, F14
             
             O placar CDC 6600 paralisaria o SUBD até que o ADDD leia operandos
     ------------------------------------------------------------------
