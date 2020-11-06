@@ -5,6 +5,7 @@
 #include "unidades_funcionais/instruction_status.h"
 #include "unidades_funcionais/register_result_status.h"
 #include "unidades_funcionais/register_database.h"
+#include "config/config.h"
 #include "tipos_instrucoes/i_types.h"
 #include "conversor.h"
 #include "utils/prints.h"
@@ -31,6 +32,8 @@ unsigned int clock;
 //  ADDI = R[RS] = [RT]  + Imediate
 
 void executeScoreboarding(
+    int config_size,
+    config_t *config,
     unsigned int numberOfInstructions,
     functional_unit_status_table_t *fu_status_table,
     instruction_status_t *inst_status_table,
@@ -72,7 +75,6 @@ void executeScoreboarding(
         writeResult(inst_status_table, fu_status_table, nextStep, j);
     }
 
-
     print_instructions_complete(inst_status_table, numberOfInstructions);
     printf("\n");
     print_functional_unit(fu_status_table);
@@ -111,11 +113,11 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
     rd = desconverteRd(instruction);
     shamt = desconverteShamt(instruction);
     funct = desconverteFunct(instruction);
-    typeOp = getTypeOp(funct);
+    typeOp = getTypeOp(funct, fu_status_table);
   }
   else
   {
-    typeOp = getTypeOp(opcode);
+    typeOp = getTypeOp(opcode, fu_status_table);
     rd = rs;
     rs = rt;
     rt = 0;
@@ -131,7 +133,11 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   // preenche Bush / op / Fi / Fj / Fk / Rj / Rk / Qj / Qk / time
 }
 
-void preencheRegStatus(unsigned int instruction, register_result_status_table_t *rr_status_table, bool isRType)
+void preencheRegStatus(
+    unsigned int instruction,
+    register_result_status_table_t *rr_status_table,
+    functional_unit_status_table_t *fu_status_table,
+    bool isRType)
 {
   unsigned int opcode, registrador;
   UnitInstruction_t typeOp;
@@ -147,7 +153,7 @@ void preencheRegStatus(unsigned int instruction, register_result_status_table_t 
     registrador = desconverteRs(instruction);
   }
 
-  typeOp = getTypeOp(opcode);
+  typeOp = getTypeOp(opcode, fu_status_table);
 
   setRegisterResult(rr_status_table, registrador, typeOp);
 }
@@ -178,9 +184,9 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
 
   if (canProceed)
   {
-    inst_status_table[instAtual].issue = clock;                        // atualiza o clock no status na tabela d inst
-    preencheFU(instruction, fu_status_table);                          // preenche tabela FU
-    preencheRegStatus(instruction, rr_status_table, isR(instruction)); // preenche tab dos Reg
+    inst_status_table[instAtual].issue = clock;                                         // atualiza o clock no status na tabela d inst
+    preencheFU(instruction, fu_status_table);                                           // preenche tabela FU
+    preencheRegStatus(instruction, rr_status_table, fu_status_table, isR(instruction)); // preenche tab dos Reg
     return true;
   }
   else
@@ -240,8 +246,8 @@ void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstr
   }
 }
 
-bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, 
-          bool *nextStep, unsigned int idInstrucao)
+bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
+                  bool *nextStep, unsigned int idInstrucao)
 {
   /*
   espere até que não haja riscos de dados, então leia os operandos
@@ -260,10 +266,10 @@ bool readOperands(instruction_status_t *inst_status_table, functional_unit_statu
   if (isR(instruction))
   {
     funct = desconverteFunct(instruction);
-    typeOp = getTypeOp(funct);
+    typeOp = getTypeOp(funct, fu_status_table);
   }
   else
-    typeOp = getTypeOp(opcode);
+    typeOp = getTypeOp(opcode, fu_status_table);
 
   bool canProceed = operandsDisponiveis(fu_status_table, typeOp);
 
@@ -280,8 +286,8 @@ bool readOperands(instruction_status_t *inst_status_table, functional_unit_statu
   return false;
 }
 
-bool executeOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, 
-          bool *nextStep, unsigned int idInstrucao)
+bool executeOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
+                     bool *nextStep, unsigned int idInstrucao)
 {
   /*3-
     Execution - opera em operandos (EX)
@@ -302,15 +308,15 @@ bool executeOperands(instruction_status_t *inst_status_table, functional_unit_st
   if (isR(instruction))
   {
     funct = desconverteFunct(instruction);
-    typeOp = getTypeOp(funct);
+    typeOp = getTypeOp(funct, fu_status_table);
   }
   else
-    typeOp = getTypeOp(opcode);
+    typeOp = getTypeOp(opcode, fu_status_table);
 
   // seta time
-  // execute operacao em alguma hr 
-  
-  canProceed = operaLatencia(fu_status_table, typeOp); 
+  // execute operacao em alguma hr
+
+  canProceed = operaLatencia(fu_status_table, typeOp);
   // se for a ultima latencia/time ele retorna 0 (true) se nao, ele diminui e retorna false
 
   if (canProceed)
@@ -320,52 +326,53 @@ bool executeOperands(instruction_status_t *inst_status_table, functional_unit_st
   return true;
 }
 
-bool operaLatencia(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp){
+bool operaLatencia(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp)
+{
   switch (typeOp)
   {
   case mult1:
-    fu_status_table->mult1.time-=1;
+    fu_status_table->mult1.time -= 1;
     if (fu_status_table->mult1.time == 0)
       return true;
 
     return false;
 
   case mult2:
-    fu_status_table->mult2.time-=1;
+    fu_status_table->mult2.time -= 1;
     if (fu_status_table->mult2.time == 0)
       return true;
 
     return false;
 
   case add:
-    fu_status_table->add.time-=1;
+    fu_status_table->add.time -= 1;
     if (fu_status_table->add.time == 0)
       return true;
 
     return false;
 
   case divide:
-    fu_status_table->divide.time-=1;
+    fu_status_table->divide.time -= 1;
     if (fu_status_table->divide.time == 0)
       return true;
 
     return false;
 
   case log:
-    fu_status_table->log.time-=1;
+    fu_status_table->log.time -= 1;
     if (fu_status_table->log.time == 0)
       return true;
 
     return false;
-  
+
   default:
     printf("Erro ao operar latencia!");
     return false;
-  }  
+  }
 }
 
-bool writeResult(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, 
-          bool *nextStep, unsigned int idInstrucao)
+bool writeResult(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
+                 bool *nextStep, unsigned int idInstrucao)
 {
   /*
   Write Resulta - execução final (WB)
@@ -386,16 +393,17 @@ bool writeResult(instruction_status_t *inst_status_table, functional_unit_status
   if (isR(instruction))
   {
     funct = desconverteFunct(instruction);
-    typeOp = getTypeOp(funct);
+    typeOp = getTypeOp(funct, fu_status_table);
   }
   else
-    typeOp = getTypeOp(opcode);
+    typeOp = getTypeOp(opcode, fu_status_table);
 
   canProceed = verifyRAW(fu_status_table, typeOp);
 
-  if (canProceed){
+  if (canProceed)
+  {
     printf("\nPrestes a terminar -> %d\n", clock);
-    
+
     // escreve
     inst_status_table[idInstrucao].writeResult = clock;
     // atualizar o registrador -> setar o dele
@@ -406,8 +414,8 @@ bool writeResult(instruction_status_t *inst_status_table, functional_unit_status
   return false;
 }
 
-bool verifyRAW(functional_unit_status_table_t *fu_status_table, 
-    UnitInstruction_t typeOp, unsigned idInstrucaoAtual)
+bool verifyRAW(functional_unit_status_table_t *fu_status_table,
+               UnitInstruction_t typeOp, unsigned idInstrucaoAtual)
 {
   unsigned int Fj, Fk, idComparacao;
   Fj = getReadF(fu_status_table, typeOp, true);
@@ -427,7 +435,7 @@ bool verifyRAW(functional_unit_status_table_t *fu_status_table,
   if (fu_status_table->log.busy && typeOp != log && (fu_status_table->log.s1_Fj == Fj || fu_status_table->log.s2_Fk == Fk))
     return false;
   // SE (ta ocupado  &&  diferente do FU dele  &&  (mesmo Fj ou mesmo FK))
-  
+
   return true;
 }
 
