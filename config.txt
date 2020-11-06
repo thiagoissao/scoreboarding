@@ -1,5 +1,6 @@
-MULT1 = 10
-MULT2 = 10
+MULT = 10
 ADD = 2
 DIV = 16
-LOG = 1
+ADDI = 2
+LI = 1
+MOVE = 1
