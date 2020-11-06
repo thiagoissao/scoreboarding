@@ -3,7 +3,7 @@
 
 typedef struct config
 {
-  char *name;
+  unsigned int opcode;
   int value;
 } config_t;
 

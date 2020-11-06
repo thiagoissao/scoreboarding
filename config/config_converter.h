@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "config.h"
+#include "../tipos_instrucoes/instructions_op.h"
 
 int count_configs(char *path)
 {
@@ -23,7 +24,7 @@ int count_configs(char *path)
 void config_converter(char *path, config_t *config)
 {
   FILE *archive = fopen(path, "r");
-  char line[32];
+  char line[50];
   char *separators = "=' ''\t'";
   int count = 0;
 
@@ -32,7 +33,7 @@ void config_converter(char *path, config_t *config)
     char *name = strtok(line, separators);
     char *charValue = strtok(NULL, separators);
     int value = strtol(charValue, NULL, 10);
-    config[count].name = name;
+    config[count].opcode = getOpcodeDecimal(name);
     config[count].value = value;
     count++;
   }

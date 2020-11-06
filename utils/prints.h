@@ -20,7 +20,7 @@ void print_config(config_t *config, int size)
        printf("\n-------------- CONFIGURATIONS --------------------\n");
        for (int i = 0; i < size; i++)
        {
-              printf("Instrução: %s => %i ciclos\n", config[size].name, config[size].value);
+              printf("Instrução: %s => %i ciclos\n", opcodeToString(config[i].opcode), config[i].value);
        }
 }
 
