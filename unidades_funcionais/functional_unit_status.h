@@ -268,4 +268,43 @@ bool operandsDisponiveis(functional_unit_status_table_t *fu_status_table, UnitIn
   }
 }
 
+unsigned int getReadF(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp, bool isFj){
+  switch (typeOp)
+  {
+  case mult1:
+    if (isFj)
+     return fu_status_table->mult1.s1_Fj;
+    
+    return fu_status_table->mult1.s2_Fk;
+
+  case mult2:
+    if (isFj)
+     return fu_status_table->mult2.s1_Fj;
+    
+    return fu_status_table->mult2.s2_Fk;
+
+  case add:
+    if (isFj)
+     return fu_status_table->add.s1_Fj;
+    
+    return fu_status_table->add.s2_Fk;
+
+  case divide:
+    if (isFj)
+     return fu_status_table->divide.s1_Fj;
+    
+    return fu_status_table->divide.s2_Fk;
+
+  case log:
+    if (isFj)
+     return fu_status_table->log.s1_Fj;
+    
+    return fu_status_table->log.s2_Fk;
+
+  default:
+    printf("Erro em GetReadF!");
+    return 1;
+  }
+}
+
 #endif
