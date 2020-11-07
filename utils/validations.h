@@ -2,6 +2,7 @@
 #define VALIDATIONS_H
 
 #include <stdio.h>
+#include <stdbool.h>
 #include "../types/i_types.h"
 #include "../conversor.h"
 

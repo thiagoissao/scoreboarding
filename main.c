@@ -16,7 +16,7 @@
 //Parametrizar depois
 #define PROGRAM "mnemonios.txt"
 #define CONFIG "config.txt"
-#define CICLOS 15
+#define CICLOS 6
 
 int main()
 {
