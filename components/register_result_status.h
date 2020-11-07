@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "./units.h"
-#include "../tipos_instrucoes/registers.h"
+#include "../types/registers.h"
 
 typedef struct register_result_status_table
 {

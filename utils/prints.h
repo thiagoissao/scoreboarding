@@ -3,16 +3,16 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include "../unidades_funcionais/functional_unit_status.h"
-#include "../unidades_funcionais/instruction_status.h"
-#include "../unidades_funcionais/register_result_status.h"
-#include "../unidades_funcionais/register_database.h"
+#include "../components/functional_unit_status.h"
+#include "../components/instruction_status.h"
+#include "../components/register_result_status.h"
+#include "../components/register_database.h"
 #include "../conversor.h"
-#include "../tipos_instrucoes/instructions_op.h"
-#include "../tipos_instrucoes/registers.h"
-#include "../tipos_instrucoes/i_types.h"
+#include "../types/instructions_op.h"
+#include "../types/registers.h"
+#include "../types/i_types.h"
 #include "../utils/validations.h"
-#include "../unidades_funcionais/units.h"
+#include "../components/units.h"
 #include "../config/config.h"
 
 void print_config(config_t *config, int size)

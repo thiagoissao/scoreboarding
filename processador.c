@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include "unidades_funcionais/functional_unit_status.h"
-#include "unidades_funcionais/instruction_status.h"
-#include "unidades_funcionais/register_result_status.h"
-#include "unidades_funcionais/register_database.h"
+#include "components/functional_unit_status.h"
+#include "components/instruction_status.h"
+#include "components/register_result_status.h"
+#include "components/register_database.h"
 #include "config/config.h"
-#include "tipos_instrucoes/i_types.h"
+#include "types/i_types.h"
 #include "conversor.h"
 #include "utils/prints.h"
 #include "utils/validations.h"

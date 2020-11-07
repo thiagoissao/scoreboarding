@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "config.h"
-#include "../tipos_instrucoes/instructions_op.h"
+#include "../types/instructions_op.h"
 
 int count_configs(char *path)
 {

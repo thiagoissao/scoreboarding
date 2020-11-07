@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "./units.h"
-#include "../tipos_instrucoes/registers.h"
+#include "../types/registers.h"
 #include "../config/config.h"
 
 typedef struct functional_unit_status
@@ -263,10 +263,10 @@ UnitInstruction_t getTypeOp(unsigned int opcode, functional_unit_status_table_t 
     return add;
   case MULT_DECIMAL:
   { //mult1 ou mult2 arrumar
-    if (fu_table->mult1.busy)
-    {
-      return mult2;
-    }
+    // if (fu_table->mult1.busy)
+    // {
+    //   return mult2;
+    // }
     return mult1;
   }
   case DIV_DECIMAL:

@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "../unidades_funcionais/instruction_status.h"
-#include "../unidades_funcionais/functional_unit_status.h"
+#include "../components/instruction_status.h"
+#include "../components/functional_unit_status.h"
 #include "./prints.h"
 #include <stdlib.h>
 

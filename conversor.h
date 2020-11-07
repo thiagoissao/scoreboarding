@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tipos_instrucoes/i_types.h"
-#include "tipos_instrucoes/registers.h"
+#include "types/i_types.h"
+#include "types/registers.h"
 
 void converteOp();
 void converteRs();

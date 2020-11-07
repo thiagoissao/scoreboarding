@@ -2,7 +2,7 @@
 #define REGISTER_DATABASE_H
 
 #include <stdio.h>
-#include "../tipos_instrucoes/registers.h"
+#include "../types/registers.h"
 
 #define initialValue 0
 

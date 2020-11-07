@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include "../unidades_funcionais/functional_unit_status.h"
-#include "../unidades_funcionais/register_result_status.h"
-#include "../tipos_instrucoes/i_types.h"
+#include "../components/functional_unit_status.h"
+#include "../components/register_result_status.h"
+#include "../types/i_types.h"
 #include "../conversor.h"
 #include "../utils/validations.h"
-#include "../unidades_funcionais/units.h"
+#include "../components/units.h"
 
 bool canProceedToIssue(
     unsigned int instruction,
