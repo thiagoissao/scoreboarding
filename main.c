@@ -16,7 +16,7 @@
 //Parametrizar depois
 #define PROGRAM "mnemonios.txt"
 #define CONFIG "config.txt"
-#define CICLOS 5
+#define CICLOS 15
 
 int main()
 {
@@ -36,6 +36,9 @@ int main()
     // Converte o conjunto das instruções para inteiro e armazena no array passado por referência
     converter(archive, instruction_set);
 
+    //Print o array de inteiros que representa o conjunto de instrucoes
+    print_instruction_set(instruction_set, numberOfInstructions);
+
     // Status das unidades funcionais e inicialização
     functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
     init_functional_unit_status_table(fu_status_table);
@@ -48,7 +51,7 @@ int main()
     register_result_status_table_t *rr_status_table = (register_result_status_table_t *)malloc(sizeof(register_result_status_table_t));
     init_register_status_table(rr_status_table);
 
-    // Banco de registradores e inicialização
+    // Banco de registradores
     register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
 
     executeScoreboarding(

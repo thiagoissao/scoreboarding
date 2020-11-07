@@ -6,6 +6,7 @@
 #include <string.h>
 #include "types/i_types.h"
 #include "types/registers.h"
+#include "types/instructions_op.h"
 
 void converteOp();
 void converteRs();
@@ -40,11 +41,48 @@ void converter(char *archive, unsigned int *instructionsSet)
         Instruction instructionType = getInstructionType(splitInstruction);
         unsigned int opcode = getOpcodeDecimal(splitInstruction);
 
-        //printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", opcode);
-        splitInstruction = strtok(NULL, separators);
+        // printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", opcode);
 
-        if (instructionType == R)
+        if (opcode == MOVE_DECIMAL)
         {
+            splitInstruction = strtok(NULL, separators);
+            char *rdInstruction = splitInstruction;
+
+            splitInstruction = strtok(NULL, separators);
+            char *rsInstruction = splitInstruction;
+
+            unsigned int rs = getRegisterDecimal(rsInstruction);
+            unsigned int rd = getRegisterDecimal(rdInstruction);
+
+            converteOp(&encodedInstruction, 0);
+            converteRs(&encodedInstruction, rs);
+            converteRt(&encodedInstruction, 0);
+            converteRd(&encodedInstruction, rd);
+            converteShamt(&encodedInstruction, 0);
+            converteFunct(&encodedInstruction, opcode);
+        }
+
+        if (opcode == LI_DECIMAL)
+        {
+            splitInstruction = strtok(NULL, separators);
+            char *rsInstruction = splitInstruction;
+
+            splitInstruction = strtok(NULL, separators);
+            char *immediateInstruction = splitInstruction;
+
+            unsigned int rs = getRegisterDecimal(rsInstruction);
+            unsigned int immediate = atoi(immediateInstruction);
+
+            converteOp(&encodedInstruction, opcode);
+            converteRs(&encodedInstruction, rs);
+            converteRt(&encodedInstruction, 0);
+            converteImmediate(&encodedInstruction, immediate);
+        }
+
+        if (instructionType == R && opcode != MOVE_DECIMAL)
+        {
+            splitInstruction = strtok(NULL, separators);
+
             char *rdInstruction = splitInstruction;
             splitInstruction = strtok(NULL, separators);
 
@@ -64,11 +102,12 @@ void converter(char *archive, unsigned int *instructionsSet)
             converteRd(&encodedInstruction, rd);
             converteShamt(&encodedInstruction, 0);
             converteFunct(&encodedInstruction, opcode);
-
-            //printf("Instruction: %i\n\n", encodedInstruction);
         }
-        if (instructionType == I)
+
+        if (instructionType == I && opcode != LI_DECIMAL)
         {
+            splitInstruction = strtok(NULL, separators);
+
             char *rsInstruction = splitInstruction;
             splitInstruction = strtok(NULL, separators);
 
@@ -86,8 +125,6 @@ void converter(char *archive, unsigned int *instructionsSet)
             converteRs(&encodedInstruction, rs);
             converteRt(&encodedInstruction, rt);
             converteImmediate(&encodedInstruction, immediate);
-
-            //printf("Instruction: %i\n\n", encodedInstruction);
         }
         instructionsSet[count] = encodedInstruction;
         count++;

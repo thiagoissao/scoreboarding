@@ -24,6 +24,15 @@ void print_config(config_t *config, int size)
        }
 }
 
+void print_instruction_set(unsigned int *instructions, int size)
+{
+       printf("\n----------------------- Conjunto de instruções--------------------------\n");
+       for (int i = 0; i < size; i++)
+       {
+              printf("%i: %i\n", i, instructions[i]);
+       }
+}
+
 void print_instructions(instruction_status_t *table, int size)
 {
        int i;

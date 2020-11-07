@@ -9,6 +9,7 @@
 #include "./units.h"
 #include "../types/registers.h"
 #include "../config/config.h"
+#include "../types/instructions_op.h"
 
 typedef struct functional_unit_status
 {
