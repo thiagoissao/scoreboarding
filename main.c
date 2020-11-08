@@ -54,7 +54,7 @@ int main()
     // Banco de registradores
     register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
 
-    executeScoreboarding(
+    execute_scoreboarding(
         numberOfConfigs,
         configurations,
         numberOfInstructions,
