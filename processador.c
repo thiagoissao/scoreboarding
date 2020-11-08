@@ -66,7 +66,7 @@ void executeScoreboarding(
     for (j = 0; j < instAtual; j++)
     {
       if (inst_status_table[j].readOperand != -1 && inst_status_table[j].execComp == -1)
-        executeOperands(inst_status_table, fu_status_table, nextStep, j);
+        executeOperands(inst_status_table, fu_status_table, nextStep, j, config, config_size);
     }
 
     for (j = 0; j < instAtual; j++)
@@ -127,9 +127,9 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   isR(instruction) ? verifyDependency(fu_status_table, typeOp, rs, rt, opcode, &dependenciaQJ, &dependenciaQK) : verifyDependency(fu_status_table, typeOp, rs, rt, funct, &dependenciaQJ, &dependenciaQK);
 
   if (isR(instruction))
-    setInstFu(fu_status_table, typeOp, funct, rd, rs, rt, dependenciaQJ, dependenciaQK, 1);
+    setInstFu(fu_status_table, typeOp, funct, rd, rs, rt, dependenciaQJ, dependenciaQK);
   else
-    setInstFu(fu_status_table, typeOp, opcode, rd, rs, rt, dependenciaQJ, dependenciaQK, 1);
+    setInstFu(fu_status_table, typeOp, opcode, rd, rs, rt, dependenciaQJ, dependenciaQK); //time?
   // preenche Bush / op / Fi / Fj / Fk / Rj / Rk / Qj / Qk / time
 }
 
@@ -287,7 +287,7 @@ bool readOperands(instruction_status_t *inst_status_table, functional_unit_statu
 }
 
 bool executeOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
-                     bool *nextStep, unsigned int idInstrucao)
+                     bool *nextStep, unsigned int idInstrucao, config_t *config, int config_size)
 {
   /*3-
     Execution - opera em operandos (EX)
@@ -309,11 +309,14 @@ bool executeOperands(instruction_status_t *inst_status_table, functional_unit_st
   {
     funct = desconverteFunct(instruction);
     typeOp = getTypeOp(funct, fu_status_table);
+    opcode = funct;
   }
   else
     typeOp = getTypeOp(opcode, fu_status_table);
 
   // seta time
+  if (!verifyTimeRealied(typeOp, fu_status_table))
+    setTimeToFu(opcode, fu_status_table, config, config_size);
   // execute operacao em alguma hr
 
   canProceed = operaLatencia(fu_status_table, typeOp);
