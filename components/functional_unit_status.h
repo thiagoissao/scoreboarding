@@ -338,42 +338,27 @@ void setTimeToFu(unsigned int opcode, functional_unit_status_table_t *fu_status_
   }
 }
 
-unsigned int getReadF(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp, bool isFj)
+unsigned int getReadFi(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp)
 {
   switch (typeOp)
   {
   case mult1:
-    if (isFj)
-      return fu_status_table->mult1.s1_Fj;
-
-    return fu_status_table->mult1.s2_Fk;
+    return fu_status_table->mult1.dest_Fi;
 
   case mult2:
-    if (isFj)
-      return fu_status_table->mult2.s1_Fj;
-
-    return fu_status_table->mult2.s2_Fk;
+    return fu_status_table->mult2.dest_Fi;
 
   case add:
-    if (isFj)
-      return fu_status_table->add.s1_Fj;
-
-    return fu_status_table->add.s2_Fk;
+    return fu_status_table->add.dest_Fi;
 
   case divide:
-    if (isFj)
-      return fu_status_table->divide.s1_Fj;
-
-    return fu_status_table->divide.s2_Fk;
+    return fu_status_table->divide.dest_Fi;
 
   case log:
-    if (isFj)
-      return fu_status_table->log.s1_Fj;
-
-    return fu_status_table->log.s2_Fk;
+    return fu_status_table->log.dest_Fi;
 
   default:
-    printf("Erro em GetReadF!");
+    printf("Erro em GetReadFi!");
     return 1;
   }
 }

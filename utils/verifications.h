@@ -81,30 +81,33 @@ void verify_dependency(functional_unit_status_table_t *fu_status_table, UnitInst
 bool verify_raw(functional_unit_status_table_t *fu_status_table,
                 UnitInstruction_t typeOp)
 {
-  unsigned int Fj, Fk, idComparacao;
-  Fj = getReadF(fu_status_table, typeOp, true);
-  Fk = getReadF(fu_status_table, typeOp, false);
+  unsigned int Fi, idComparacao;
+  Fi = getReadFi(fu_status_table, typeOp);
 
-  // achar solucao melhor, deve verificar apenas as das instrucoes q veio antes dele
-  // tava vendo pelo FU todo, sem contar a ordem d instrucao
+  // atentar depois ao clock de uma instrucao que teve que esperar um read anteriormente
 
-  if (fu_status_table->mult1.busy && typeOp != mult1 && ( (fu_status_table->mult1.s1_Fj == Fj && 
-    !fu_status_table->mult1.fj_Rj) || (fu_status_table->mult1.s2_Fk == Fk && !fu_status_table->mult1.fj_Rk) ))
+  if (fu_status_table->mult1.busy && typeOp != mult1 && ( (fu_status_table->mult1.s1_Fj == Fi && 
+    fu_status_table->mult1.fj_Rj) || (fu_status_table->mult1.s2_Fk == Fi && fu_status_table->mult1.fj_Rk) ))
     return false;
-  if (fu_status_table->mult2.busy && typeOp != mult2 && ( (fu_status_table->mult2.s1_Fj == Fj && 
-    !fu_status_table->mult2.fj_Rj) || (fu_status_table->mult2.s2_Fk == Fk && !fu_status_table->mult2.fj_Rk) ))
+  if (fu_status_table->mult2.busy && typeOp != mult2 && ( (fu_status_table->mult2.s1_Fj == Fi && 
+    fu_status_table->mult2.fj_Rj) || (fu_status_table->mult2.s2_Fk == Fi && fu_status_table->mult2.fj_Rk) ))
     return false;
-  if (fu_status_table->add.busy && typeOp != add && ( (fu_status_table->add.s1_Fj == Fj && 
-    !fu_status_table->add.fj_Rj) || (fu_status_table->add.s2_Fk == Fk && !fu_status_table->add.fj_Rk) ))
+  if (fu_status_table->add.busy && typeOp != add && ( (fu_status_table->add.s1_Fj == Fi && 
+    fu_status_table->add.fj_Rj) || (fu_status_table->add.s2_Fk == Fi && fu_status_table->add.fj_Rk) ))
     return false;
-  if (fu_status_table->divide.busy && typeOp != divide && ( (fu_status_table->divide.s1_Fj == Fj && 
-    !fu_status_table->divide.fj_Rj) || (fu_status_table->divide.s2_Fk == Fk && !fu_status_table->divide.fj_Rk) ))
+  if (fu_status_table->divide.busy && typeOp != divide && ( (fu_status_table->divide.s1_Fj == Fi && 
+    fu_status_table->divide.fj_Rj) || (fu_status_table->divide.s2_Fk == Fi && fu_status_table->divide.fj_Rk) ))
     return false;
-  if (fu_status_table->log.busy && typeOp != log && ( (fu_status_table->log.s1_Fj == Fj && 
-    !fu_status_table->log.fj_Rj) || (fu_status_table->log.s2_Fk == Fk && !fu_status_table->log.fj_Rk) ))
+  if (fu_status_table->log.busy && typeOp != log && ( (fu_status_table->log.s1_Fj == Fi && 
+    fu_status_table->log.fj_Rj) || (fu_status_table->log.s2_Fk == Fi && fu_status_table->log.fj_Rk) ))
     return false;
-  // SE (ta ocupado  &&  diferente do FU dele  &&  (mesmo Fj ou mesmo FK))
-
+  // SE (ta ocupado  &&  diferente do FU dele  && ( (Destino Fi == Fj && dependencia Rj) OU 
+  //                                                (Destino Fi == Fk && dependencia Rk)  ))
+  //                                              se tem dependencia R siginica que a instrucao 
+  //                                                       do write ta antes das inst de dependencias
+  //  ae se entrar quer dizer que nao pode proceguir pra write
+  
+  
   return true;
 }
 
