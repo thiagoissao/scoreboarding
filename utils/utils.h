@@ -115,27 +115,170 @@ void update_register_result_table(
   setRegisterResult(rr_status_table, registrador, typeOp);
 }
 
+unsigned int get_register_destiny(unsigned int instruction)
+{
+  if (isR(instruction))
+  {
+    return desconverteRd(instruction);
+  }
+  return desconverteRs(instruction);
+}
+
 void update_register_status_after_write_result(
     unsigned int instruction,
     register_result_status_table_t *rr_status_table)
 {
-  unsigned int register_destiny;
-  if (isR(instruction))
-  {
-    register_destiny = desconverteRd(instruction);
-  }
-  else
-  {
-    register_destiny = desconverteRs(instruction);
-  }
+  unsigned int register_destiny = get_register_destiny(instruction);
   setRegisterResult(rr_status_table, register_destiny, empty);
+}
+
+void update_functional_unit_after_write_result(
+    unsigned int instruction,
+    functional_unit_status_table_t *fu_status_table)
+{
+  unsigned int register_destiny = get_register_destiny(instruction);
+  UnitInstruction_t unit;
+
+  //Reseta unidade que o registrador de destino pertence
+  if (fu_status_table->add.dest_Fi == register_destiny)
+  {
+    unit = add;
+    fu_status_table->add.time = 0;
+    fu_status_table->add.busy = false;
+    fu_status_table->add.op = 0;
+    fu_status_table->add.dest_Fi = zero_dec;
+    fu_status_table->add.s1_Fj = zero_dec;
+    fu_status_table->add.s2_Fk = zero_dec;
+    fu_status_table->add.fu_Qj = empty;
+    fu_status_table->add.fu_Qk = empty;
+    fu_status_table->add.fj_Rj = true;
+    fu_status_table->add.fj_Rk = true;
+  }
+  if (fu_status_table->divide.dest_Fi == register_destiny)
+  {
+    unit = divide;
+    fu_status_table->divide.time = 0;
+    fu_status_table->divide.busy = false;
+    fu_status_table->divide.op = 0;
+    fu_status_table->divide.dest_Fi = zero_dec;
+    fu_status_table->divide.s1_Fj = zero_dec;
+    fu_status_table->divide.s2_Fk = zero_dec;
+    fu_status_table->divide.fu_Qj = empty;
+    fu_status_table->divide.fu_Qk = empty;
+    fu_status_table->divide.fj_Rj = true;
+    fu_status_table->divide.fj_Rk = true;
+  }
+  if (fu_status_table->log.dest_Fi == register_destiny)
+  {
+    unit = log;
+    fu_status_table->log.time = 0;
+    fu_status_table->log.busy = false;
+    fu_status_table->log.op = 0;
+    fu_status_table->log.dest_Fi = zero_dec;
+    fu_status_table->log.s1_Fj = zero_dec;
+    fu_status_table->log.s2_Fk = zero_dec;
+    fu_status_table->log.fu_Qj = empty;
+    fu_status_table->log.fu_Qk = empty;
+    fu_status_table->log.fj_Rj = true;
+    fu_status_table->log.fj_Rk = true;
+  }
+  if (fu_status_table->mult1.dest_Fi == register_destiny)
+  {
+    unit = mult1;
+    fu_status_table->mult1.time = 0;
+    fu_status_table->mult1.busy = false;
+    fu_status_table->mult1.op = 0;
+    fu_status_table->mult1.dest_Fi = zero_dec;
+    fu_status_table->mult1.s1_Fj = zero_dec;
+    fu_status_table->mult1.s2_Fk = zero_dec;
+    fu_status_table->mult1.fu_Qj = empty;
+    fu_status_table->mult1.fu_Qk = empty;
+    fu_status_table->mult1.fj_Rj = true;
+    fu_status_table->mult1.fj_Rk = true;
+  }
+  if (fu_status_table->mult2.dest_Fi == register_destiny)
+  {
+    unit = mult2;
+    fu_status_table->mult2.time = 0;
+    fu_status_table->mult2.busy = false;
+    fu_status_table->mult2.op = 0;
+    fu_status_table->mult2.dest_Fi = zero_dec;
+    fu_status_table->mult2.s1_Fj = zero_dec;
+    fu_status_table->mult2.s2_Fk = zero_dec;
+    fu_status_table->mult2.fu_Qj = empty;
+    fu_status_table->mult2.fu_Qk = empty;
+    fu_status_table->mult2.fj_Rj = true;
+    fu_status_table->mult2.fj_Rk = true;
+  }
+
+  //Procura e reseta possíveis Qj e Qk e atualiza Rj e Rk
+  if (fu_status_table->add.fu_Qj == unit)
+  {
+    fu_status_table->add.fu_Qj = empty;
+    fu_status_table->add.fj_Rj = true;
+  }
+  if (fu_status_table->add.fu_Qk == unit)
+  {
+    fu_status_table->add.fu_Qk = empty;
+    fu_status_table->add.fj_Rk = true;
+  }
+
+  if (fu_status_table->divide.fu_Qj == unit)
+  {
+    fu_status_table->divide.fu_Qj = empty;
+    fu_status_table->divide.fj_Rj = true;
+  }
+
+  if (fu_status_table->divide.fu_Qk == unit)
+  {
+    fu_status_table->divide.fu_Qk = empty;
+    fu_status_table->divide.fj_Rk = true;
+  }
+
+  if (fu_status_table->log.fu_Qj == unit)
+  {
+    fu_status_table->log.fu_Qj = empty;
+    fu_status_table->log.fj_Rj = true;
+  }
+
+  if (fu_status_table->log.fu_Qk == unit)
+  {
+    fu_status_table->log.fu_Qk = empty;
+    fu_status_table->log.fj_Rk = true;
+  }
+
+  if (fu_status_table->mult1.fu_Qj == unit)
+  {
+    fu_status_table->mult1.fu_Qj = empty;
+    fu_status_table->mult1.fj_Rj = true;
+  }
+
+  if (fu_status_table->mult1.fu_Qk == unit)
+  {
+    fu_status_table->mult1.fu_Qk = empty;
+    fu_status_table->mult1.fj_Rk = true;
+  }
+
+  if (fu_status_table->mult2.fu_Qj == unit)
+  {
+    fu_status_table->mult2.fu_Qj = empty;
+    fu_status_table->mult2.fj_Rj = true;
+  }
+
+  if (fu_status_table->mult2.fu_Qk == unit)
+  {
+    fu_status_table->mult2.fu_Qk = empty;
+    fu_status_table->mult2.fj_Rk = true;
+  }
 }
 
 void update_components_after_write_result(
     unsigned int instruction,
-    register_result_status_table_t *rr_status_table)
+    register_result_status_table_t *rr_status_table,
+    functional_unit_status_table_t *fu_status_table)
 {
   update_register_status_after_write_result(instruction, rr_status_table);
+  update_functional_unit_after_write_result(instruction, fu_status_table);
 }
 
 #endif
