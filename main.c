@@ -9,7 +9,7 @@
 #include "components/instruction_status.h"
 #include "components/register_result_status.h"
 #include "components/register_database.h"
-#include "utils/prints.h"
+#include "prints/prints.h"
 #include "config/config.h"
 #include "config/config_converter.h"
 
@@ -54,7 +54,7 @@ int main()
     // Banco de registradores
     register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
 
-    executeScoreboarding(
+    execute_scoreboarding(
         numberOfConfigs,
         configurations,
         numberOfInstructions,
