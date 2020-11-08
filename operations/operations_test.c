@@ -39,8 +39,8 @@ int main()
   operation_mult(18106392, database);  //t1 = 3
   operation_mult(43165720, database);  //s5 = 1 * 1 = 1
   // operation_div(67000346, database);
-  operation_addi(560594994, database); // t3 = 52
-  operation_add(41189408, database);   // s0 = 4
+  operation_addi(560594994, database);                       // t3 = 52
+  update_register_database(ADD_DECIMAL, 41189408, database); // s0 = 4
 
   print_register_database(database);
 }

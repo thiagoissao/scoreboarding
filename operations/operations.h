@@ -5,6 +5,76 @@
 #include "../utils/utils.h"
 #include "../types/registers.h"
 
+void operation_add(unsigned int instruction, register_database_t *db);
+void operation_addi(unsigned int instruction, register_database_t *db);
+void operation_and(unsigned int instruction, register_database_t *db);
+void operation_andi(unsigned int instruction, register_database_t *db);
+void operation_or(unsigned int instruction, register_database_t *db);
+void operation_ori(unsigned int instruction, register_database_t *db);
+void operation_slt(unsigned int instruction, register_database_t *db);
+void operation_sub(unsigned int instruction, register_database_t *db);
+void operation_mult(unsigned int instruction, register_database_t *db);
+void operation_div(unsigned int instruction, register_database_t *db);
+void operation_li(unsigned int instruction, register_database_t *db);
+void operation_move(unsigned int instruction, register_database_t *db);
+
+void update_register_database(unsigned int opcode, unsigned int instruction, register_database_t *db)
+{
+  switch (opcode)
+  {
+  case ADD_DECIMAL:
+    operation_add(instruction, db);
+    break;
+
+  case ADDI_DECIMAL:
+    operation_addi(instruction, db);
+    break;
+
+  case AND_DECIMAL:
+    operation_and(instruction, db);
+    break;
+
+  case ANDI_DECIMAL:
+    operation_andi(instruction, db);
+    break;
+
+  case OR_DECIMAL:
+    operation_or(instruction, db);
+    break;
+
+  case ORI_DECIMAL:
+    operation_ori(instruction, db);
+    break;
+
+  case SLT_DECIMAL:
+    operation_slt(instruction, db);
+    break;
+
+  case SUB_DECIMAL:
+    operation_sub(instruction, db);
+    break;
+
+  case MULT_DECIMAL:
+    operation_mult(instruction, db);
+    break;
+
+  case DIV_DECIMAL:
+    operation_div(instruction, db);
+    break;
+
+  case LI_DECIMAL:
+    operation_li(instruction, db);
+    break;
+
+  case MOVE_DECIMAL:
+    operation_move(instruction, db);
+    break;
+
+  default:
+    break;
+  }
+}
+
 void operation_add(unsigned int instruction, register_database_t *db)
 {
   unsigned int rs = desconverteRs(instruction);
