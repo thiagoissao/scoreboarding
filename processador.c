@@ -11,13 +11,11 @@
 #include "prints/prints.h"
 #include "utils/validations.h"
 #include "utils/can_proceed_to_issue.h"
-#include "utils/verify_if_all_was_writed.h"
+#include "utils/verifications.h"
 
 void defineNextStep();
 void executeScoreboarding();
 void preencheFU();
-void verifyDependency();
-bool verifyRAW();
 bool writeResult();
 bool readOperands();
 bool executeIssue();
@@ -124,7 +122,7 @@ void preencheFU(unsigned int instruction, functional_unit_status_table_t *fu_sta
   }
 
   //verifica Rk e Rj e passar pra preencher tb
-  isR(instruction) ? verifyDependency(fu_status_table, typeOp, rs, rt, opcode, &dependenciaQJ, &dependenciaQK) : verifyDependency(fu_status_table, typeOp, rs, rt, funct, &dependenciaQJ, &dependenciaQK);
+  isR(instruction) ? verify_dependency(fu_status_table, typeOp, rs, rt, opcode, &dependenciaQJ, &dependenciaQK) : verify_dependency(fu_status_table, typeOp, rs, rt, funct, &dependenciaQJ, &dependenciaQK);
 
   if (isR(instruction))
     setInstFu(fu_status_table, typeOp, funct, rd, rs, rt, dependenciaQJ, dependenciaQK);
@@ -174,59 +172,6 @@ bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_ta
   }
   else
     return false;
-}
-
-void verifyDependency(functional_unit_status_table_t *fu_status_table, UnitInstruction_t typeOp,
-                      unsigned int fjAtual, unsigned int fkAtual, unsigned int opcode,
-                      UnitInstruction_t *dependenciaQJ, UnitInstruction_t *dependenciaQK)
-{
-  *dependenciaQJ = empty;
-  *dependenciaQK = empty;
-
-  if (fu_status_table->add.busy && typeOp != ADD_FU_DECIMAL)
-  {
-    if (fu_status_table->add.dest_Fi == fjAtual)
-      *dependenciaQJ = ADD_FU_DECIMAL;
-
-    if (fu_status_table->add.dest_Fi == fkAtual)
-      *dependenciaQK = ADD_FU_DECIMAL;
-  }
-
-  if (fu_status_table->mult1.busy && typeOp != MULT1_FU_DECIMAL)
-  {
-    if (fu_status_table->mult1.dest_Fi == fjAtual)
-      *dependenciaQJ = MULT1_FU_DECIMAL;
-
-    if (fu_status_table->mult1.dest_Fi == fkAtual)
-      *dependenciaQK = MULT1_FU_DECIMAL;
-  }
-
-  if (fu_status_table->mult2.busy && typeOp != MULT2_FU_DECIMAL)
-  {
-    if (fu_status_table->mult2.dest_Fi == fjAtual)
-      *dependenciaQJ = MULT2_FU_DECIMAL;
-
-    if (fu_status_table->mult2.dest_Fi == fkAtual)
-      *dependenciaQK = MULT2_FU_DECIMAL;
-  }
-
-  if (fu_status_table->divide.busy && typeOp != DIVIDE_FU_DECIMAL)
-  {
-    if (fu_status_table->divide.dest_Fi == fjAtual)
-      *dependenciaQJ = DIVIDE_FU_DECIMAL;
-
-    if (fu_status_table->divide.dest_Fi == fkAtual)
-      *dependenciaQK = DIVIDE_FU_DECIMAL;
-  }
-
-  if (fu_status_table->log.busy && typeOp != LOG_FU_DECIMAL)
-  {
-    if (fu_status_table->log.dest_Fi == fjAtual)
-      *dependenciaQJ = LOG_FU_DECIMAL;
-
-    if (fu_status_table->log.dest_Fi == fkAtual)
-      *dependenciaQK = LOG_FU_DECIMAL;
-  }
 }
 
 bool readOperands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
@@ -369,7 +314,7 @@ bool writeResult(instruction_status_t *inst_status_table, functional_unit_status
   else
     typeOp = getTypeOp(opcode, fu_status_table);
 
-  canProceed = verifyRAW(fu_status_table, typeOp);
+  canProceed = verify_raw(fu_status_table, typeOp);
 
   if (canProceed)
   {
@@ -383,31 +328,6 @@ bool writeResult(instruction_status_t *inst_status_table, functional_unit_status
   }
 
   return false;
-}
-
-bool verifyRAW(functional_unit_status_table_t *fu_status_table,
-               UnitInstruction_t typeOp, unsigned idInstrucaoAtual)
-{
-  unsigned int Fj, Fk, idComparacao;
-  Fj = getReadF(fu_status_table, typeOp, true);
-  Fk = getReadF(fu_status_table, typeOp, false);
-
-  // achar solucao melhor, deve verificar apenas as das instrucoes q veio antes dele
-  // tava vendo pelo FU todo, sem contar a ordem d instrucao
-
-  if (fu_status_table->mult1.busy && typeOp != mult1 && (fu_status_table->mult1.s1_Fj == Fj || fu_status_table->mult1.s2_Fk == Fk))
-    return false;
-  if (fu_status_table->mult2.busy && typeOp != mult2 && (fu_status_table->mult2.s1_Fj == Fj || fu_status_table->mult2.s2_Fk == Fk))
-    return false;
-  if (fu_status_table->add.busy && typeOp != add && (fu_status_table->add.s1_Fj == Fj || fu_status_table->add.s2_Fk == Fk))
-    return false;
-  if (fu_status_table->divide.busy && typeOp != divide && (fu_status_table->divide.s1_Fj == Fj || fu_status_table->divide.s2_Fk == Fk))
-    return false;
-  if (fu_status_table->log.busy && typeOp != log && (fu_status_table->log.s1_Fj == Fj || fu_status_table->log.s2_Fk == Fk))
-    return false;
-  // SE (ta ocupado  &&  diferente do FU dele  &&  (mesmo Fj ou mesmo FK))
-
-  return true;
 }
 
 /*
