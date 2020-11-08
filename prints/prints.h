@@ -82,7 +82,7 @@ void print_instructions_complete(instruction_status_t *table, int size)
 void print_functional_unit(functional_unit_status_table_t *table)
 {
        printf("\n2) STATUS DAS UNIDADES FUNCIONAIS\n");
-       printf("UF|Busy\t | Op\t| Fi\t| Fj\t| Fk\t| Qj\t| Qk\t| Rj\t| Rk\n");
+       printf("UF\t| Busy\t| Op\t| Fi\t| Fj\t| Fk\t| Qj\t| Qk\t| Rj\t| Rk\n");
        printf("%-2i Mult1 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->mult1.time,
               table->mult1.busy ? "Yes" : "No",

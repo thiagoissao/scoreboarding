@@ -88,15 +88,20 @@ bool verify_raw(functional_unit_status_table_t *fu_status_table,
   // achar solucao melhor, deve verificar apenas as das instrucoes q veio antes dele
   // tava vendo pelo FU todo, sem contar a ordem d instrucao
 
-  if (fu_status_table->mult1.busy && typeOp != mult1 && (fu_status_table->mult1.s1_Fj == Fj || fu_status_table->mult1.s2_Fk == Fk))
+  if (fu_status_table->mult1.busy && typeOp != mult1 && ( (fu_status_table->mult1.s1_Fj == Fj && 
+    !fu_status_table->mult1.fj_Rj) || (fu_status_table->mult1.s2_Fk == Fk && !fu_status_table->mult1.fj_Rk) ))
     return false;
-  if (fu_status_table->mult2.busy && typeOp != mult2 && (fu_status_table->mult2.s1_Fj == Fj || fu_status_table->mult2.s2_Fk == Fk))
+  if (fu_status_table->mult2.busy && typeOp != mult2 && ( (fu_status_table->mult2.s1_Fj == Fj && 
+    !fu_status_table->mult2.fj_Rj) || (fu_status_table->mult2.s2_Fk == Fk && !fu_status_table->mult2.fj_Rk) ))
     return false;
-  if (fu_status_table->add.busy && typeOp != add && (fu_status_table->add.s1_Fj == Fj || fu_status_table->add.s2_Fk == Fk))
+  if (fu_status_table->add.busy && typeOp != add && ( (fu_status_table->add.s1_Fj == Fj && 
+    !fu_status_table->add.fj_Rj) || (fu_status_table->add.s2_Fk == Fk && !fu_status_table->add.fj_Rk) ))
     return false;
-  if (fu_status_table->divide.busy && typeOp != divide && (fu_status_table->divide.s1_Fj == Fj || fu_status_table->divide.s2_Fk == Fk))
+  if (fu_status_table->divide.busy && typeOp != divide && ( (fu_status_table->divide.s1_Fj == Fj && 
+    !fu_status_table->divide.fj_Rj) || (fu_status_table->divide.s2_Fk == Fk && !fu_status_table->divide.fj_Rk) ))
     return false;
-  if (fu_status_table->log.busy && typeOp != log && (fu_status_table->log.s1_Fj == Fj || fu_status_table->log.s2_Fk == Fk))
+  if (fu_status_table->log.busy && typeOp != log && ( (fu_status_table->log.s1_Fj == Fj && 
+    !fu_status_table->log.fj_Rj) || (fu_status_table->log.s2_Fk == Fk && !fu_status_table->log.fj_Rk) ))
     return false;
   // SE (ta ocupado  &&  diferente do FU dele  &&  (mesmo Fj ou mesmo FK))
 
