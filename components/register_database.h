@@ -78,105 +78,243 @@ void init_register_database(register_database_t *reg_databae)
   reg_databae->ra = initialValue;
 }
 
-void setRegisterDatabase(register_database_t *reg_database, unsigned int register_number, int value)
+int getRegisterValueFromDatabase(register_database_t *database, unsigned int register_number)
 {
   switch (register_number)
   {
   case zero_dec:
-    reg_database->at = value;
-    break;
+    return database->zero;
   case at_dec:
-    reg_database->at = value;
-    break;
+    return database->at;
+
   case v0_dec:
-    reg_database->v0 = value;
-    break;
+    return database->v0;
+
   case v1_dec:
-    reg_database->v1 = value;
-    break;
+    return database->v1;
+
   case a0_dec:
-    reg_database->a0 = value;
-    break;
+    return database->a0;
+
   case a1_dec:
-    reg_database->a1 = value;
-    break;
+    return database->a1;
+
   case a2_dec:
-    reg_database->a2 = value;
-    break;
+    return database->a2;
+
   case a3_dec:
-    reg_database->a3 = value;
-    break;
+    return database->a3;
+
   case t0_dec:
-    reg_database->t0 = value;
-    break;
+    return database->t0;
+
   case t1_dec:
-    reg_database->t1 = value;
-    break;
+    return database->t1;
+
   case t2_dec:
-    reg_database->t2 = value;
-    break;
+    return database->t2;
+
   case t3_dec:
-    reg_database->t3 = value;
-    break;
+    return database->t3;
+
   case t4_dec:
-    reg_database->t4 = value;
-    break;
+    return database->t4;
+
   case t5_dec:
-    reg_database->t5 = value;
-    break;
+    return database->t5;
+
   case t6_dec:
-    reg_database->t6 = value;
-    break;
+    return database->t6;
+
   case t7_dec:
-    reg_database->t7 = value;
-    break;
+    return database->t7;
+
   case s0_dec:
-    reg_database->s0 = value;
-    break;
+    return database->s0;
+
   case s1_dec:
-    reg_database->s1 = value;
-    break;
+    return database->s1;
+
   case s2_dec:
-    reg_database->s2 = value;
-    break;
+    return database->s2;
+
   case s3_dec:
-    reg_database->s3 = value;
-    break;
+    return database->s3;
+
   case s4_dec:
-    reg_database->s4 = value;
-    break;
+    return database->s4;
+
   case s5_dec:
-    reg_database->s5 = value;
-    break;
+    return database->s5;
+
   case s6_dec:
-    reg_database->s6 = value;
-    break;
+    return database->s6;
+
   case s7_dec:
-    reg_database->s7 = value;
-    break;
+    return database->s7;
+
   case t8_dec:
-    reg_database->t8 = value;
-    break;
+    return database->t8;
+
   case t9_dec:
-    reg_database->t9 = value;
-    break;
+    return database->t9;
+
   case k0_dec:
-    reg_database->k0 = value;
-    break;
+    return database->k0;
+
   case k1_dec:
-    reg_database->k1 = value;
-    break;
+    return database->k1;
+
   case gp_dec:
-    reg_database->gp = value;
-    break;
+    return database->gp;
+
   case sp_dec:
-    reg_database->sp = value;
-    break;
+    return database->sp;
+
   case fp_dec:
-    reg_database->fp = value;
-    break;
+    return database->fp;
+
   case ra_dec:
-    reg_database->ra = value;
+    return database->ra;
+
+  default:
+    printf("Erro ao inserir na tabela no banco de registradores!");
+    break;
+  }
+}
+
+void setValueToRegisterDatabase(register_database_t *database, unsigned int register_number, int value)
+{
+  switch (register_number)
+  {
+  case zero_dec:
+  {
+    database->zero = value;
+    break;
+  }
+
+  case at_dec:
+    database->at = value;
+    break;
+
+  case v0_dec:
+    database->v0 = value;
+    break;
+
+  case v1_dec:
+    database->v1 = value;
+    break;
+
+  case a0_dec:
+    database->a0 = value;
+    break;
+
+  case a1_dec:
+    database->a1 = value;
+    break;
+
+  case a2_dec:
+    database->a2 = value;
+    break;
+
+  case a3_dec:
+    database->a3 = value;
+    break;
+
+  case t0_dec:
+    database->t0 = value;
+    break;
+
+  case t1_dec:
+    database->t1 = value;
+    break;
+
+  case t2_dec:
+    database->t2 = value;
+    break;
+
+  case t3_dec:
+    database->t3 = value;
+    break;
+
+  case t4_dec:
+    database->t4 = value;
+    break;
+
+  case t5_dec:
+    database->t5 = value;
+    break;
+
+  case t6_dec:
+    database->t6 = value;
+    break;
+
+  case t7_dec:
+    database->t7 = value;
+    break;
+
+  case s0_dec:
+    database->s0 = value;
+    break;
+
+  case s1_dec:
+    database->s1 = value;
+    break;
+
+  case s2_dec:
+    database->s2 = value;
+    break;
+
+  case s3_dec:
+    database->s3 = value;
+    break;
+
+  case s4_dec:
+    database->s4 = value;
+    break;
+
+  case s5_dec:
+    database->s5 = value;
+    break;
+
+  case s6_dec:
+    database->s6 = value;
+    break;
+
+  case s7_dec:
+    database->s7 = value;
+    break;
+
+  case t8_dec:
+    database->t8 = value;
+    break;
+
+  case t9_dec:
+    database->t9 = value;
+    break;
+
+  case k0_dec:
+    database->k0 = value;
+    break;
+
+  case k1_dec:
+    database->k1 = value;
+    break;
+
+  case gp_dec:
+    database->gp = value;
+    break;
+
+  case sp_dec:
+    database->sp = value;
+    break;
+
+  case fp_dec:
+    database->fp = value;
+    break;
+
+  case ra_dec:
+    database->ra = value;
     break;
 
   default:

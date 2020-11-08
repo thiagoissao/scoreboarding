@@ -160,7 +160,7 @@ void preencheRegStatus(
 
 bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int size)
 {
-  if (clock == 15)
+  if (clock == 6)
     return true;
   else
     return false;
