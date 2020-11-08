@@ -22,11 +22,6 @@ bool execute_operands();
 
 unsigned int clock;
 
-// EXEMPLO INSTRUCAO //
-//  ADD  = R[RD] = R[RS] + R[RT]
-//
-//  ADDI = R[RS] = [RT]  + Imediate
-
 void execute_scoreboarding(
     int config_size,
     config_t *config,
@@ -85,7 +80,7 @@ void execute_scoreboarding(
     print_register_database(register_database);
 
     define_next_step(nextStep, instAtual);
-    allWasWrited = verify_if_all_was_writed(inst_status_table, 2, clock);
+    allWasWrited = verify_if_all_was_writed(inst_status_table, numberOfInstructions, clock);
     clock += 1;
   }
 }
@@ -231,7 +226,7 @@ bool write_result(
     // escreve
     inst_status_table[idInstrucao].writeResult = clock;
     update_register_database(opcode, instruction, register_database);
-    update_components_after_write_result(instruction, rr_status_table);
+    update_components_after_write_result(instruction, rr_status_table, fu_status_table);
     // atualizar as tabela -> setar o dele
     return true;
   }
