@@ -68,7 +68,12 @@ void execute_scoreboarding(
     for (j = 0; j < instAtual; j++)
     {
       if (inst_status_table[j].execComp != -1 && inst_status_table[j].writeResult == -1)
-        write_result(register_database, inst_status_table, fu_status_table, nextStep, j);
+        write_result(
+            register_database,
+            inst_status_table,
+            fu_status_table,
+            rr_status_table,
+            nextStep, j);
     }
 
     print_instructions_complete(inst_status_table, numberOfInstructions);
@@ -186,8 +191,12 @@ bool execute_operands(instruction_status_t *inst_status_table, functional_unit_s
   return true;
 }
 
-bool write_result(register_database_t *register_database, instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
-                  bool *nextStep, unsigned int idInstrucao)
+bool write_result(
+    register_database_t *register_database,
+    instruction_status_t *inst_status_table,
+    functional_unit_status_table_t *fu_status_table,
+    register_result_status_table_t *rr_status_table,
+    bool *nextStep, unsigned int idInstrucao)
 {
   /*
   Write Resulta - execução final (WB)
@@ -222,6 +231,7 @@ bool write_result(register_database_t *register_database, instruction_status_t *
     // escreve
     inst_status_table[idInstrucao].writeResult = clock;
     update_register_database(opcode, instruction, register_database);
+    update_components_after_write_result(instruction, rr_status_table);
     // atualizar as tabela -> setar o dele
     return true;
   }

@@ -115,4 +115,27 @@ void update_register_result_table(
   setRegisterResult(rr_status_table, registrador, typeOp);
 }
 
+void update_register_status_after_write_result(
+    unsigned int instruction,
+    register_result_status_table_t *rr_status_table)
+{
+  unsigned int register_destiny;
+  if (isR(instruction))
+  {
+    register_destiny = desconverteRd(instruction);
+  }
+  else
+  {
+    register_destiny = desconverteRs(instruction);
+  }
+  setRegisterResult(rr_status_table, register_destiny, empty);
+}
+
+void update_components_after_write_result(
+    unsigned int instruction,
+    register_result_status_table_t *rr_status_table)
+{
+  update_register_status_after_write_result(instruction, rr_status_table);
+}
+
 #endif
