@@ -8,7 +8,7 @@
 #include "../components/register_result_status.h"
 #include "../types/i_types.h"
 #include "../conversor.h"
-#include "../utils/validations.h"
+#include "../utils/utils.h"
 #include "../components/units.h"
 
 bool can_proceed_to_issue(

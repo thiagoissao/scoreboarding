@@ -11,7 +11,7 @@
 #include "../types/instructions_op.h"
 #include "../types/registers.h"
 #include "../types/i_types.h"
-#include "../utils/validations.h"
+#include "../utils/utils.h"
 #include "../components/units.h"
 #include "../config/config.h"
 
