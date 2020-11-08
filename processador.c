@@ -12,6 +12,7 @@
 #include "utils/utils.h"
 #include "utils/can_proceed_to_issue.h"
 #include "utils/verifications.h"
+#include "operations/operations.h"
 
 void execute_scoreboarding();
 bool write_result();
@@ -67,7 +68,7 @@ void execute_scoreboarding(
     for (j = 0; j < instAtual; j++)
     {
       if (inst_status_table[j].execComp != -1 && inst_status_table[j].writeResult == -1)
-        write_result(inst_status_table, fu_status_table, nextStep, j);
+        write_result(register_database, inst_status_table, fu_status_table, nextStep, j);
     }
 
     print_instructions_complete(inst_status_table, numberOfInstructions);
@@ -185,7 +186,7 @@ bool execute_operands(instruction_status_t *inst_status_table, functional_unit_s
   return true;
 }
 
-bool write_result(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
+bool write_result(register_database_t *register_database, instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
                   bool *nextStep, unsigned int idInstrucao)
 {
   /*
@@ -197,7 +198,7 @@ bool write_result(instruction_status_t *inst_status_table, functional_unit_statu
   bool canProceed;
 
   UnitInstruction_t typeOp; // se pa funcao p substituir esse processo ou ja definir o type d cada instrucao no inicio
-  unsigned int funct, opcode;
+  unsigned int opcode;
 
   if (!nextStep[idInstrucao])
     return false;
@@ -206,8 +207,8 @@ bool write_result(instruction_status_t *inst_status_table, functional_unit_statu
 
   if (isR(instruction))
   {
-    funct = desconverteFunct(instruction);
-    typeOp = getTypeOp(funct, fu_status_table);
+    opcode = desconverteFunct(instruction);
+    typeOp = getTypeOp(opcode, fu_status_table);
   }
   else
     typeOp = getTypeOp(opcode, fu_status_table);
@@ -220,7 +221,7 @@ bool write_result(instruction_status_t *inst_status_table, functional_unit_statu
 
     // escreve
     inst_status_table[idInstrucao].writeResult = clock;
-    // atualizar o registrador -> setar o dele
+    update_register_database(opcode, instruction, register_database);
     // atualizar as tabela -> setar o dele
     return true;
   }
