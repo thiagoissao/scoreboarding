@@ -11,7 +11,7 @@
 #include "../utils/validations.h"
 #include "../components/units.h"
 
-bool canProceedToIssue(
+bool can_proceed_to_issue(
     unsigned int instruction,
     functional_unit_status_table_t *fu_status_table,
     register_result_status_table_t *rr_status_table)

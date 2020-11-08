@@ -2,7 +2,7 @@
 #include "../components/register_database.h"
 #include "../types/instructions_op.h"
 #include "./operations.h"
-#include "../utils/prints.h"
+#include "../prints/prints.h"
 
 int main()
 {

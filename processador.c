@@ -8,9 +8,10 @@
 #include "config/config.h"
 #include "types/i_types.h"
 #include "conversor.h"
-#include "utils/prints.h"
+#include "prints/prints.h"
 #include "utils/validations.h"
-#include "utils/canProceedToIssue.h"
+#include "utils/can_proceed_to_issue.h"
+#include "utils/verify_if_all_was_writed.h"
 
 void defineNextStep();
 void executeScoreboarding();
@@ -22,7 +23,6 @@ bool readOperands();
 bool executeIssue();
 bool operaLatencia();
 bool executeOperands();
-bool verifyIfAllWasWrited();
 
 unsigned int clock;
 
@@ -84,7 +84,7 @@ void executeScoreboarding(
     print_register_database(register_database);
 
     defineNextStep(nextStep, instAtual);
-    allWasWrited = verifyIfAllWasWrited(inst_status_table, 2);
+    allWasWrited = verify_if_all_was_writed(inst_status_table, 2, clock);
     clock += 1;
   }
 }
@@ -158,29 +158,12 @@ void preencheRegStatus(
   setRegisterResult(rr_status_table, registrador, typeOp);
 }
 
-bool verifyIfAllWasWrited(instruction_status_t *inst_status_table, unsigned int size)
-{
-  if (clock == 6)
-    return true;
-  else
-    return false;
-
-  //for (int i = 0; i < size; i++)
-  //{
-  //  if (inst_status_table->writeResult == -1)
-  //  {
-  //    return false;
-  //  }
-  //}
-  return true;
-}
-
 bool executeIssue(unsigned int instruction, instruction_status_t *inst_status_table,
                   functional_unit_status_table_t *fu_status_table, register_result_status_table_t *rr_status_table, unsigned int instAtual)
 {
 
   // verifica disponibilidade da sessao da operacao na FU
-  bool canProceed = canProceedToIssue(instruction, fu_status_table, rr_status_table);
+  bool canProceed = can_proceed_to_issue(instruction, fu_status_table, rr_status_table);
 
   if (canProceed)
   {
@@ -335,38 +318,23 @@ bool operaLatencia(functional_unit_status_table_t *fu_status_table, UnitInstruct
   {
   case mult1:
     fu_status_table->mult1.time -= 1;
-    if (fu_status_table->mult1.time == 0)
-      return true;
-
-    return false;
+    return fu_status_table->mult1.time == 0;
 
   case mult2:
     fu_status_table->mult2.time -= 1;
-    if (fu_status_table->mult2.time == 0)
-      return true;
-
-    return false;
+    return fu_status_table->mult2.time == 0;
 
   case add:
     fu_status_table->add.time -= 1;
-    if (fu_status_table->add.time == 0)
-      return true;
-
-    return false;
+    return fu_status_table->add.time == 0;
 
   case divide:
     fu_status_table->divide.time -= 1;
-    if (fu_status_table->divide.time == 0)
-      return true;
-
-    return false;
+    return fu_status_table->divide.time == 0;
 
   case log:
     fu_status_table->log.time -= 1;
-    if (fu_status_table->log.time == 0)
-      return true;
-
-    return false;
+    return fu_status_table->log.time == 0;
 
   default:
     printf("Erro ao operar latencia!");
