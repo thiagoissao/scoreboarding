@@ -178,7 +178,7 @@ int getRegisterValueFromDatabase(register_database_t *database, unsigned int reg
     return database->ra;
 
   default:
-    printf("Erro ao inserir na tabela no banco de registradores!");
+    printf("Erro de get na tabela no banco de registradores!");
     break;
   }
 }
@@ -318,7 +318,7 @@ void setValueToRegisterDatabase(register_database_t *database, unsigned int regi
     break;
 
   default:
-    printf("Erro ao inserir na tabela no banco de registradores!");
+    printf("Erro de set na tabela no banco de registradores!");
     break;
   }
 }
