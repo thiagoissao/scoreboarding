@@ -1,0 +1,6 @@
+LI $t6, 34
+LI $t2, 45
+MULT $t0, $t2, $t4
+SUB $t8, $t6, $t2
+DIV $k0, $t0, $t6
+ADD $t6, $t8, $t2

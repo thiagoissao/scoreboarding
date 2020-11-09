@@ -159,7 +159,7 @@ bool verify_raw(instruction_status_t *inst_status_table, functional_unit_status_
       aux = verifyIsRead(inst_status_table, divide, typeOp, Fi, true, instAtual, nextStepRead);
     }
     else if(fu_status_table->divide.s2_Fk == Fi && fu_status_table->divide.fj_Rk){
-      aux = verifyIsRead(inst_status_table, divide, typeOp, Fi, true, instAtual, nextStepRead);
+      aux = verifyIsRead(inst_status_table, divide, typeOp, Fi, false, instAtual, nextStepRead);
     }
     if (aux) 
       return false;
@@ -169,7 +169,7 @@ bool verify_raw(instruction_status_t *inst_status_table, functional_unit_status_
       aux = verifyIsRead(inst_status_table, log, typeOp, Fi, true, instAtual, nextStepRead);
     }
     else if(fu_status_table->log.s2_Fk == Fi && fu_status_table->log.fj_Rk){
-      aux = verifyIsRead(inst_status_table, log, typeOp, Fi, true, instAtual, nextStepRead);
+      aux = verifyIsRead(inst_status_table, log, typeOp, Fi, false, instAtual, nextStepRead);
     }
     if (aux) 
       return false;

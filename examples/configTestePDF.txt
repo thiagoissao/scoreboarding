@@ -1,0 +1,12 @@
+ADD = 2
+ADDI = 2
+AND = 1
+ANDI = 2
+OR = 1
+ORI = 1
+SLT = 2
+SUB = 2
+MULT = 10
+DIV = 40
+LI = 1
+MOVE = 1
