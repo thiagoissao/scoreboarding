@@ -1,1 +1,0 @@
-./a.out ./examples/mnemonios2.txt ./examples/config.txt 3

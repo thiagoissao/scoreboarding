@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <ctype.h>
 #include <assert.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -19,32 +20,80 @@
 
 int main(int argc, char *argv[])
 {
-    char *config = argv[2]; //"./examples/config.txt"
-    char *archive = argv[1]; //"./examples/mnemoniosMult.txt"
-    int numberOfInstructions = atoi(argv[3]);
+    int option;
+    char *config = NULL;  //"./examples/config.txt"
+    char *archive = NULL; //"./examples/mnemoniosMult.txt"
+    int number_instructions = 0;
+
+    while ((option = getopt(argc, argv, "n:p:c:")) != -1)
+    {
+        switch (option)
+        {
+        case 'n':
+            number_instructions = atoi(optarg);
+            break;
+
+        case 'c':
+            config = optarg;
+            break;
+
+        case 'p':
+            archive = optarg;
+            break;
+
+        case '?':
+            if (optopt == 'c' || optopt == 'p') // Esqueceu um argumento
+                fprintf(stderr, "Opção '-%c' requer caminho para o arquivo.\n", optopt);
+            else if (optopt == 'n') // Esqueceu um argumento
+                fprintf(stderr, "Opção n requer o número de instruções.\n");
+            else if (isprint(optopt))
+                fprintf(stderr, "Opção '-%c' desconhecida.\n", optopt);
+            else
+                fprintf(stderr, "Caractere '\\x%x' de opção desconhecido.\n", optopt);
+            exit(1);
+        }
+    }
+
+    if (!archive)
+    {
+        printf("Caminho para o programa não encontrado! Ex: -p arq.txt\n");
+        exit(1);
+    }
+
+    if (!config)
+    {
+        printf("Caminho para o arquivo de configuração não encontrado! Ex: -c config.txt!\n");
+        exit(1);
+    }
+
+    if (number_instructions == 0)
+    {
+        printf("Paramêtro da quantidade de instruções não encontrado! Ex: -n 20\n");
+        exit(1);
+    }
 
     // Cria na memória um array para armazenar a configuração do scoreboarding
-    int numberOfConfigs = count_configs(config);
-    config_t configurations[numberOfConfigs];
+    int number_of_configs = count_configs(config);
+    config_t configurations[number_of_configs];
     config_converter(config, configurations);
-    print_config(configurations, numberOfConfigs);
+    print_config(configurations, number_of_configs);
 
     // Cria na memória um array com o inteiro de cada instrução
-    unsigned int instruction_set[numberOfInstructions];
+    unsigned int instruction_set[number_instructions];
 
     // Converte o conjunto das instruções para inteiro e armazena no array passado por referência
     converter(archive, instruction_set);
 
     //Print o array de inteiros que representa o conjunto de instrucoes
-    print_instruction_set(instruction_set, numberOfInstructions);
+    print_instruction_set(instruction_set, number_instructions);
 
     // Status das unidades funcionais e inicialização
     functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
     init_functional_unit_status_table(fu_status_table);
 
     // Status das instruções e inicialização
-    instruction_status_t inst_status_table[numberOfInstructions];
-    init_instruction_status_table(inst_status_table, instruction_set, numberOfInstructions);
+    instruction_status_t inst_status_table[number_instructions];
+    init_instruction_status_table(inst_status_table, instruction_set, number_instructions);
 
     // Status dos registradores e inicialização
     register_result_status_table_t *rr_status_table = (register_result_status_table_t *)malloc(sizeof(register_result_status_table_t));
@@ -54,9 +103,9 @@ int main(int argc, char *argv[])
     register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
 
     execute_scoreboarding(
-        numberOfConfigs,
+        number_of_configs,
         configurations,
-        numberOfInstructions,
+        number_instructions,
         fu_status_table,
         inst_status_table,
         rr_status_table,
