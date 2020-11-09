@@ -47,11 +47,37 @@ void print_instructions(instruction_status_t *table, int size)
 void print_instructions_complete(instruction_status_t *table, int size)
 {
        int i;
+       unsigned int opcode;
        printf("\n1) STATUS DAS INSTRUÇÕES\n");
        printf("\t\t      Emissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
        for (i = 0; i < size; i++)
        {
-              if (isR(table[i].instruction))
+              opcode = desconverteOp(table[i].instruction);
+              if (opcode == MOVE_DECIMAL){
+                     printf("%4s $%s, %s\t\t  %1i\t\t %4i\t %12i\t %12i\n",
+                            opcodeToString(desconverteFunct(table[i].instruction)),
+                            registerToString(desconverteRs(table[i].instruction)),
+                            registerToString(desconverteRd(table[i].instruction)),
+                            table[i].issue,
+                            table[i].readOperand,
+                            table[i].execComp,
+                            table[i].writeResult);
+
+              }
+              
+              else if (opcode == LI_DECIMAL){
+                     printf("%4s $%s, %3i\t\t  %1i\t\t %4i\t %12i\t %12i\n",
+                            opcodeToString(desconverteOp(table[i].instruction)),
+                            registerToString(desconverteRs(table[i].instruction)),
+                            desconverteImmediate(table[i].instruction),
+                            table[i].issue,
+                            table[i].readOperand,
+                            table[i].execComp,
+                            table[i].writeResult);
+
+              }
+
+              else if (isR(table[i].instruction) && opcode != MOVE_DECIMAL)
               {
                      printf("%4s $%s, $%s, $%s\t  %1i\t\t %4i\t %12i\t %12i\n",
                             opcodeToString(desconverteFunct(table[i].instruction)),
@@ -142,7 +168,7 @@ void print_functional_unit(functional_unit_status_table_t *table)
 
 void print_register_result(register_result_status_table_t *table)
 {
-       char *format = "%s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t\n";
+       char *format = "%3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t\n";
        printf("\n3) STATUS DOS REGISTRADORES\n");
        printf(format,
               zero_reg,
@@ -215,8 +241,8 @@ void print_register_result(register_result_status_table_t *table)
 
 void print_register_database(register_database_t *table)
 {
-       char *formatRegName = "%s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t| %s\t\n";
-       char *format = "%i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t| %i\t\n";
+       char *formatRegName = "%3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t\n";
+       char *format = "%3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t\n";
        printf("\n4) BANCO DE REGISTRADORES\n");
        printf(formatRegName,
               zero_reg,
