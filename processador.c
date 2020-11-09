@@ -34,9 +34,11 @@ void execute_scoreboarding(
   // inicializa
   clock = 1;
   unsigned int instAtual = 0, j;
-  bool nextStep[numberOfInstructions], allWasWrited = false, allWasRead;
+  bool nextStep[numberOfInstructions], nextStepRead[numberOfInstructions]; 
+  bool allWasWrited = false, allWasRead;
 
   define_next_step(nextStep, numberOfInstructions);
+  define_next_step(nextStepRead, numberOfInstructions);
 
   while (!allWasWrited)
   {
@@ -50,8 +52,10 @@ void execute_scoreboarding(
 
     for (j = 0; j < instAtual; j++)
     {
-      if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1)
+      if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1){
         read_operands(inst_status_table, fu_status_table, nextStep, j);
+        nextStepRead[j] = false;
+      }
     }
 
     for (j = 0; j < instAtual; j++)
@@ -68,7 +72,7 @@ void execute_scoreboarding(
             inst_status_table,
             fu_status_table,
             rr_status_table,
-            nextStep, j);
+            nextStepRead, nextStep, j);
     }
 
     print_instructions_complete(inst_status_table, numberOfInstructions);
@@ -80,6 +84,7 @@ void execute_scoreboarding(
     print_register_database(register_database);
 
     define_next_step(nextStep, instAtual);
+    define_next_step(nextStepRead, instAtual);
     allWasWrited = verify_if_all_was_writed(inst_status_table, numberOfInstructions, clock);
     clock += 1;
   }
@@ -191,7 +196,7 @@ bool write_result(
     instruction_status_t *inst_status_table,
     functional_unit_status_table_t *fu_status_table,
     register_result_status_table_t *rr_status_table,
-    bool *nextStep, unsigned int idInstrucao)
+    bool *nextStepRead, bool *nextStep, unsigned int idInstrucao)
 {
   /*
   Write Resulta - execução final (WB)
@@ -217,7 +222,7 @@ bool write_result(
   else
     typeOp = getTypeOp(opcode, fu_status_table);
 
-  canProceed = verify_raw(fu_status_table, typeOp);
+  canProceed = verify_raw(inst_status_table, fu_status_table, typeOp, nextStepRead, idInstrucao);
 
   if (canProceed)
   {
