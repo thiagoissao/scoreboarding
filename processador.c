@@ -43,19 +43,20 @@ void execute_scoreboarding(
   while (!allWasWrited)
   {
     printf("\n\n-------------------------------------------------------- CICLO %i -----------------------------------------------------------------\n", clock);
-
-    if (execute_issue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
+  
+    if (instAtual < numberOfInstructions && execute_issue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
     {
       nextStep[instAtual] = false;
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
     }
 
+    if (instAtual > numberOfInstructions) 
+      instAtual = numberOfInstructions;
+
     for (j = 0; j < instAtual; j++)
     {
-      if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1){
-        read_operands(inst_status_table, fu_status_table, nextStep, j);
-        nextStepRead[j] = false;
-      }
+      if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1)
+        read_operands(inst_status_table, fu_status_table, nextStep, nextStepRead, j);
     }
 
     for (j = 0; j < instAtual; j++)
@@ -109,7 +110,7 @@ bool execute_issue(unsigned int instruction, instruction_status_t *inst_status_t
 }
 
 bool read_operands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
-                   bool *nextStep, unsigned int idInstrucao)
+                   bool *nextStep, bool *nextStepRead, unsigned int idInstrucao)
 {
   /*
   espere até que não haja riscos de dados, então leia os operandos
@@ -142,6 +143,7 @@ bool read_operands(instruction_status_t *inst_status_table, functional_unit_stat
   {
     inst_status_table[idInstrucao].readOperand = clock;
     nextStep[idInstrucao] = false;
+    nextStepRead[idInstrucao] = false;
     return true;
   }
 

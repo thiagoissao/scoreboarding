@@ -120,8 +120,8 @@ bool verify_raw(instruction_status_t *inst_status_table, functional_unit_status_
   unsigned int Fi, idComparacao;
   Fi = getReadFi(fu_status_table, typeOp);
   bool aux = false;
-  // atentar depois ao clock de uma instrucao que teve que esperar um read anteriormente
-
+  
+  
   if (fu_status_table->mult1.busy && typeOp != mult1){
     // se (FJ == FI) && RJ -> se FK ==FI entao o RJ tem q ta YES pra ser um RAW) entao verifica o read p ter as decisoes
     if (fu_status_table->mult1.s1_Fj == Fi && fu_status_table->mult1.fj_Rj){
