@@ -7,6 +7,6 @@ ORI = 1
 SLT = 2
 SUB = 2
 MULT = 2
-DIV = 1
+DIV = 16
 LI = 1
 MOVE = 1

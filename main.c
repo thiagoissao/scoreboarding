@@ -13,16 +13,15 @@
 #include "config/config.h"
 #include "config/config_converter.h"
 
-//Parametrizar depois
-#define PROGRAM "mnemonios.txt"
-#define CONFIG "config.txt"
-#define CICLOS 6
+// #define PROGRAM "mnemonios.txt"
+// #define CONFIG "config.txt"
+// #define CICLOS 18
 
-int main()
+int main(int argc, char *argv[])
 {
-    char *config = CONFIG;
-    char *archive = PROGRAM;
-    int numberOfInstructions = CICLOS;
+    char *config = argv[2];
+    char *archive = argv[1];
+    int numberOfInstructions = atoi(argv[3]);
 
     // Cria na memória um array para armazenar a configuração do scoreboarding
     int numberOfConfigs = count_configs(config);
