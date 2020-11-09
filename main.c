@@ -19,8 +19,8 @@
 
 int main(int argc, char *argv[])
 {
-    char *config = argv[2];
-    char *archive = argv[1];
+    char *config = argv[2]; //"./examples/config.txt"
+    char *archive = argv[1]; //"./examples/mnemoniosMult.txt"
     int numberOfInstructions = atoi(argv[3]);
 
     // Cria na memória um array para armazenar a configuração do scoreboarding

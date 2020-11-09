@@ -281,13 +281,20 @@ bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcod
   // verificar por aq se pa se ta escrevendo no msm destino rsrs
   UnitInstruction_t typeOp = getTypeOp(opcode, fu_status_table);
 
+  if (typeOp == mult1){
+    if (fu_status_table->mult1.busy){
+      return fu_status_table->mult2.busy;
+    }
+    return fu_status_table->mult1.busy;
+  }
+
   switch (typeOp)
   {
-  case 0: //mult1
-    return fu_status_table->mult1.busy;
+  //case 0: //mult1
+  //  return fu_status_table->mult1.busy;
 
-  case 1: //mult2
-    return fu_status_table->mult2.busy;
+  //case 1: //mult2
+  //  return fu_status_table->mult2.busy;
 
   case 2: // add
     return fu_status_table->add.busy;
@@ -304,7 +311,7 @@ bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcod
   }
 }
 
-void setTimeToFu(unsigned int opcode, functional_unit_status_table_t *fu_status_table, config_t *config, int config_size)
+void setTimeToFu(unsigned int opcode, functional_unit_status_table_t *fu_status_table, config_t *config, int config_size, bool isMult2)
 {
   unsigned int unit = getTypeOp(opcode, fu_status_table); //add -> 2
   //Procura o tempo no arquivo de configuração
@@ -316,6 +323,10 @@ void setTimeToFu(unsigned int opcode, functional_unit_status_table_t *fu_status_
       time = config[i].value;
     }
   }
+
+  if (isMult2)
+    unit = mult2;
+
   if (unit == mult1)
   {
     fu_status_table->mult1.time = time;

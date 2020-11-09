@@ -1,0 +1,4 @@
+MULT $t1, $t3, $t0
+MULT $t2, $t5, $t7
+SUB $t8, $t6, $t2
+LI $t8, 3

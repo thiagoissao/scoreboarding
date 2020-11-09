@@ -81,6 +81,11 @@ void update_functional_unit_table(unsigned int instruction, functional_unit_stat
     rt = 0;
   }
 
+  if (typeOp == mult1){
+    if (fu_status_table->mult1.busy)
+      typeOp = mult2;
+  }
+
   //verifica Rk e Rj e passar pra preencher tb
   isR(instruction) ? verify_dependency(fu_status_table, typeOp, rs, rt, opcode, &dependenciaQJ, &dependenciaQK) : verify_dependency(fu_status_table, typeOp, rs, rt, funct, &dependenciaQJ, &dependenciaQK);
 
@@ -111,6 +116,11 @@ void update_register_result_table(
   }
 
   typeOp = getTypeOp(opcode, fu_status_table);
+
+  if (typeOp == mult1){
+    if (fu_status_table->mult1.busy && !fu_status_table->mult2.busy)
+      typeOp = mult2;
+  }
 
   setRegisterResult(rr_status_table, registrador, typeOp);
 }

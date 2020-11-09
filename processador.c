@@ -101,8 +101,8 @@ bool execute_issue(unsigned int instruction, instruction_status_t *inst_status_t
   if (canProceed)
   {
     inst_status_table[instAtual].issue = clock;                                                    // atualiza o clock no status na tabela d inst
-    update_functional_unit_table(instruction, fu_status_table);                                    // preenche tabela FU
     update_register_result_table(instruction, rr_status_table, fu_status_table, isR(instruction)); // preenche tab dos Reg
+    update_functional_unit_table(instruction, fu_status_table);                                    // preenche tabela FU
     return true;
   }
   else
@@ -133,6 +133,11 @@ bool read_operands(instruction_status_t *inst_status_table, functional_unit_stat
   }
   else
     typeOp = getTypeOp(opcode, fu_status_table);
+
+  if (typeOp == mult1){
+    if (fu_status_table->mult1.dest_Fi != desconverteRd(instruction))
+      typeOp = mult2;
+  }
 
   bool canProceed = operandsDisponiveis(fu_status_table, typeOp);
 
@@ -178,9 +183,14 @@ bool execute_operands(instruction_status_t *inst_status_table, functional_unit_s
   else
     typeOp = getTypeOp(opcode, fu_status_table);
 
+  if (typeOp == mult1){
+    if (fu_status_table->mult1.dest_Fi != desconverteRd(instruction))
+      typeOp = mult2;
+  }
+
   // seta time
   if (!verifyTimeRealied(typeOp, fu_status_table))
-    setTimeToFu(opcode, fu_status_table, config, config_size);
+    setTimeToFu(opcode, fu_status_table, config, config_size, typeOp == mult2);
   // execute operacao em alguma hr
 
   can_proceed = opera_latencia(fu_status_table, typeOp);
@@ -223,6 +233,11 @@ bool write_result(
   }
   else
     typeOp = getTypeOp(opcode, fu_status_table);
+
+  if (typeOp == mult1){
+    if (fu_status_table->mult1.dest_Fi != desconverteRd(instruction))
+      typeOp = mult2;
+  }
 
   canProceed = verify_raw(inst_status_table, fu_status_table, typeOp, nextStepRead, idInstrucao);
 
