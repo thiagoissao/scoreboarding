@@ -137,7 +137,12 @@ void operation_ori(unsigned int instruction, register_database_t *db)
 
 void operation_slt(unsigned int instruction, register_database_t *db)
 {
-  //DO OR NOT DO SLT INSTRUCTION ?
+  unsigned int rs = desconverteRs(instruction);
+  unsigned int rt = desconverteRt(instruction);
+  unsigned int rd = desconverteRd(instruction);
+
+  int slt = getRegisterValueFromDatabase(db, rs) < getRegisterValueFromDatabase(db, rt);
+  setValueToRegisterDatabase(db, rd, slt);
 }
 
 void operation_sub(unsigned int instruction, register_database_t *db)
