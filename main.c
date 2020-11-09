@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
 
     free(fu_status_table);
     free(rr_status_table);
+    free(register_database);
     return 0;
 }
 
