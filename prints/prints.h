@@ -53,16 +53,31 @@ void print_instructions_complete(instruction_status_t *table, int size)
        for (i = 0; i < size; i++)
        {
               opcode = desconverteOp(table[i].instruction);
-              if (opcode == MOVE_DECIMAL)
-              {
-                     printf("%4s $%s, %s\t\t  %1i\t\t %4i\t %12i\t %12i\n",
-                            opcodeToString(desconverteFunct(table[i].instruction)),
-                            registerToString(desconverteRs(table[i].instruction)),
-                            registerToString(desconverteRd(table[i].instruction)),
-                            table[i].issue,
-                            table[i].readOperand,
-                            table[i].execComp,
-                            table[i].writeResult);
+
+              if (isR(table[i].instruction)){
+                     opcode = desconverteFunct(table[i].instruction);
+                     if (opcode == MOVE_DECIMAL)
+                     {
+                            printf("%4s $%s, $%s\t\t  %1i\t\t %4i\t %12i\t %12i\n",
+                                   opcodeToString(desconverteFunct(table[i].instruction)),
+                                   registerToString(desconverteRs(table[i].instruction)),
+                                   registerToString(desconverteRd(table[i].instruction)),
+                                   table[i].issue,
+                                   table[i].readOperand,
+                                   table[i].execComp,
+                                   table[i].writeResult);
+                     }
+                     else{
+                            printf("%4s $%s, $%s, $%s\t  %1i\t\t %4i\t %12i\t %12i\n",
+                                   opcodeToString(desconverteFunct(table[i].instruction)),
+                                   registerToString(desconverteRd(table[i].instruction)),
+                                   registerToString(desconverteRs(table[i].instruction)),
+                                   registerToString(desconverteRt(table[i].instruction)),
+                                   table[i].issue,
+                                   table[i].readOperand,
+                                   table[i].execComp,
+                                   table[i].writeResult);
+                     }
               }
 
               else if (opcode == LI_DECIMAL)
@@ -71,19 +86,6 @@ void print_instructions_complete(instruction_status_t *table, int size)
                             opcodeToString(desconverteOp(table[i].instruction)),
                             registerToString(desconverteRs(table[i].instruction)),
                             desconverteImmediate(table[i].instruction),
-                            table[i].issue,
-                            table[i].readOperand,
-                            table[i].execComp,
-                            table[i].writeResult);
-              }
-
-              else if (isR(table[i].instruction) && opcode != MOVE_DECIMAL)
-              {
-                     printf("%4s $%s, $%s, $%s\t  %1i\t\t %4i\t %12i\t %12i\n",
-                            opcodeToString(desconverteFunct(table[i].instruction)),
-                            registerToString(desconverteRd(table[i].instruction)),
-                            registerToString(desconverteRs(table[i].instruction)),
-                            registerToString(desconverteRt(table[i].instruction)),
                             table[i].issue,
                             table[i].readOperand,
                             table[i].execComp,
@@ -102,7 +104,6 @@ void print_instructions_complete(instruction_status_t *table, int size)
                             table[i].writeResult);
               }
        }
-       //printf("----------------------------------------------------------------------------------------\n");
 }
 
 void print_functional_unit(functional_unit_status_table_t *table)
