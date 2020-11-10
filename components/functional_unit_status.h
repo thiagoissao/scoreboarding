@@ -257,18 +257,14 @@ UnitInstruction_t getTypeOp(unsigned int opcode, functional_unit_status_table_t 
   case SUB_DECIMAL: //sub
     return add;
   case MULT_DECIMAL:
-  { //mult1 ou mult2 arrumar
-    // if (fu_table->mult1.busy)
-    // {
-    //   return mult2;
-    // }
+  { 
     return mult1;
   }
   case DIV_DECIMAL:
     return divide;
-  case LI_DECIMAL: //LI -> arrumar
+  case LI_DECIMAL: //LI 
     return log;
-  case MOVE_DECIMAL: //mov -> arrumar
+  case MOVE_DECIMAL: //mov 
     return log;
   default:
     printf("Erro em Units.h\n");
@@ -278,7 +274,6 @@ UnitInstruction_t getTypeOp(unsigned int opcode, functional_unit_status_table_t 
 
 bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcode)
 {
-  // verificar por aq se pa se ta escrevendo no msm destino rsrs
   UnitInstruction_t typeOp = getTypeOp(opcode, fu_status_table);
 
   if (typeOp == mult1){
@@ -290,12 +285,6 @@ bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcod
 
   switch (typeOp)
   {
-  //case 0: //mult1
-  //  return fu_status_table->mult1.busy;
-
-  //case 1: //mult2
-  //  return fu_status_table->mult2.busy;
-
   case 2: // add
     return fu_status_table->add.busy;
 
@@ -313,7 +302,7 @@ bool getBusy(functional_unit_status_table_t *fu_status_table, unsigned int opcod
 
 void setTimeToFu(unsigned int opcode, functional_unit_status_table_t *fu_status_table, config_t *config, int config_size, bool isMult2)
 {
-  unsigned int unit = getTypeOp(opcode, fu_status_table); //add -> 2
+  unsigned int unit = getTypeOp(opcode, fu_status_table); 
   //Procura o tempo no arquivo de configuração
   int time = 1;
   for (int i = 0; i < config_size; i++)

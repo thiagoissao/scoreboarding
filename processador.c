@@ -242,7 +242,7 @@ bool write_result(
       typeOp = mult2;
   }
 
-  canProceed = verify_raw(inst_status_table, fu_status_table, typeOp, nextStepRead, idInstrucao);
+  canProceed = verify_war(inst_status_table, fu_status_table, typeOp, nextStepRead, idInstrucao);
 
   if (canProceed)
   {
@@ -290,10 +290,6 @@ bool write_result(
             nenhuma outra instrução / FU vai ler o registrador de destino da instrução
       Ações: 
             Escreva o registro e atualize o placar
-            
-            Exemplo de WAR: DIVD F0, F2, F4
-                            ADDD F10, F0, F8
-                            SUBD F8, F8, F14
             
             O placar CDC 6600 paralisaria o SUBD até que o ADDD leia operandos
     ------------------------------------------------------------------

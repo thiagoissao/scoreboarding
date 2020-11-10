@@ -41,8 +41,6 @@ void converter(char *archive, unsigned int *instructionsSet)
         Instruction instructionType = getInstructionType(splitInstruction);
         unsigned int opcode = getOpcodeDecimal(splitInstruction);
 
-        // printf("%s é do tipo %s e seu código é %u\n", splitInstruction, instructionType == R ? "R" : "I", opcode);
-
         if (opcode == MOVE_DECIMAL)
         {
             splitInstruction = strtok(NULL, separators);

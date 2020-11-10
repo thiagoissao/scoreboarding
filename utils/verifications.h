@@ -94,7 +94,7 @@ bool verifyIsRead(instruction_status_t *inst_status_table, UnitInstruction_t typ
     }
     else{ 
       comparaF = desconverteRt(inst_status_table[i].instruction);
-      typeOpInst = getTypeOp(opcode, fu_status_table); //nem ta usando o fu na funcao
+      typeOpInst = getTypeOp(opcode, fu_status_table); 
     }
 
     // se (Fj ou Fk == Destino Fi) && (mesmo tipo da dependencia) && (diferente de ser ele mesmo)
@@ -111,10 +111,10 @@ bool verifyIsRead(instruction_status_t *inst_status_table, UnitInstruction_t typ
     }
     
   }  
-  return false; // creio q n chega aq mas deixei
+  return false; 
 }
 
-bool verify_raw(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, 
+bool verify_war(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table, 
     UnitInstruction_t typeOp, bool *nextStepRead, int instAtual)
 {
   unsigned int Fi, idComparacao;
@@ -123,11 +123,11 @@ bool verify_raw(instruction_status_t *inst_status_table, functional_unit_status_
   
   
   if (fu_status_table->mult1.busy && typeOp != mult1){
-    // se (FJ == FI) && RJ -> se FK ==FI entao o RJ tem q ta YES pra ser um RAW) entao verifica o read p ter as decisoes
+    // se (FJ == FI) && RJ -> se FK ==FI entao o RJ tem q ta YES pra ser um WAR) entao verifica o read p ter as decisoes
     if (fu_status_table->mult1.s1_Fj == Fi && fu_status_table->mult1.fj_Rj){
       aux = verifyIsRead(inst_status_table, mult1, typeOp, Fi, true, instAtual, nextStepRead);
     }
-    // se (FK == FI) && RJ -> se FK ==FI entao o RK tem q ta YES pra ser um RAW)
+    // se (FK == FI) && RJ -> se FK ==FI entao o RK tem q ta YES pra ser um WAR)
     else if(fu_status_table->mult1.s2_Fk == Fi && fu_status_table->mult1.fj_Rk){
       aux = verifyIsRead(inst_status_table, mult1, typeOp, Fi, false, instAtual, nextStepRead);
     }
