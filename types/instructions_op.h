@@ -4,18 +4,18 @@
 #include <stdio.h>
 #include <string.h>
 
-#define ADD "ADD"
-#define ADDI "ADDI"
-#define AND "AND"
-#define ANDI "ANDI"
-#define OR "OR"
-#define ORI "ORI"
-#define SLT "SLT"
-#define SUB "SUB"
-#define MULT "MULT"
-#define DIV "DIV"
-#define LI "LI"
-#define MOVE "MOVE"
+#define ADD "add"
+#define ADDI "addi"
+#define AND "and"
+#define ANDI "andi"
+#define OR "or"
+#define ORI "ori"
+#define SLT "slt"
+#define SUB "sub"
+#define MULT "mult"
+#define DIV "div"
+#define LI "li"
+#define MOVE "move"
 
 #define EMPTY_FU_DECIMAL -1
 #define MULT1_FU_DECIMAL 0

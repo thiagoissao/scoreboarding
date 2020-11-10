@@ -34,7 +34,7 @@ void execute_scoreboarding(
   // inicializa
   clock = 1;
   unsigned int instAtual = 0, j;
-  bool nextStep[numberOfInstructions], nextStepRead[numberOfInstructions]; 
+  bool nextStep[numberOfInstructions], nextStepRead[numberOfInstructions];
   bool allWasWrited = false, allWasRead;
 
   define_next_step(nextStep, numberOfInstructions);
@@ -42,15 +42,15 @@ void execute_scoreboarding(
 
   while (!allWasWrited)
   {
-    printf("\n\n-------------------------------------------------------- CICLO %i -----------------------------------------------------------------\n", clock);
-  
+    printf("\n\n-------------------------------------------------------- ciclo %i -----------------------------------------------------------------\n", clock);
+
     if (instAtual < numberOfInstructions && execute_issue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
     {
       nextStep[instAtual] = false;
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
     }
 
-    if (instAtual > numberOfInstructions) 
+    if (instAtual > numberOfInstructions)
       instAtual = numberOfInstructions;
 
     for (j = 0; j < instAtual; j++)
@@ -134,7 +134,8 @@ bool read_operands(instruction_status_t *inst_status_table, functional_unit_stat
   else
     typeOp = getTypeOp(opcode, fu_status_table);
 
-  if (typeOp == mult1){
+  if (typeOp == mult1)
+  {
     if (fu_status_table->mult1.dest_Fi != desconverteRd(instruction))
       typeOp = mult2;
   }
@@ -183,7 +184,8 @@ bool execute_operands(instruction_status_t *inst_status_table, functional_unit_s
   else
     typeOp = getTypeOp(opcode, fu_status_table);
 
-  if (typeOp == mult1){
+  if (typeOp == mult1)
+  {
     if (fu_status_table->mult1.dest_Fi != desconverteRd(instruction))
       typeOp = mult2;
   }
@@ -234,7 +236,8 @@ bool write_result(
   else
     typeOp = getTypeOp(opcode, fu_status_table);
 
-  if (typeOp == mult1){
+  if (typeOp == mult1)
+  {
     if (fu_status_table->mult1.dest_Fi != desconverteRd(instruction))
       typeOp = mult2;
   }
@@ -243,8 +246,6 @@ bool write_result(
 
   if (canProceed)
   {
-    printf("\nPrestes a terminar -> %d\n", clock);
-
     // escreve
     inst_status_table[idInstrucao].writeResult = clock;
     update_register_database(opcode, instruction, register_database);

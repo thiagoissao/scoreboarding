@@ -1,18 +1,18 @@
-LI $t0, 0
-LI $t1, 1
-LI $t2, 2
-LI $t3, 3
-MOVE $ra, $t3
-MOVE $fp, $ra 
-LI $s5, 5
-LI $s4, 4
-LI $s2, 2
-LI $s0, 0
-LI $s3, 3
-ADDI $t0, $t1, 2
-MULT $t1, $t3, $t0
-DIV $t3, $ra, $fp
-MULT $s5, $s4, $s2
-ADDI $t3, $t2, 50
-ADD $s0, $s3, $s4
-SUB $s0, $s0, $t3
+li $t0, 0
+li $t1, 1
+li $t2, 2
+li $t3, 3
+move $ra, $t3
+move $fp, $ra 
+li $s5, 5
+li $s4, 4
+li $s2, 2
+li $s0, 0
+li $s3, 3
+addi $t0, $t1, 2
+mult $t1, $t3, $t0
+div $t3, $ra, $fp
+mult $s5, $s4, $s2
+addi $t3, $t2, 50
+add $s0, $s3, $s4
+sub $s0, $s0, $t3

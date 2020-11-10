@@ -76,16 +76,12 @@ int main(int argc, char *argv[])
     int number_of_configs = count_configs(config);
     config_t configurations[number_of_configs];
     config_converter(config, configurations);
-    print_config(configurations, number_of_configs);
 
     // Cria na memória um array com o inteiro de cada instrução
     unsigned int instruction_set[number_instructions];
 
     // Converte o conjunto das instruções para inteiro e armazena no array passado por referência
     converter(archive, instruction_set);
-
-    //Print o array de inteiros que representa o conjunto de instrucoes
-    print_instruction_set(instruction_set, number_instructions);
 
     // Status das unidades funcionais e inicialização
     functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));

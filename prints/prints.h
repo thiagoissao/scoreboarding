@@ -17,7 +17,7 @@
 
 void print_config(config_t *config, int size)
 {
-       printf("\n-------------- CONFIGURATIONS --------------------\n");
+       printf("\n-------------- configurations --------------------\n");
        for (int i = 0; i < size; i++)
        {
               printf("Instrução: %s => %i ciclos\n", opcodeToString(config[i].opcode), config[i].value);
@@ -26,7 +26,7 @@ void print_config(config_t *config, int size)
 
 void print_instruction_set(unsigned int *instructions, int size)
 {
-       printf("\n----------------------- Conjunto de instruções--------------------------\n");
+       printf("\n----------------------- conjunto de instrucoes--------------------------\n");
        for (int i = 0; i < size; i++)
        {
               printf("%i: %i\n", i, instructions[i]);
@@ -36,8 +36,8 @@ void print_instruction_set(unsigned int *instructions, int size)
 void print_instructions(instruction_status_t *table, int size)
 {
        int i;
-       printf("\n1) STATUS DAS INSTRUÇÕES\n");
-       printf("\t\tEmissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
+       printf("\n1) status das instrucoes\n");
+       printf("\t\temissao | leitura dos operandos | execução | escrita dos resultados\n");
        for (i = 0; i < size; i++)
        {
               printf("%i\t%i\t\t%i\t\t    %i\t\t%i\n", table[i].instruction, table[i].issue, table[i].readOperand, table[i].execComp, table[i].writeResult);
@@ -48,12 +48,13 @@ void print_instructions_complete(instruction_status_t *table, int size)
 {
        int i;
        unsigned int opcode;
-       printf("\n1) STATUS DAS INSTRUÇÕES\n");
-       printf("\t\t      Emissão | Leitura dos Operandos | Execução | Escrita dos Resultados\n");
+       printf("\n1) status das instrucoes\n");
+       printf("\t\t      emissao | leitura dos operandos | execucao | escrita dos resultados\n");
        for (i = 0; i < size; i++)
        {
               opcode = desconverteOp(table[i].instruction);
-              if (opcode == MOVE_DECIMAL){
+              if (opcode == MOVE_DECIMAL)
+              {
                      printf("%4s $%s, %s\t\t  %1i\t\t %4i\t %12i\t %12i\n",
                             opcodeToString(desconverteFunct(table[i].instruction)),
                             registerToString(desconverteRs(table[i].instruction)),
@@ -62,10 +63,10 @@ void print_instructions_complete(instruction_status_t *table, int size)
                             table[i].readOperand,
                             table[i].execComp,
                             table[i].writeResult);
-
               }
-              
-              else if (opcode == LI_DECIMAL){
+
+              else if (opcode == LI_DECIMAL)
+              {
                      printf("%4s $%s, %3i\t\t  %1i\t\t %4i\t %12i\t %12i\n",
                             opcodeToString(desconverteOp(table[i].instruction)),
                             registerToString(desconverteRs(table[i].instruction)),
@@ -74,7 +75,6 @@ void print_instructions_complete(instruction_status_t *table, int size)
                             table[i].readOperand,
                             table[i].execComp,
                             table[i].writeResult);
-
               }
 
               else if (isR(table[i].instruction) && opcode != MOVE_DECIMAL)
@@ -107,69 +107,69 @@ void print_instructions_complete(instruction_status_t *table, int size)
 
 void print_functional_unit(functional_unit_status_table_t *table)
 {
-       printf("\n2) STATUS DAS UNIDADES FUNCIONAIS\n");
-       printf("UF\t| Busy\t| Op\t| Fi\t| Fj\t| Fk\t| Qj\t| Qk\t| Rj\t| Rk\n");
-       printf("%-2i Mult1 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+       printf("\n2) status das unidades funcionais\n");
+       printf("uf\t| busy\t| op\t| fi\t| fj\t| fk\t| qj\t| qk\t| rj\t| rk\n");
+       printf("%-2i mult1 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->mult1.time,
-              table->mult1.busy ? "Yes" : "No",
+              table->mult1.busy ? "sim" : "nao",
               opcodeToString(table->mult1.op),
               registerToString(table->mult1.dest_Fi),
               registerToString(table->mult1.s1_Fj),
               registerToString(table->mult1.s2_Fk),
               typeOpToString(table->mult1.fu_Qj),
               typeOpToString(table->mult1.fu_Qk),
-              table->mult1.busy ? table->mult1.fj_Rj ? "Yes" : "No" : "",
-              table->mult1.busy ? table->mult1.fj_Rk ? "Yes" : "No" : "");
-       printf("%-2i Mult2 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+              table->mult1.busy ? table->mult1.fj_Rj ? "sim" : "nao" : "",
+              table->mult1.busy ? table->mult1.fj_Rk ? "sim" : "nao" : "");
+       printf("%-2i mult2 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->mult2.time,
-              table->mult2.busy ? "Yes" : "No",
+              table->mult2.busy ? "sim" : "nao",
               opcodeToString(table->mult2.op),
               registerToString(table->mult2.dest_Fi),
               registerToString(table->mult2.s1_Fj),
               registerToString(table->mult2.s2_Fk),
               typeOpToString(table->mult2.fu_Qj),
               typeOpToString(table->mult2.fu_Qk),
-              table->mult2.busy ? table->mult2.fj_Rj ? "Yes" : "No" : "",
-              table->mult2.busy ? table->mult2.fj_Rk ? "Yes" : "No" : "");
-       printf("%-2i Add   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+              table->mult2.busy ? table->mult2.fj_Rj ? "sim" : "nao" : "",
+              table->mult2.busy ? table->mult2.fj_Rk ? "sim" : "nao" : "");
+       printf("%-2i add   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->add.time,
-              table->add.busy ? "Yes" : "No",
+              table->add.busy ? "sim" : "nao",
               opcodeToString(table->add.op),
               registerToString(table->add.dest_Fi),
               registerToString(table->add.s1_Fj),
               registerToString(table->add.s2_Fk),
               typeOpToString(table->add.fu_Qj),
               typeOpToString(table->add.fu_Qk),
-              table->add.busy ? table->add.fj_Rj ? "Yes" : "No" : "",
-              table->add.busy ? table->add.fj_Rk ? "Yes" : "No" : "");
-       printf("%-2i Div   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+              table->add.busy ? table->add.fj_Rj ? "sim" : "nao" : "",
+              table->add.busy ? table->add.fj_Rk ? "sim" : "nao" : "");
+       printf("%-2i div   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->divide.time,
-              table->divide.busy ? "Yes" : "No",
+              table->divide.busy ? "sim" : "nao",
               opcodeToString(table->divide.op),
               registerToString(table->divide.dest_Fi),
               registerToString(table->divide.s1_Fj),
               registerToString(table->divide.s2_Fk),
               typeOpToString(table->divide.fu_Qj),
               typeOpToString(table->divide.fu_Qk),
-              table->divide.busy ? table->divide.fj_Rj ? "Yes" : "No" : "",
-              table->divide.busy ? table->divide.fj_Rk ? "Yes" : "No" : "");
-       printf("%-2i Log   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+              table->divide.busy ? table->divide.fj_Rj ? "sim" : "nao" : "",
+              table->divide.busy ? table->divide.fj_Rk ? "sim" : "nao" : "");
+       printf("%-2i log   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->log.time,
-              table->log.busy ? "Yes" : "No",
+              table->log.busy ? "sim" : "nao",
               opcodeToString(table->log.op),
               registerToString(table->log.dest_Fi),
               registerToString(table->log.s1_Fj),
               registerToString(table->log.s2_Fk),
               typeOpToString(table->log.fu_Qj),
               typeOpToString(table->log.fu_Qk),
-              table->log.busy ? table->log.fj_Rj ? "Yes" : "No" : "",
-              table->log.busy ? table->log.fj_Rk ? "Yes" : "No" : "");
+              table->log.busy ? table->log.fj_Rj ? "sim" : "nao" : "",
+              table->log.busy ? table->log.fj_Rk ? "sim" : "nao" : "");
 }
 
 void print_register_result(register_result_status_table_t *table)
 {
        char *format = "%3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t\n";
-       printf("\n3) STATUS DOS REGISTRADORES\n");
+       printf("\n3) status dos registradores\n");
        printf(format,
               zero_reg,
               at_reg,
@@ -243,7 +243,7 @@ void print_register_database(register_database_t *table)
 {
        char *formatRegName = "%3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t\n";
        char *format = "%3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t\n";
-       printf("\n4) BANCO DE REGISTRADORES\n");
+       printf("\n4) banco de registradores\n");
        printf(formatRegName,
               zero_reg,
               at_reg,

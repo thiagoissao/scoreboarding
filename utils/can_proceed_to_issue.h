@@ -129,8 +129,6 @@ bool can_proceed_to_issue(
   if (strcmp(regChar, ra_reg) == 0 && rr_status_table->ra != empty)
     wawDependency = true;
 
-  printf("WAW DEPENDENCY: %s\n", wawDependency ? regChar : "NÃO");
-
   //Verifica se está a unidade está ocupada
   if (isTypeR)
   {
