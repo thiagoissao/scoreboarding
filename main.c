@@ -53,24 +53,13 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-
-    if (!archive)
-    {
-        printf("Caminho para o programa não encontrado! Ex: -p arq.txt\n");
+    if (number_instructions == 0 || !config || !archive){
+        printf("Parametrização Incorreta!\n");
+        printf("Utilize:\n");
+        printf("\t./executavel -n <qtd_de_instrucao> -c <arq_configuracao.txt> -p <arq_instrucoes.txt>\n");
         exit(1);
     }
-
-    if (!config)
-    {
-        printf("Caminho para o arquivo de configuração não encontrado! Ex: -c config.txt!\n");
-        exit(1);
-    }
-
-    if (number_instructions == 0)
-    {
-        printf("Paramêtro da quantidade de instruções não encontrado! Ex: -n 20\n");
-        exit(1);
-    }
+    
 
     // Cria na memória um array para armazenar a configuração do scoreboarding
     int number_of_configs = count_configs(config);
