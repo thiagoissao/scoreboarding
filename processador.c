@@ -23,6 +23,7 @@ bool execute_operands();
 unsigned int clock;
 
 void execute_scoreboarding(
+    char *path,
     int config_size,
     config_t *config,
     unsigned int numberOfInstructions,
@@ -36,13 +37,16 @@ void execute_scoreboarding(
   unsigned int instAtual = 0, j;
   bool nextStep[numberOfInstructions], nextStepRead[numberOfInstructions];
   bool allWasWrited = false, allWasRead;
+  FILE *destiny;
 
   define_next_step(nextStep, numberOfInstructions);
   define_next_step(nextStepRead, numberOfInstructions);
 
   while (!allWasWrited)
   {
-    printf("\n\n-------------------------------------------------------- ciclo %i -----------------------------------------------------------------\n", clock);
+    destiny = fopen(path, "a");
+    fprintf(destiny, "\n\n-------------------------------------------------------- ciclo %i -----------------------------------------------------------------\n", clock);
+    fclose(destiny);
 
     if (instAtual < numberOfInstructions && execute_issue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
     {
@@ -76,13 +80,10 @@ void execute_scoreboarding(
             nextStepRead, nextStep, j);
     }
 
-    print_instructions_complete(inst_status_table, numberOfInstructions);
-    printf("\n");
-    print_functional_unit(fu_status_table);
-    printf("\n");
-    print_register_result(rr_status_table);
-    printf("\n");
-    print_register_database(register_database);
+    print_instructions_complete(inst_status_table, numberOfInstructions, path);
+    print_functional_unit(fu_status_table, path);
+    print_register_result(rr_status_table, path);
+    print_register_database(register_database, path);
 
     define_next_step(nextStep, instAtual);
     define_next_step(nextStepRead, instAtual);

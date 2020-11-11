@@ -15,41 +15,68 @@
 #include "../components/units.h"
 #include "../config/config.h"
 
-void print_config(config_t *config, int size)
+void print_config(config_t *config, int size, char *path)
 {
-       printf("\n-------------- configurations --------------------\n");
+       FILE *archive = fopen(path, "a");
+       if (archive == NULL){
+              printf("Erro ao escrever no artigo!\n");
+              exit(1);
+       }
+       fprintf(archive, "\n-------------- configurations --------------------\n");
        for (int i = 0; i < size; i++)
        {
-              printf("Instrução: %s => %i ciclos\n", opcodeToString(config[i].opcode), config[i].value);
+              fprintf(archive, "Instrução: %s => %i ciclos\n", opcodeToString(config[i].opcode), config[i].value);
        }
+       fprintf(archive, "\n");
+       fclose(archive);
 }
 
-void print_instruction_set(unsigned int *instructions, int size)
+void print_instruction_set(unsigned int *instructions, int size, char *path)
 {
-       printf("\n----------------------- conjunto de instrucoes--------------------------\n");
+       FILE *archive = fopen(path, "a");
+       if (archive == NULL){
+              printf("Erro ao escrever no artigo!\n");
+              exit(1);
+       }
+
+       fprintf(archive,"\n----------------------- conjunto de instrucoes--------------------------\n");
        for (int i = 0; i < size; i++)
        {
-              printf("%i: %i\n", i, instructions[i]);
+              fprintf(archive,"%i: %i\n", i, instructions[i]);
        }
+       fprintf(archive, "\n");
+       fclose(archive);
 }
 
-void print_instructions(instruction_status_t *table, int size)
+void print_instructions(instruction_status_t *table, int size, char *path)
 {
+       FILE *archive = fopen(path, "a");
+       if (archive == NULL){
+              printf("Erro ao escrever no artigo!\n");
+              exit(1);
+       }
        int i;
-       printf("\n1) status das instrucoes\n");
-       printf("\t\temissao | leitura dos operandos | execução | escrita dos resultados\n");
+       fprintf(archive, "\n1) status das instrucoes\n");
+       fprintf(archive, "\t\temissao | leitura dos operandos | execução | escrita dos resultados\n");
        for (i = 0; i < size; i++)
        {
-              printf("%i\t%i\t\t%i\t\t    %i\t\t%i\n", table[i].instruction, table[i].issue, table[i].readOperand, table[i].execComp, table[i].writeResult);
+              fprintf(archive, "%i\t%i\t\t%i\t\t    %i\t\t%i\n", table[i].instruction, table[i].issue, table[i].readOperand, table[i].execComp, table[i].writeResult);
        }
+       fprintf(archive, "\n");
+       fclose(archive);
 }
 
-void print_instructions_complete(instruction_status_t *table, int size)
+void print_instructions_complete(instruction_status_t *table, int size, char *path)
 {
+       FILE *archive = fopen(path, "a");
+       if (archive == NULL){
+              printf("Erro ao escrever no artigo!\n");
+              exit(1);
+       }
        int i;
        unsigned int opcode;
-       printf("\n1) status das instrucoes\n");
-       printf("\t\t      emissao | leitura dos operandos | execucao | escrita dos resultados\n");
+       fprintf(archive, "\n1) status das instrucoes\n");
+       fprintf(archive, "\t\t      emissao | leitura dos operandos | execucao | escrita dos resultados\n");
        for (i = 0; i < size; i++)
        {
               opcode = desconverteOp(table[i].instruction);
@@ -58,7 +85,7 @@ void print_instructions_complete(instruction_status_t *table, int size)
                      opcode = desconverteFunct(table[i].instruction);
                      if (opcode == MOVE_DECIMAL)
                      {
-                            printf("%4s $%s, $%s\t\t  %1i\t\t %4i\t %12i\t %12i\n",
+                            fprintf(archive,"%4s $%s, $%s\t\t  %1i\t\t %4i\t %12i\t %12i\n",
                                    opcodeToString(desconverteFunct(table[i].instruction)),
                                    registerToString(desconverteRs(table[i].instruction)),
                                    registerToString(desconverteRd(table[i].instruction)),
@@ -68,7 +95,7 @@ void print_instructions_complete(instruction_status_t *table, int size)
                                    table[i].writeResult);
                      }
                      else{
-                            printf("%4s $%s, $%s, $%s\t  %1i\t\t %4i\t %12i\t %12i\n",
+                            fprintf(archive, "%4s $%s, $%s, $%s\t  %1i\t\t %4i\t %12i\t %12i\n",
                                    opcodeToString(desconverteFunct(table[i].instruction)),
                                    registerToString(desconverteRd(table[i].instruction)),
                                    registerToString(desconverteRs(table[i].instruction)),
@@ -82,7 +109,7 @@ void print_instructions_complete(instruction_status_t *table, int size)
 
               else if (opcode == LI_DECIMAL)
               {
-                     printf("%4s $%s, %3i\t\t  %1i\t\t %4i\t %12i\t %12i\n",
+                     fprintf(archive, "%4s $%s, %3i\t\t  %1i\t\t %4i\t %12i\t %12i\n",
                             opcodeToString(desconverteOp(table[i].instruction)),
                             registerToString(desconverteRs(table[i].instruction)),
                             desconverteImmediate(table[i].instruction),
@@ -93,7 +120,7 @@ void print_instructions_complete(instruction_status_t *table, int size)
               }
               else
               {
-                     printf("%4s $%s, $%s, %3i\t  %1i\t\t %4i\t %12i\t %12i\n",
+                     fprintf(archive, "%4s $%s, $%s, %3i\t  %1i\t\t %4i\t %12i\t %12i\n",
                             opcodeToString(desconverteOp(table[i].instruction)),
                             registerToString(desconverteRs(table[i].instruction)),
                             registerToString(desconverteRt(table[i].instruction)),
@@ -104,13 +131,20 @@ void print_instructions_complete(instruction_status_t *table, int size)
                             table[i].writeResult);
               }
        }
+       fprintf(archive, "\n");
+       fclose(archive);
 }
 
-void print_functional_unit(functional_unit_status_table_t *table)
+void print_functional_unit(functional_unit_status_table_t *table, char *path)
 {
-       printf("\n2) status das unidades funcionais\n");
-       printf("uf\t| busy\t| op\t| fi\t| fj\t| fk\t| qj\t| qk\t| rj\t| rk\n");
-       printf("%-2i mult1 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+       FILE *archive = fopen(path, "a");
+       if (archive == NULL){
+              printf("Erro ao escrever no artigo!\n");
+              exit(1);
+       }
+       fprintf(archive, "\n2) status das unidades funcionais\n");
+       fprintf(archive, "uf\t| busy\t| op\t| fi\t| fj\t| fk\t| qj\t| qk\t| rj\t| rk\n");
+       fprintf(archive, "%-2i mult1 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->mult1.time,
               table->mult1.busy ? "sim" : "nao",
               opcodeToString(table->mult1.op),
@@ -121,7 +155,7 @@ void print_functional_unit(functional_unit_status_table_t *table)
               typeOpToString(table->mult1.fu_Qk),
               table->mult1.busy ? table->mult1.fj_Rj ? "sim" : "nao" : "",
               table->mult1.busy ? table->mult1.fj_Rk ? "sim" : "nao" : "");
-       printf("%-2i mult2 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+       fprintf(archive, "%-2i mult2 | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->mult2.time,
               table->mult2.busy ? "sim" : "nao",
               opcodeToString(table->mult2.op),
@@ -132,7 +166,7 @@ void print_functional_unit(functional_unit_status_table_t *table)
               typeOpToString(table->mult2.fu_Qk),
               table->mult2.busy ? table->mult2.fj_Rj ? "sim" : "nao" : "",
               table->mult2.busy ? table->mult2.fj_Rk ? "sim" : "nao" : "");
-       printf("%-2i add   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+       fprintf(archive, "%-2i add   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->add.time,
               table->add.busy ? "sim" : "nao",
               opcodeToString(table->add.op),
@@ -143,7 +177,7 @@ void print_functional_unit(functional_unit_status_table_t *table)
               typeOpToString(table->add.fu_Qk),
               table->add.busy ? table->add.fj_Rj ? "sim" : "nao" : "",
               table->add.busy ? table->add.fj_Rk ? "sim" : "nao" : "");
-       printf("%-2i div   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+       fprintf(archive, "%-2i div   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->divide.time,
               table->divide.busy ? "sim" : "nao",
               opcodeToString(table->divide.op),
@@ -154,7 +188,7 @@ void print_functional_unit(functional_unit_status_table_t *table)
               typeOpToString(table->divide.fu_Qk),
               table->divide.busy ? table->divide.fj_Rj ? "sim" : "nao" : "",
               table->divide.busy ? table->divide.fj_Rk ? "sim" : "nao" : "");
-       printf("%-2i log   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
+       fprintf(archive, "%-2i log   | %4s\t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s \t| %4s\n",
               table->log.time,
               table->log.busy ? "sim" : "nao",
               opcodeToString(table->log.op),
@@ -165,13 +199,20 @@ void print_functional_unit(functional_unit_status_table_t *table)
               typeOpToString(table->log.fu_Qk),
               table->log.busy ? table->log.fj_Rj ? "sim" : "nao" : "",
               table->log.busy ? table->log.fj_Rk ? "sim" : "nao" : "");
+       fprintf(archive, "\n");
+       fclose(archive);
 }
 
-void print_register_result(register_result_status_table_t *table)
+void print_register_result(register_result_status_table_t *table, char *path)
 {
+       FILE *archive = fopen(path, "a");
+       if (archive == NULL){
+              printf("Erro ao escrever no artigo!\n");
+              exit(1);
+       }
        char *format = "%3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t\n";
-       printf("\n3) status dos registradores\n");
-       printf(format,
+       fprintf(archive, "\n3) status dos registradores\n");
+       fprintf(archive, format,
               zero_reg,
               at_reg,
               v0_reg,
@@ -204,8 +245,8 @@ void print_register_result(register_result_status_table_t *table)
               sp_reg,
               fp_reg,
               ra_reg);
-       printf("\n");
-       printf(format,
+       fprintf(archive, "\n");
+       fprintf(archive, format,
               typeOpToString(table->zero),
               typeOpToString(table->at),
               typeOpToString(table->v0),
@@ -238,14 +279,21 @@ void print_register_result(register_result_status_table_t *table)
               typeOpToString(table->sp),
               typeOpToString(table->fp),
               typeOpToString(table->ra));
+       fprintf(archive, "\n");
+       fclose(archive);
 }
 
-void print_register_database(register_database_t *table)
+void print_register_database(register_database_t *table, char *path)
 {
+       FILE *archive = fopen(path, "a");
+       if (archive == NULL){
+              printf("Erro ao escrever no artigo!\n");
+              exit(1);
+       }
        char *formatRegName = "%3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t| %3s\t\n";
        char *format = "%3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t| %3i\t\n";
-       printf("\n4) banco de registradores\n");
-       printf(formatRegName,
+       fprintf(archive, "\n4) banco de registradores\n");
+       fprintf(archive, formatRegName,
               zero_reg,
               at_reg,
               v0_reg,
@@ -278,8 +326,8 @@ void print_register_database(register_database_t *table)
               sp_reg,
               fp_reg,
               ra_reg);
-       printf("\n");
-       printf(format,
+       fprintf(archive, "\n");
+       fprintf(archive, format,
               table->zero,
               table->at,
               table->v0,
@@ -312,6 +360,8 @@ void print_register_database(register_database_t *table)
               table->sp,
               table->fp,
               table->ra);
+       fprintf(archive, "\n");
+       fclose(archive);
 }
 
 #endif
