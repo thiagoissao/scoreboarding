@@ -1,1 +1,0 @@
-./a.out -p ./examples/mnemoniosTestePDF.txt -c ./examples/configTestePDF.txt -n 6

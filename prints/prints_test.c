@@ -29,7 +29,6 @@ int main()
   functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
   init_functional_unit_status_table(fu_status_table);
 
-  print_instructions_complete(inst_table, size);
   // print_functional_unit(fu_status_table);
   return 0;
 }

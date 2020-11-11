@@ -42,42 +42,6 @@ typedef struct register_database
   int ra;
 } register_database_t;
 
-void init_register_database(register_database_t *reg_databae)
-{
-  reg_databae->zero = initialValue;
-  reg_databae->at = initialValue;
-  reg_databae->v0 = initialValue;
-  reg_databae->v1 = initialValue;
-  reg_databae->a0 = initialValue;
-  reg_databae->a1 = initialValue;
-  reg_databae->a2 = initialValue;
-  reg_databae->a3 = initialValue;
-  reg_databae->t0 = initialValue;
-  reg_databae->t1 = initialValue;
-  reg_databae->t2 = initialValue;
-  reg_databae->t3 = initialValue;
-  reg_databae->t4 = initialValue;
-  reg_databae->t5 = initialValue;
-  reg_databae->t6 = initialValue;
-  reg_databae->t7 = initialValue;
-  reg_databae->s0 = initialValue;
-  reg_databae->s1 = initialValue;
-  reg_databae->s2 = initialValue;
-  reg_databae->s3 = initialValue;
-  reg_databae->s4 = initialValue;
-  reg_databae->s5 = initialValue;
-  reg_databae->s6 = initialValue;
-  reg_databae->s7 = initialValue;
-  reg_databae->t8 = initialValue;
-  reg_databae->t9 = initialValue;
-  reg_databae->k0 = initialValue;
-  reg_databae->k1 = initialValue;
-  reg_databae->gp = initialValue;
-  reg_databae->sp = initialValue;
-  reg_databae->fp = initialValue;
-  reg_databae->ra = initialValue;
-}
-
 int getRegisterValueFromDatabase(register_database_t *database, unsigned int register_number)
 {
   switch (register_number)
