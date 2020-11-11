@@ -178,8 +178,6 @@ void operation_div(unsigned int instruction, register_database_t *db)
     int divide = getRegisterValueFromDatabase(db, rs) / denominator;
     setValueToRegisterDatabase(db, rd, divide);
   }
-
-  printf("Divisão por zero na operação %i\n", instruction);
 }
 
 void operation_li(unsigned int instruction, register_database_t *db)

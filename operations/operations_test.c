@@ -41,6 +41,4 @@ int main()
   // operation_div(67000346, database);
   operation_addi(560594994, database);                       // t3 = 52
   update_register_database(ADD_DECIMAL, 41189408, database); // s0 = 4
-
-  print_register_database(database);
 }
