@@ -1,0 +1,7 @@
+li $t1, 0
+li $t2, 4
+li $t3, 3
+li $t4, 10
+li $t5, 2
+sub $t1, $t4, $t2
+add $t1, $t3, $t5

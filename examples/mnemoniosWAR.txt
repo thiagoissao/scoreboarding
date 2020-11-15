@@ -1,0 +1,9 @@
+li $t1, 0
+li $t2, 20
+li $t3, 10
+li $t4, 30
+li $t5, 2
+div $t1, $t3, $t5
+sub $t5, $t4, $t2
+
+//erru - achar algum outro
