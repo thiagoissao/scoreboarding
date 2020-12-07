@@ -93,22 +93,6 @@ void print_instructions_complete(instruction_status_t *table, int size, char *pa
                                    opcodeToString(desconverteFunct(table[i].instruction)),
                                    registerToString(desconverteRs(table[i].instruction)),
                                    registerToString(desconverteRd(table[i].instruction)));
-                            
-                            sprintf(aux, "%d", table[i].issue);
-                            fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].readOperand);
-                            fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].execComp);
-                            fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].writeResult);
-                            fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
                      }
                      else{
                             fprintf(archive, "%4s $%s, $%s, $%s\t  ",
@@ -116,22 +100,6 @@ void print_instructions_complete(instruction_status_t *table, int size, char *pa
                                    registerToString(desconverteRd(table[i].instruction)),
                                    registerToString(desconverteRs(table[i].instruction)),
                                    registerToString(desconverteRt(table[i].instruction)));
-
-                            sprintf(aux, "%d", table[i].issue);
-                            fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].readOperand);
-                            fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].execComp);
-                            fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].writeResult);
-                            fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
                      }
               }
 
@@ -141,22 +109,6 @@ void print_instructions_complete(instruction_status_t *table, int size, char *pa
                             opcodeToString(desconverteOp(table[i].instruction)),
                             registerToString(desconverteRs(table[i].instruction)),
                             desconverteImmediate(table[i].instruction));
-
-                            sprintf(aux, "%d", table[i].issue);
-                            fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].readOperand);
-                            fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].execComp);
-                            fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].writeResult);
-                            fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
               }
               else
               {
@@ -166,22 +118,22 @@ void print_instructions_complete(instruction_status_t *table, int size, char *pa
                             registerToString(desconverteRt(table[i].instruction)),
                             desconverteImmediate(table[i].instruction));
 
-                            sprintf(aux, "%d", table[i].issue);
-                            fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].readOperand);
-                            fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].execComp);
-                            fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
-
-                            sprintf(aux, "%d", table[i].writeResult);
-                            fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
-                            aux[0] = '\0';
               }
+              sprintf(aux, "%d", table[i].issue);
+              fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
+              aux[0] = '\0';
+
+              sprintf(aux, "%d", table[i].readOperand);
+              fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
+              aux[0] = '\0';
+
+              sprintf(aux, "%d", table[i].execComp);
+              fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
+              aux[0] = '\0';
+
+              sprintf(aux, "%d", table[i].writeResult);
+              fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
+              aux[0] = '\0';
        }
        fprintf(archive, "\n");
        fclose(archive);
