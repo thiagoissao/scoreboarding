@@ -4,4 +4,4 @@ li $t3, 3
 li $t4, 10
 li $t5, 2
 sub $t1, $t4, $t2
-add $t1, $t3, $t5
+div $t1, $t3, $t5

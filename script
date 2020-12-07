@@ -1,0 +1,1 @@
+./a.out -n 7 -p ./examples/mnemoniosRAW.txt -c ./examples/config.txt -o testeUm.txt

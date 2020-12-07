@@ -7,6 +7,6 @@ ori = 1
 slt = 2
 sub = 2
 mult = 10
-div = 40
+div = 2
 li = 1
 move = 1

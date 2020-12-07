@@ -6,4 +6,4 @@ li $t5, 2
 div $t1, $t3, $t5
 sub $t5, $t4, $t2
 
-//erru - achar algum outro
+// t5
