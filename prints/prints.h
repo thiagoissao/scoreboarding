@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../components/functional_unit_status.h"
 #include "../components/instruction_status.h"
 #include "../components/register_result_status.h"
@@ -70,10 +72,12 @@ void print_instructions_complete(instruction_status_t *table, int size, char *pa
 {
        FILE *archive = fopen(path, "a");
        if (archive == NULL){
-              printf("Erro ao escrever no artigo!\n");
+              printf("Erro ao escrever no arquivo!\n");
               exit(1);
        }
        int i;
+       char aux[2];
+       aux[0] = '\0';
        unsigned int opcode;
        fprintf(archive, "\n1) status das instrucoes\n");
        fprintf(archive, "\t\t      emissao | leitura dos operandos | execucao | escrita dos resultados\n");
@@ -85,38 +89,74 @@ void print_instructions_complete(instruction_status_t *table, int size, char *pa
                      opcode = desconverteFunct(table[i].instruction);
                      if (opcode == MOVE_DECIMAL)
                      {
-                            fprintf(archive,"%4s $%s, $%s\t\t  %1i\t\t %4i\t %12i\t %12i\n",
+                            fprintf(archive,"%4s $%s, $%s\t\t  ",
                                    opcodeToString(desconverteFunct(table[i].instruction)),
                                    registerToString(desconverteRs(table[i].instruction)),
-                                   registerToString(desconverteRd(table[i].instruction)),
-                                   table[i].issue,
-                                   table[i].readOperand,
-                                   table[i].execComp,
-                                   table[i].writeResult);
+                                   registerToString(desconverteRd(table[i].instruction)));
+                            
+                            sprintf(aux, "%d", table[i].issue);
+                            fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].readOperand);
+                            fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].execComp);
+                            fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].writeResult);
+                            fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
                      }
                      else{
-                            fprintf(archive, "%4s $%s, $%s, $%s\t  %1i\t\t %4i\t %12i\t %12i\n",
+                            fprintf(archive, "%4s $%s, $%s, $%s\t  ",
                                    opcodeToString(desconverteFunct(table[i].instruction)),
                                    registerToString(desconverteRd(table[i].instruction)),
                                    registerToString(desconverteRs(table[i].instruction)),
-                                   registerToString(desconverteRt(table[i].instruction)),
-                                   table[i].issue,
-                                   table[i].readOperand,
-                                   table[i].execComp,
-                                   table[i].writeResult);
+                                   registerToString(desconverteRt(table[i].instruction)));
+
+                            sprintf(aux, "%d", table[i].issue);
+                            fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].readOperand);
+                            fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].execComp);
+                            fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].writeResult);
+                            fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
                      }
               }
 
               else if (opcode == LI_DECIMAL)
               {
-                     fprintf(archive, "%4s $%s, %3i\t\t  %1i\t\t %4i\t %12i\t %12i\n",
+                     fprintf(archive, "%4s $%s, %3i\t\t  ",
                             opcodeToString(desconverteOp(table[i].instruction)),
                             registerToString(desconverteRs(table[i].instruction)),
-                            desconverteImmediate(table[i].instruction),
-                            table[i].issue,
-                            table[i].readOperand,
-                            table[i].execComp,
-                            table[i].writeResult);
+                            desconverteImmediate(table[i].instruction));
+
+                            sprintf(aux, "%d", table[i].issue);
+                            fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].readOperand);
+                            fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].execComp);
+                            fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].writeResult);
+                            fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
               }
               else
               {
@@ -124,11 +164,23 @@ void print_instructions_complete(instruction_status_t *table, int size, char *pa
                             opcodeToString(desconverteOp(table[i].instruction)),
                             registerToString(desconverteRs(table[i].instruction)),
                             registerToString(desconverteRt(table[i].instruction)),
-                            desconverteImmediate(table[i].instruction),
-                            table[i].issue,
-                            table[i].readOperand,
-                            table[i].execComp,
-                            table[i].writeResult);
+                            desconverteImmediate(table[i].instruction));
+
+                            sprintf(aux, "%d", table[i].issue);
+                            fprintf(archive, "%s\t\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].readOperand);
+                            fprintf(archive, "%4s\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].execComp);
+                            fprintf(archive, "%12s\t ", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
+
+                            sprintf(aux, "%d", table[i].writeResult);
+                            fprintf(archive, "%12s\n", strcmp(aux, "-1") ? aux : " ");
+                            aux[0] = '\0';
               }
        }
        fprintf(archive, "\n");
@@ -362,6 +414,17 @@ void print_register_database(register_database_t *table, char *path)
               table->ra);
        fprintf(archive, "\n");
        fclose(archive);
+}
+
+void printa(instruction_status_t *inst_status_table, int numberOfInstructions, 
+       functional_unit_status_table_t *fu_status_table, 
+       register_result_status_table_t *rr_status_table, 
+       register_database_t *register_database, char *path)
+       {
+       print_instructions_complete(inst_status_table, numberOfInstructions, path);
+       print_functional_unit(fu_status_table, path);
+       print_register_result(rr_status_table, path);
+       print_register_database(register_database, path);
 }
 
 #endif

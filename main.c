@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
     // Banco de registradores
     register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
 
-    execute_scoreboarding(
+    execute_pipeline(
         destino,
         number_of_configs,
         configurations,

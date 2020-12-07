@@ -14,7 +14,7 @@
 #include "utils/verifications.h"
 #include "operations/operations.h"
 
-void execute_scoreboarding();
+void execute_pipeline();
 bool write_result();
 bool read_operands();
 bool execute_issue();
@@ -22,7 +22,7 @@ bool execute_operands();
 
 unsigned int clock;
 
-void execute_scoreboarding(
+void execute_pipeline(
     char *path,
     int config_size,
     config_t *config,
@@ -80,10 +80,7 @@ void execute_scoreboarding(
             nextStepRead, nextStep, j);
     }
 
-    print_instructions_complete(inst_status_table, numberOfInstructions, path);
-    print_functional_unit(fu_status_table, path);
-    print_register_result(rr_status_table, path);
-    print_register_database(register_database, path);
+    printa(inst_status_table, numberOfInstructions, fu_status_table, rr_status_table, register_database, path);
 
     define_next_step(nextStep, instAtual);
     define_next_step(nextStepRead, instAtual);

@@ -4,13 +4,13 @@
 
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		   -1	           -1	           -1
-  li $t2,   4		  -1		   -1	           -1	           -1
-  li $t3,   3		  -1		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t1,   0		  1		     	             	             
+  li $t2,   4		   		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -39,13 +39,13 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	           -1	           -1
-  li $t2,   4		  -1		   -1	           -1	           -1
-  li $t3,   3		  -1		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t1,   0		  1		    2	             	             
+  li $t2,   4		   		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -74,13 +74,13 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	           -1
-  li $t2,   4		  -1		   -1	           -1	           -1
-  li $t3,   3		  -1		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t1,   0		  1		    2	            3	             
+  li $t2,   4		   		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -110,12 +110,12 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  -1		   -1	           -1	           -1
-  li $t3,   3		  -1		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t2,   4		   		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -145,12 +145,12 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		   -1	           -1	           -1
-  li $t3,   3		  -1		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t2,   4		  5		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -180,12 +180,12 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	           -1	           -1
-  li $t3,   3		  -1		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t2,   4		  5		    6	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -215,12 +215,12 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	           -1
-  li $t3,   3		  -1		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t2,   4		  5		    6	            7	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -251,11 +251,11 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  -1		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -286,11 +286,11 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   -1	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t3,   3		  9		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -321,11 +321,11 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           -1	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t3,   3		  9		   10	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -356,11 +356,11 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           -1
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t3,   3		  9		   10	           11	             
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -392,10 +392,10 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  -1		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t4,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -427,10 +427,10 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   -1	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t4,  10		  13		     	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -462,10 +462,10 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           -1	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t4,  10		  13		   14	             	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -497,10 +497,10 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           -1
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t4,  10		  13		   14	           15	             
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -533,9 +533,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,   2		  -1		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t5,   2		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -568,9 +568,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,   2		  17		   -1	           -1	           -1
- sub $t1, $t2, $t3	  -1		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t5,   2		  17		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -603,9 +603,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,   2		  17		   18	           -1	           -1
- sub $t1, $t2, $t3	  18		   -1	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t5,   2		  17		   18	             	             
+ sub $t1, $t2, $t3	  18		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -638,9 +638,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,   2		  17		   18	           19	           -1
- sub $t1, $t2, $t3	  18		   19	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+  li $t5,   2		  17		   18	           19	             
+ sub $t1, $t2, $t3	  18		   19	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -674,8 +674,8 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
   li $t5,   2		  17		   18	           19	           20
- sub $t1, $t2, $t3	  18		   19	           -1	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+ sub $t1, $t2, $t3	  18		   19	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -709,8 +709,8 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
   li $t5,   2		  17		   18	           19	           20
- sub $t1, $t2, $t3	  18		   19	           21	           -1
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+ sub $t1, $t2, $t3	  18		   19	           21	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -745,7 +745,7 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t4,  10		  13		   14	           15	           16
   li $t5,   2		  17		   18	           19	           20
  sub $t1, $t2, $t3	  18		   19	           21	           22
- add $t4, $t1, $t5	  -1		   -1	           -1	           -1
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -780,7 +780,7 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t4,  10		  13		   14	           15	           16
   li $t5,   2		  17		   18	           19	           20
  sub $t1, $t2, $t3	  18		   19	           21	           22
- add $t4, $t1, $t5	  23		   -1	           -1	           -1
+ add $t4, $t1, $t5	  23		     	             	             
 
 
 2) status das unidades funcionais
@@ -815,7 +815,7 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t4,  10		  13		   14	           15	           16
   li $t5,   2		  17		   18	           19	           20
  sub $t1, $t2, $t3	  18		   19	           21	           22
- add $t4, $t1, $t5	  23		   24	           -1	           -1
+ add $t4, $t1, $t5	  23		   24	             	             
 
 
 2) status das unidades funcionais
@@ -850,7 +850,7 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t4,  10		  13		   14	           15	           16
   li $t5,   2		  17		   18	           19	           20
  sub $t1, $t2, $t3	  18		   19	           21	           22
- add $t4, $t1, $t5	  23		   24	           -1	           -1
+ add $t4, $t1, $t5	  23		   24	             	             
 
 
 2) status das unidades funcionais
@@ -885,7 +885,7 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t4,  10		  13		   14	           15	           16
   li $t5,   2		  17		   18	           19	           20
  sub $t1, $t2, $t3	  18		   19	           21	           22
- add $t4, $t1, $t5	  23		   24	           26	           -1
+ add $t4, $t1, $t5	  23		   24	           26	             
 
 
 2) status das unidades funcionais
