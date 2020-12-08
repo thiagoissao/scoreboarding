@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "../types/registers.h"
 
-#define initialValue 0
+#define initialValue = -1
 
 typedef struct register_database
 {
@@ -41,6 +41,42 @@ typedef struct register_database
   int fp;
   int ra;
 } register_database_t;
+
+void init_register_database(register_database_t *db)
+{
+  db->zero = empty;
+  db->at = empty;
+  db->v0 = empty;
+  db->v1 = empty;
+  db->a0 = empty;
+  db->a1 = empty;
+  db->a2 = empty;
+  db->a3 = empty;
+  db->t0 = empty;
+  db->t1 = empty;
+  db->t2 = empty;
+  db->t3 = empty;
+  db->t4 = empty;
+  db->t5 = empty;
+  db->t6 = empty;
+  db->t7 = empty;
+  db->s0 = empty;
+  db->s1 = empty;
+  db->s2 = empty;
+  db->s3 = empty;
+  db->s4 = empty;
+  db->s5 = empty;
+  db->s6 = empty;
+  db->s7 = empty;
+  db->t8 = empty;
+  db->t9 = empty;
+  db->k0 = empty;
+  db->k1 = empty;
+  db->gp = empty;
+  db->sp = empty;
+  db->fp = empty;
+  db->ra = empty;
+}
 
 int getRegisterValueFromDatabase(register_database_t *database, unsigned int register_number)
 {

@@ -46,7 +46,8 @@ int main(int argc, char *argv[])
         case 'o':
             destino = optarg;
             archive_destiny = fopen(destino, "w");
-            if (archive_destiny == NULL){
+            if (archive_destiny == NULL)
+            {
                 printf("Erro no nome do arquivo destino!\n");
                 exit(1);
             }
@@ -65,13 +66,13 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-    if (number_instructions <= 0 || !config || !archive || !destino){
+    if (number_instructions <= 0 || !config || !archive || !destino)
+    {
         printf("Parametrização Incorreta!\n");
         printf("Utilize:\n");
         printf("\t./executavel -n <qtd_de_instrucao> -c <arq_configuracao.txt> -o <arq_destino> -p <arq_instrucoes.txt>\n");
         exit(1);
     }
-
 
     // Cria na memória um array para armazenar a configuração do scoreboarding
     int number_of_configs = count_configs(config);
@@ -98,6 +99,7 @@ int main(int argc, char *argv[])
 
     // Banco de registradores
     register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
+    init_register_database(register_database);
 
     execute_pipeline(
         destino,
@@ -108,8 +110,8 @@ int main(int argc, char *argv[])
         inst_status_table,
         rr_status_table,
         register_database);
-        
-    printf("Simulação concluida!\nArquivo <%s> criado!\n",destino);
+
+    printf("Simulação concluida!\nArquivo <%s> criado!\n", destino);
     free(fu_status_table);
     free(rr_status_table);
     free(register_database);
