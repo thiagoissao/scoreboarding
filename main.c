@@ -36,18 +36,26 @@ void *run(void *arg)
 int main(int argc, char *argv[])
 {
     int option;
-    char *config = NULL;       //"./examples/config.txt"
-    char *path_program = NULL; //"./examples/mnemoniosMult.txt"
-    char *path_destiny = NULL;
-    FILE *archive_destiny;
-    int number_instructions = 0;
+    char *config = NULL;        //"./examples/config.txt"
+    char *path_program1 = NULL; //"./examples/mnemoniosMult.txt"
+    char *path_program2 = NULL;
+    char *path_destiny1 = NULL;
+    char *path_destiny2 = NULL;
+    FILE *archive_destiny1;
+    FILE *archive_destiny2;
+    int number_instructions1 = 0;
+    int number_instructions2 = 0;
 
-    while ((option = getopt(argc, argv, "n:p:c:o:")) != -1)
+    while ((option = getopt(argc, argv, "n:m:p:r:c:o:q:")) != -1)
     {
         switch (option)
         {
         case 'n':
-            number_instructions = atoi(optarg);
+            number_instructions1 = atoi(optarg);
+            break;
+
+        case 'm':
+            number_instructions2 = atoi(optarg);
             break;
 
         case 'c':
@@ -55,18 +63,33 @@ int main(int argc, char *argv[])
             break;
 
         case 'p':
-            path_program = optarg;
+            path_program1 = optarg;
+            break;
+
+        case 'r':
+            path_program2 = optarg;
             break;
 
         case 'o':
-            path_destiny = optarg;
-            archive_destiny = fopen(path_destiny, "w");
-            if (archive_destiny == NULL)
+            path_destiny1 = optarg;
+            archive_destiny1 = fopen(path_destiny1, "w");
+            if (archive_destiny1 == NULL)
             {
                 printf("Erro no nome do arquivo destino!\n");
                 exit(1);
             }
-            fclose(archive_destiny);
+            fclose(archive_destiny1);
+            break;
+
+        case 'q':
+            path_destiny2 = optarg;
+            archive_destiny2 = fopen(path_destiny1, "w");
+            if (archive_destiny2 == NULL)
+            {
+                printf("Erro no nome do arquivo destino!\n");
+                exit(1);
+            }
+            fclose(archive_destiny2);
             break;
 
         case '?':
@@ -81,11 +104,18 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-    if (number_instructions <= 0 || !config || !path_program || !path_destiny)
+
+    if (number_instructions1 <= 0 ||
+        !config ||
+        !path_program1 ||
+        !path_destiny1 ||
+        number_instructions2 <= 0 ||
+        !path_program2 ||
+        !path_destiny2)
     {
-        printf("Parametrização Incorreta!\n");
+        printf("Parametrização do Programa 1 Incorreta!\n");
         printf("Utilize:\n");
-        printf("\t./executavel -n <qtd_de_instrucao> -c <arq_configuracao.txt> -o <arq_path_destiny> -p <arq_instrucoes.txt>\n");
+        printf("\t./executavel -n <qtd_de_instrucao> -c <arq_configuracao.txt> -o <arq_path_destiny> -p <arq_instrucoes.txt> -m <qtd_de_instrucao> -q <arq_path_destiny> -r <arq_instrucoes.txt>\n");
         exit(1);
     }
 
@@ -99,17 +129,17 @@ int main(int argc, char *argv[])
 
     arguments[0].id = 0;
     arguments[0].configurations = configurations;
-    arguments[0].number_instructions = number_instructions;
+    arguments[0].number_instructions = number_instructions1;
     arguments[0].number_of_configs = number_of_configs;
-    arguments[0].path_destiny = path_destiny;
-    arguments[0].path_program = path_program;
+    arguments[0].path_destiny = path_destiny1;
+    arguments[0].path_program = path_program1;
 
     arguments[1].id = 1;
     arguments[1].configurations = configurations;
-    arguments[1].number_instructions = number_instructions;
+    arguments[1].number_instructions = number_instructions2;
     arguments[1].number_of_configs = number_of_configs;
-    arguments[1].path_destiny = path_destiny;
-    arguments[1].path_program = path_program;
+    arguments[1].path_destiny = path_destiny2;
+    arguments[1].path_program = path_program2;
 
     pthread_create(&(threads[0]), NULL, run, &(arguments[0]));
     pthread_create(&(threads[1]), NULL, run, &(arguments[1]));
@@ -117,7 +147,8 @@ int main(int argc, char *argv[])
     pthread_join(threads[0], NULL);
     pthread_join(threads[1], NULL);
 
-    printf("Simulação concluida!\nArquivo <%s> criado!\n", path_destiny);
+    printf("Simulação concluida!\nArquivo <%s> criado!\n", path_destiny1);
+    printf("Simulação concluida!\nArquivo <%s> criado!\n", path_destiny2);
 
     return 0;
 }
