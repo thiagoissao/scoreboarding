@@ -107,8 +107,15 @@ int main(int argc, char *argv[])
     config_t configurations[number_of_configs];
     config_converter(config, configurations);
 
-    execute_pthread(configurations, number_instructions1, number_of_configs, path_destiny1,
-    path_program1, number_instructions2, path_destiny2, path_program2);
-    
+    execute_pthread(
+        configurations,
+        number_instructions1,
+        number_of_configs,
+        path_destiny1,
+        path_program1,
+        number_instructions2,
+        path_destiny2,
+        path_program2);
+
     return 0;
 }

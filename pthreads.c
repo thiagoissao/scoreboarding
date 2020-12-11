@@ -16,9 +16,15 @@ void *run(void *arg)
         targ->number_instructions);
 }
 
-void execute_pthread(config_t *configurations, int number_instructions1, int number_of_configs, 
-    char * path_destiny1, char * path_program1, int number_instructions2, char * path_destiny2, 
-    char * path_program2 )
+void execute_pthread(
+    config_t *configurations,
+    int number_instructions1,
+    int number_of_configs,
+    char *path_destiny1,
+    char *path_program1,
+    int number_instructions2,
+    char *path_destiny2,
+    char *path_program2)
 {
 
     pthread_t threads[2];
