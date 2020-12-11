@@ -87,7 +87,6 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-    printf("\n->> %s --- %s\n\n", path_destiny1, path_destiny2);
     if (number_instructions1 <= 0 ||
         !config ||
         !path_program1 ||
