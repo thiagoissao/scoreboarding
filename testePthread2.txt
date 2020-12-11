@@ -2,6 +2,785 @@
 
 -------------------------------------------------------- ciclo 1 -----------------------------------------------------------------
 
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		     	             	             
+  li $t2,   4		   		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t1 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 2 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	             	             
+  li $t2,   4		   		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t1 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 3 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	             
+  li $t2,   4		   		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t1 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 4 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		   		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 5 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		     	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t2 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 6 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	             	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t2 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 7 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	             
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t2 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 8 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		   		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 9 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		     	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t3 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 10 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	             	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t3 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 11 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	             
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t3 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 12 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		   		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 13 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		     	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t4 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 14 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	             	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t4 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 15 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	             
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t4 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 16 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,  10		   		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 17 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,  10		  17		     	             	             
+ sub $t1, $t2, $t3	   		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t5 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 18 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,  10		  17		   18	             	             
+ sub $t1, $t2, $t3	  18		     	             	             
+ div $t4, $t2, $t3	   		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  sim	|   li 	|   t5 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 19 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,  10		  17		   18	           19	             
+ sub $t1, $t2, $t3	  18		   19	             	             
+ div $t4, $t2, $t3	  19		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  log   |  sim	|   li 	|   t5 	|      	|      	|      	|      	|  sim 	|  sim
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 20 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,  10		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	             	             
+ div $t4, $t2, $t3	  19		   20	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+1  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 21 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,  10		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	           21	             
+ div $t4, $t2, $t3	  19		   20	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+1  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 22 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,  10		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	           21	           22
+ div $t4, $t2, $t3	  19		   20	           22	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 23 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,  10		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	           21	           22
+ div $t4, $t2, $t3	  19		   20	           22	           23
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|   1	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
 
 -------------------------------------------------------- ciclo 1 -----------------------------------------------------------------
 
@@ -11,9 +790,9 @@
   li $t2,   4		   		     	             	             
   li $t3,   3		   		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -45,9 +824,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		   		     	             	             
   li $t3,   3		   		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -57,32 +836,12 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  log   |  sim	|   li 	|   t1 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		     	             	             
-  li $t2,   4		   		     	             	             
-  li $t3,   3		   		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
 
 
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t1 	|      	|      	|      	|      	|  sim 	|  sim
 
 
 4) banco de registradores
@@ -93,27 +852,16 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 
 -------------------------------------------------------- ciclo 3 -----------------------------------------------------------------
 
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	             
   li $t2,   4		   		     	             	             
   li $t3,   3		   		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 2) status das unidades funcionais
 uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
@@ -123,9 +871,6 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  log   |  sim	|   li 	|   t1 	|      	|      	|      	|      	|  sim 	|  sim
 
-
-
--------------------------------------------------------- ciclo 2 -----------------------------------------------------------------
 
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
@@ -133,30 +878,10 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	             	             
-  li $t2,   4		   		     	             	             
-  li $t3,   3		   		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
 4) banco de registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
     	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t1 	|      	|      	|      	|      	|  sim 	|  sim
-
 
 
 -------------------------------------------------------- ciclo 4 -----------------------------------------------------------------
@@ -167,15 +892,9 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
   li $t2,   4		   		     	             	             
   li $t3,   3		   		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -196,18 +915,10 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 4) banco de registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
-    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
     	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
 -------------------------------------------------------- ciclo 5 -----------------------------------------------------------------
-
-
--------------------------------------------------------- ciclo 3 -----------------------------------------------------------------
 
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
@@ -215,9 +926,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		     	             	             
   li $t3,   3		   		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -229,30 +940,10 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  log   |  sim	|   li 	|   t2 	|      	|      	|      	|      	|  sim 	|  sim
 
 
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	             
-  li $t2,   4		   		     	             	             
-  li $t3,   3		   		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t1 	|      	|      	|      	|      	|  sim 	|  sim
 
 
 4) banco de registradores
@@ -263,21 +954,15 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 
 -------------------------------------------------------- ciclo 6 -----------------------------------------------------------------
 
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	             	             
   li $t3,   3		   		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -294,14 +979,6 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 
    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 4 -----------------------------------------------------------------
 
 4) banco de registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
@@ -317,20 +994,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	             
   li $t3,   3		   		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		   		     	             	             
-  li $t3,   3		   		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -348,15 +1014,6 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
 4) banco de registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
@@ -365,21 +1022,15 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 
 -------------------------------------------------------- ciclo 8 -----------------------------------------------------------------
 
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		   		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -391,19 +1042,11 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 
 
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
-
-
--------------------------------------------------------- ciclo 5 -----------------------------------------------------------------
 
 4) banco de registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
@@ -416,23 +1059,12 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		     	             	             
-  li $t3,   3		   		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		     	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -444,25 +1076,10 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  log   |  sim	|   li 	|   t3 	|      	|      	|      	|      	|  sim 	|  sim
 
 
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t2 	|      	|      	|      	|      	|  sim 	|  sim
-
-
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
 4) banco de registradores
@@ -479,15 +1096,10 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	             	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 2) status das unidades funcionais
 uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
@@ -497,9 +1109,6 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  log   |  sim	|   li 	|   t3 	|      	|      	|      	|      	|  sim 	|  sim
 
-
-
--------------------------------------------------------- ciclo 6 -----------------------------------------------------------------
 
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
@@ -518,32 +1127,12 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	             	             
-  li $t3,   3		   		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	             
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t2 	|      	|      	|      	|      	|  sim 	|  sim
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -559,12 +1148,6 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
 4) banco de registradores
@@ -575,20 +1158,15 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 
 -------------------------------------------------------- ciclo 12 -----------------------------------------------------------------
 
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
 1) status das instrucoes
 		      emissao | leitura dos operandos | execucao | escrita dos resultados
   li $t1,   0		  1		    2	            3	            4
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -600,9 +1178,6 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 
 
-
--------------------------------------------------------- ciclo 7 -----------------------------------------------------------------
-
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
@@ -613,17 +1188,6 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
     	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	             
-  li $t3,   3		   		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
 
 
 -------------------------------------------------------- ciclo 13 -----------------------------------------------------------------
@@ -634,574 +1198,10 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		     	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t2 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t4 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 14 -----------------------------------------------------------------
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 8 -----------------------------------------------------------------
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t4 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		   		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
-
--------------------------------------------------------- ciclo 15 -----------------------------------------------------------------
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t4 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 16 -----------------------------------------------------------------
-
-
--------------------------------------------------------- ciclo 9 -----------------------------------------------------------------
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		     	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t3 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-
--------------------------------------------------------- ciclo 17 -----------------------------------------------------------------
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t5 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 10 -----------------------------------------------------------------
-
-
--------------------------------------------------------- ciclo 18 -----------------------------------------------------------------
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	             	             
- sub $t1, $t2, $t3	  18		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	             	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t5 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t3 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 19 -----------------------------------------------------------------
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	             
- sub $t1, $t2, $t3	  18		   19	             	             
- div $t4, $t2, $t3	  19		     	             	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  log   |  sim	|   li 	|   t5 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-
--------------------------------------------------------- ciclo 11 -----------------------------------------------------------------
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 20 -----------------------------------------------------------------
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	             
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	           20
- sub $t1, $t2, $t3	  18		   19	             	             
- div $t4, $t2, $t3	  19		   20	             	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-1  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  sim	|   li 	|   t3 	|      	|      	|      	|      	|  sim 	|  sim
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 21 -----------------------------------------------------------------
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	           20
- sub $t1, $t2, $t3	  18		   19	           21	             
- div $t4, $t2, $t3	  19		   20	             	             
-
-
-
--------------------------------------------------------- ciclo 12 -----------------------------------------------------------------
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-1  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		   		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 22 -----------------------------------------------------------------
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	           20
- sub $t1, $t2, $t3	  18		   19	           21	           22
- div $t4, $t2, $t3	  19		   20	           22	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 23 -----------------------------------------------------------------
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	           20
- sub $t1, $t2, $t3	  18		   19	           21	           22
- div $t4, $t2, $t3	  19		   20	           22	           23
-
-
-
--------------------------------------------------------- ciclo 13 -----------------------------------------------------------------
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		     	             	             
-  li $t5,  10		   		     	             	             
- sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|   1	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 2) status das unidades funcionais
 uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
@@ -1232,9 +1232,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	             	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1266,9 +1266,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	             
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1300,9 +1300,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		   		     	             	             
+  li $t5,   2		   		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1334,9 +1334,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		     	             	             
+  li $t5,   2		  17		     	             	             
  sub $t1, $t2, $t3	   		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1368,9 +1368,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	             	             
+  li $t5,   2		  17		   18	             	             
  sub $t1, $t2, $t3	  18		     	             	             
- div $t4, $t2, $t3	   		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1402,9 +1402,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	             
+  li $t5,   2		  17		   18	           19	             
  sub $t1, $t2, $t3	  18		   19	             	             
- div $t4, $t2, $t3	  19		     	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1412,14 +1412,14 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  log   |  sim	|   li 	|   t5 	|      	|      	|      	|      	|  sim 	|  sim
 
 
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
-   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	| log	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
 4) banco de registradores
@@ -1436,9 +1436,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	           20
+  li $t5,   2		  17		   18	           19	           20
  sub $t1, $t2, $t3	  18		   19	             	             
- div $t4, $t2, $t3	  19		   20	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1446,20 +1446,20 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 1  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 
 
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
-   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
 4) banco de registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|   2	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
 -------------------------------------------------------- ciclo 21 -----------------------------------------------------------------
@@ -1470,9 +1470,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	           20
+  li $t5,   2		  17		   18	           19	           20
  sub $t1, $t2, $t3	  18		   19	           21	             
- div $t4, $t2, $t3	  19		   20	             	             
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1480,20 +1480,20 @@ uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
 0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  add   |  sim	|  sub 	|   t1 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-1  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
 
 
 3) status dos registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
-   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+   	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
 4) banco de registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   0	|   4	|   3	|  10	|   2	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
 
 
 -------------------------------------------------------- ciclo 22 -----------------------------------------------------------------
@@ -1504,43 +1504,9 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
   li $t2,   4		  5		    6	            7	            8
   li $t3,   3		  9		   10	           11	           12
   li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	           20
+  li $t5,   2		  17		   18	           19	           20
  sub $t1, $t2, $t3	  18		   19	           21	           22
- div $t4, $t2, $t3	  19		   20	           22	             
-
-
-2) status das unidades funcionais
-uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
-0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-0  div   |  sim	|  div 	|   t4 	|   t2 	|   t3 	|      	|      	|  sim 	|  sim
-0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
-
-
-3) status dos registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| div	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
-4) banco de registradores
-zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
-
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|  10	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
-
-
--------------------------------------------------------- ciclo 23 -----------------------------------------------------------------
-
-1) status das instrucoes
-		      emissao | leitura dos operandos | execucao | escrita dos resultados
-  li $t1,   0		  1		    2	            3	            4
-  li $t2,   4		  5		    6	            7	            8
-  li $t3,   3		  9		   10	           11	           12
-  li $t4,  10		  13		   14	           15	           16
-  li $t5,  10		  17		   18	           19	           20
- sub $t1, $t2, $t3	  18		   19	           21	           22
- div $t4, $t2, $t3	  19		   20	           22	           23
+ add $t4, $t1, $t5	   		     	             	             
 
 
 2) status das unidades funcionais
@@ -1561,4 +1527,174 @@ zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  
 4) banco de registradores
 zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
 
-    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|   1	|  10	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|  10	|   2	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 23 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,   2		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	           21	           22
+ add $t4, $t1, $t5	  23		     	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  sim	|  add 	|   t4 	|   t1 	|   t5 	|      	|      	|  sim 	|  sim
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|  10	|   2	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 24 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,   2		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	           21	           22
+ add $t4, $t1, $t5	  23		   24	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  sim	|  add 	|   t4 	|   t1 	|   t5 	|      	|      	|  sim 	|  sim
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|  10	|   2	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 25 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,   2		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	           21	           22
+ add $t4, $t1, $t5	  23		   24	             	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+1  add   |  sim	|  add 	|   t4 	|   t1 	|   t5 	|      	|      	|  sim 	|  sim
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|  10	|   2	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 26 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,   2		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	           21	           22
+ add $t4, $t1, $t5	  23		   24	           26	             
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  sim	|  add 	|   t4 	|   t1 	|   t5 	|      	|      	|  sim 	|  sim
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	| add	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|  10	|   2	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+-------------------------------------------------------- ciclo 27 -----------------------------------------------------------------
+
+1) status das instrucoes
+		      emissao | leitura dos operandos | execucao | escrita dos resultados
+  li $t1,   0		  1		    2	            3	            4
+  li $t2,   4		  5		    6	            7	            8
+  li $t3,   3		  9		   10	           11	           12
+  li $t4,  10		  13		   14	           15	           16
+  li $t5,   2		  17		   18	           19	           20
+ sub $t1, $t2, $t3	  18		   19	           21	           22
+ add $t4, $t1, $t5	  23		   24	           26	           27
+
+
+2) status das unidades funcionais
+uf	| busy	| op	| fi	| fj	| fk	| qj	| qk	| rj	| rk
+0  mult1 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  mult2 |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  add   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  div   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+0  log   |  nao	|      	|      	|      	|      	|      	|      	|      	|     
+
+
+3) status dos registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+   	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	
+
+
+4) banco de registradores
+zero	|  at	|  v0	|  v1	|  a0	|  a1	|  a2	|  a3	|  t0	|  t1	|  t2	|  t3	|  t4	|  t5	|  t6	|  t7	|  s0	|  s1	|  s2	|  s3	|  s4	|  s5	|  s6	|  s7	|  t8	|  t9	|  k0	|  k1	|  gp	|  sp	|  fp	|  ra	
+
+    	|    	|    	|    	|    	|    	|    	|    	|    	|   1	|   4	|   3	|   3	|   2	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	|    	

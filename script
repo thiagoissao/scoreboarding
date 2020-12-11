@@ -1,1 +1,1 @@
-./a.out -n 7 -p ./examples/mnemoniosRAW.txt -c ./examples/config.txt -o testeUm.txt
+./a.out -c ./examples/config.txt -n 7 -p ./examples/mnemoniosRAR.txt -o testePthread1.txt -m 7 -r ./examples/mnemoniosRAW.txt -q testePthread2.txt

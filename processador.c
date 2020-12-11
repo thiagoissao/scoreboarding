@@ -20,20 +20,38 @@ bool read_operands();
 bool execute_issue();
 bool execute_operands();
 
-unsigned int clock;
-
 void execute_pipeline(
     char *path,
+    char *archive,
     int config_size,
     config_t *config,
-    unsigned int numberOfInstructions,
-    functional_unit_status_table_t *fu_status_table,
-    instruction_status_t *inst_status_table,
-    register_result_status_table_t *rr_status_table,
-    register_database_t *register_database)
+    unsigned int numberOfInstructions)
 {
+
+  // Cria na memória um array com o inteiro de cada instrução
+  unsigned int instruction_set[numberOfInstructions];
+
+  // Converte o conjunto das instruções para inteiro e armazena no array passado por referência
+  converter(archive, instruction_set);
+
+  // Status das unidades funcionais e inicialização
+  functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
+  init_functional_unit_status_table(fu_status_table);
+
+  // Status das instruções e inicialização
+  instruction_status_t inst_status_table[numberOfInstructions];
+  init_instruction_status_table(inst_status_table, instruction_set, numberOfInstructions);
+
+  // Status dos registradores e inicialização
+  register_result_status_table_t *rr_status_table = (register_result_status_table_t *)malloc(sizeof(register_result_status_table_t));
+  init_register_status_table(rr_status_table);
+
+  // Banco de registradores
+  register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
+  init_register_database(register_database);
+
   // inicializa
-  clock = 1;
+  unsigned int clock = 1;
   unsigned int instAtual = 0, j;
   bool nextStep[numberOfInstructions], nextStepRead[numberOfInstructions];
   bool allWasWrited = false, allWasRead;
@@ -48,7 +66,13 @@ void execute_pipeline(
     fprintf(destiny, "\n\n-------------------------------------------------------- ciclo %i -----------------------------------------------------------------\n", clock);
     fclose(destiny);
 
-    if (instAtual < numberOfInstructions && execute_issue(inst_status_table[instAtual].instruction, inst_status_table, fu_status_table, rr_status_table, instAtual))
+    if (instAtual < numberOfInstructions && execute_issue(
+                                                inst_status_table[instAtual].instruction,
+                                                inst_status_table,
+                                                fu_status_table,
+                                                rr_status_table,
+                                                instAtual,
+                                                clock))
     {
       nextStep[instAtual] = false;
       instAtual++; // se a atual iniciou pra issue a inst pode ir pra proxima
@@ -60,13 +84,26 @@ void execute_pipeline(
     for (j = 0; j < instAtual; j++)
     {
       if (inst_status_table[j].issue != -1 && inst_status_table[j].readOperand == -1)
-        read_operands(inst_status_table, fu_status_table, nextStep, nextStepRead, j);
+        read_operands(
+            inst_status_table,
+            fu_status_table,
+            nextStep,
+            nextStepRead,
+            j,
+            clock);
     }
 
     for (j = 0; j < instAtual; j++)
     {
       if (inst_status_table[j].readOperand != -1 && inst_status_table[j].execComp == -1)
-        execute_operands(inst_status_table, fu_status_table, nextStep, j, config, config_size);
+        execute_operands(
+            inst_status_table,
+            fu_status_table,
+            nextStep,
+            j,
+            config,
+            config_size,
+            clock);
     }
 
     for (j = 0; j < instAtual; j++)
@@ -77,7 +114,9 @@ void execute_pipeline(
             inst_status_table,
             fu_status_table,
             rr_status_table,
-            nextStepRead, nextStep, j);
+            nextStepRead, nextStep,
+            j,
+            clock);
     }
 
     printa(inst_status_table, numberOfInstructions, fu_status_table, rr_status_table, register_database, path);
@@ -87,10 +126,14 @@ void execute_pipeline(
     allWasWrited = verify_if_all_was_writed(inst_status_table, numberOfInstructions, clock);
     clock += 1;
   }
+
+  free(fu_status_table);
+  free(rr_status_table);
+  free(register_database);
 }
 
 bool execute_issue(unsigned int instruction, instruction_status_t *inst_status_table,
-                   functional_unit_status_table_t *fu_status_table, register_result_status_table_t *rr_status_table, unsigned int instAtual)
+                   functional_unit_status_table_t *fu_status_table, register_result_status_table_t *rr_status_table, unsigned int instAtual, unsigned int clock)
 {
 
   // verifica disponibilidade da sessao da operacao na FU
@@ -107,8 +150,14 @@ bool execute_issue(unsigned int instruction, instruction_status_t *inst_status_t
     return false;
 }
 
-bool read_operands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
-                   bool *nextStep, bool *nextStepRead, unsigned int idInstrucao)
+bool read_operands(
+    instruction_status_t *inst_status_table,
+    functional_unit_status_table_t *fu_status_table,
+    bool *nextStep,
+    bool *nextStepRead,
+    unsigned int idInstrucao,
+    unsigned int clock)
+
 {
   /*
   espere até que não haja riscos de dados, então leia os operandos
@@ -154,8 +203,14 @@ bool read_operands(instruction_status_t *inst_status_table, functional_unit_stat
   return false;
 }
 
-bool execute_operands(instruction_status_t *inst_status_table, functional_unit_status_table_t *fu_status_table,
-                      bool *nextStep, unsigned int id_instrucao, config_t *config, int config_size)
+bool execute_operands(
+    instruction_status_t *inst_status_table,
+    functional_unit_status_table_t *fu_status_table,
+    bool *nextStep,
+    unsigned int id_instrucao,
+    config_t *config,
+    int config_size,
+    unsigned int clock)
 {
   /*3-
     Execution - opera em operandos (EX)
@@ -208,7 +263,7 @@ bool write_result(
     instruction_status_t *inst_status_table,
     functional_unit_status_table_t *fu_status_table,
     register_result_status_table_t *rr_status_table,
-    bool *nextStepRead, bool *nextStep, unsigned int idInstrucao)
+    bool *nextStepRead, bool *nextStep, unsigned int idInstrucao, unsigned int clock)
 {
   /*
   Write Resulta - execução final (WB)

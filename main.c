@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <pthread.h>
 #include "conversor.h"
 #include "processador.c"
 #include "components/functional_unit_status.h"
@@ -14,25 +15,47 @@
 #include "config/config.h"
 #include "config/config_converter.h"
 
-// #define PROGRAM "mnemonios.txt"
-// #define CONFIG "config.txt"
-// #define CICLOS 18
+typedef struct
+{
+    int id, number_of_configs, number_instructions;
+    char *path_program, *path_destiny;
+    config_t *configurations;
+} thread_arg, *ptr_thread_arg;
+
+void *run(void *arg)
+{
+    ptr_thread_arg targ = (ptr_thread_arg)arg;
+    execute_pipeline(
+        targ->path_destiny,
+        targ->path_program,
+        targ->number_of_configs,
+        targ->configurations,
+        targ->number_instructions);
+}
 
 int main(int argc, char *argv[])
 {
     int option;
-    char *config = NULL;  //"./examples/config.txt"
-    char *archive = NULL; //"./examples/mnemoniosMult.txt"
-    char *destino = NULL;
-    FILE *archive_destiny;
-    int number_instructions = 0;
+    char *config = NULL;        //"./examples/config.txt"
+    char *path_program1 = NULL; //"./examples/mnemoniosMult.txt"
+    char *path_program2 = NULL;
+    char *path_destiny1 = NULL;
+    char *path_destiny2 = NULL;
+    FILE *archive_destiny1;
+    FILE *archive_destiny2;
+    int number_instructions1 = 0;
+    int number_instructions2 = 0;
 
-    while ((option = getopt(argc, argv, "n:p:c:o:")) != -1)
+    while ((option = getopt(argc, argv, "n:m:p:r:c:o:q:")) != -1)
     {
         switch (option)
         {
         case 'n':
-            number_instructions = atoi(optarg);
+            number_instructions1 = atoi(optarg);
+            break;
+
+        case 'm':
+            number_instructions2 = atoi(optarg);
             break;
 
         case 'c':
@@ -40,18 +63,33 @@ int main(int argc, char *argv[])
             break;
 
         case 'p':
-            archive = optarg;
+            path_program1 = optarg;
+            break;
+
+        case 'r':
+            path_program2 = optarg;
             break;
 
         case 'o':
-            destino = optarg;
-            archive_destiny = fopen(destino, "w");
-            if (archive_destiny == NULL)
+            path_destiny1 = optarg;
+            archive_destiny1 = fopen(path_destiny1, "w");
+            if (archive_destiny1 == NULL)
             {
                 printf("Erro no nome do arquivo destino!\n");
                 exit(1);
             }
-            fclose(archive_destiny);
+            fclose(archive_destiny1);
+            break;
+
+        case 'q':
+            path_destiny2 = optarg;
+            archive_destiny2 = fopen(path_destiny1, "w");
+            if (archive_destiny2 == NULL)
+            {
+                printf("Erro no nome do arquivo destino!\n");
+                exit(1);
+            }
+            fclose(archive_destiny2);
             break;
 
         case '?':
@@ -66,11 +104,18 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-    if (number_instructions <= 0 || !config || !archive || !destino)
+
+    if (number_instructions1 <= 0 ||
+        !config ||
+        !path_program1 ||
+        !path_destiny1 ||
+        number_instructions2 <= 0 ||
+        !path_program2 ||
+        !path_destiny2)
     {
-        printf("Parametrização Incorreta!\n");
+        printf("Parametrização do Programa 1 Incorreta!\n");
         printf("Utilize:\n");
-        printf("\t./executavel -n <qtd_de_instrucao> -c <arq_configuracao.txt> -o <arq_destino> -p <arq_instrucoes.txt>\n");
+        printf("\t./executavel -n <qtd_de_instrucao> -c <arq_configuracao.txt> -o <arq_path_destiny> -p <arq_instrucoes.txt> -m <qtd_de_instrucao> -q <arq_path_destiny> -r <arq_instrucoes.txt>\n");
         exit(1);
     }
 
@@ -79,56 +124,31 @@ int main(int argc, char *argv[])
     config_t configurations[number_of_configs];
     config_converter(config, configurations);
 
-    // Cria na memória um array com o inteiro de cada instrução
-    unsigned int instruction_set[number_instructions];
+    pthread_t threads[2];
+    thread_arg arguments[2];
 
-    // Converte o conjunto das instruções para inteiro e armazena no array passado por referência
-    converter(archive, instruction_set);
+    arguments[0].id = 0;
+    arguments[0].configurations = configurations;
+    arguments[0].number_instructions = number_instructions1;
+    arguments[0].number_of_configs = number_of_configs;
+    arguments[0].path_destiny = path_destiny1;
+    arguments[0].path_program = path_program1;
 
-    // Status das unidades funcionais e inicialização
-    functional_unit_status_table_t *fu_status_table = (functional_unit_status_table_t *)malloc(sizeof(functional_unit_status_table_t));
-    init_functional_unit_status_table(fu_status_table);
+    arguments[1].id = 1;
+    arguments[1].configurations = configurations;
+    arguments[1].number_instructions = number_instructions2;
+    arguments[1].number_of_configs = number_of_configs;
+    arguments[1].path_destiny = path_destiny2;
+    arguments[1].path_program = path_program2;
 
-    // Status das instruções e inicialização
-    instruction_status_t inst_status_table[number_instructions];
-    init_instruction_status_table(inst_status_table, instruction_set, number_instructions);
+    pthread_create(&(threads[0]), NULL, run, &(arguments[0]));
+    pthread_create(&(threads[1]), NULL, run, &(arguments[1]));
 
-    // Status dos registradores e inicialização
-    register_result_status_table_t *rr_status_table = (register_result_status_table_t *)malloc(sizeof(register_result_status_table_t));
-    init_register_status_table(rr_status_table);
+    pthread_join(threads[0], NULL);
+    pthread_join(threads[1], NULL);
 
-    // Banco de registradores
-    register_database_t *register_database = (register_database_t *)malloc(sizeof(register_database_t));
-    init_register_database(register_database);
+    printf("Simulação concluida!\nArquivo <%s> criado!\n", path_destiny1);
+    printf("Simulação concluida!\nArquivo <%s> criado!\n", path_destiny2);
 
-    execute_pipeline(
-        destino,
-        number_of_configs,
-        configurations,
-        number_instructions,
-        fu_status_table,
-        inst_status_table,
-        rr_status_table,
-        register_database);
-
-    printf("Simulação concluida!\nArquivo <%s> criado!\n", destino);
-    free(fu_status_table);
-    free(rr_status_table);
-    free(register_database);
     return 0;
 }
-
-/*
-* - main.c  => Controla o scoreboarding, aqui são utilizadas todas as structs, conversões, etc.
-* - conversor.h => ler o arquivo de instrucoes e salvar na memória, porém o papel de salvar na memória deve ser atribuida a main.c. Então a ideia para o conversor.h é receber valores e devolver esses valores prontos.
-* - Cada "tabela" do scoreboarding deve ser separado em arquivos diferentes para facilitar a leitura posteriormente, organizar cada "tabela" em structs e construir funcões auxiliares para cada tipo de processamento. Lembrando que quem deve utilizar essas structs e funcões auxiliares é a main.c
-* - Existe um arquivo chamado processador.c. Seu papel é organizar essas "tabelas" de forma que eles trabalhem em sintonia. Acho que uma forma legal de arquiteturar esse arquivo é criar métodos para a main.c, pois dessa forma toda a lógica de execucão fica por conta da main. Por exemplo, a instrucão atual é um ADD, então o processador.c deve possuir uma funcão de ADD.
-*    Sugestão de uso: 
-*      ENQUANTO existir instrucões FACA
-*         INTRUCAO_ATUAL = INSTRUCOES[i]
-*         SE INSTRUCAO_ATUAL === ADD ENTAO
-*            processador.add(INSTRUCAO_ATUAL)
-*         SE INSTRUCAO_ATUAL === MUL ENTAO
-*            processador.mul(INSTRUCAO_ATUAL)
-*          ....
-*/
