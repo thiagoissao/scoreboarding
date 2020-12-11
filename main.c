@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
             archive_destiny1 = fopen(path_destiny1, "w");
             if (archive_destiny1 == NULL)
             {
-                printf("Erro no nome do arquivo destino!\n");
+                printf("Erro no nome do arquivo destino 1!\n");
                 exit(1);
             }
             fclose(archive_destiny1);
@@ -66,10 +66,10 @@ int main(int argc, char *argv[])
 
         case 'q':
             path_destiny2 = optarg;
-            archive_destiny2 = fopen(path_destiny1, "w");
+            archive_destiny2 = fopen(path_destiny2, "w");
             if (archive_destiny2 == NULL)
             {
-                printf("Erro no nome do arquivo destino!\n");
+                printf("Erro no nome do arquivo destino 2!\n");
                 exit(1);
             }
             fclose(archive_destiny2);
@@ -87,18 +87,19 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-
+    printf("\n->> %s --- %s\n\n", path_destiny1, path_destiny2);
     if (number_instructions1 <= 0 ||
         !config ||
         !path_program1 ||
         !path_destiny1 ||
         number_instructions2 <= 0 ||
         !path_program2 ||
-        !path_destiny2)
+        !path_destiny2 || 
+        !strcmp(path_destiny1,path_destiny2))
     {
-        printf("Parametrização do Programa 1 Incorreta!\n");
+        printf("Parametrização do Programa Incorreta!\n");
         printf("Utilize:\n");
-        printf("\t./executavel -n <qtd_de_instrucao> -c <arq_configuracao.txt> -o <arq_path_destiny> -p <arq_instrucoes.txt> -m <qtd_de_instrucao> -q <arq_path_destiny> -r <arq_instrucoes.txt>\n");
+        printf("\t./executable -c <configuration_file.txt> -n <amount_instruction_1> -o <arq_path_destiny_1> -p <instruction_file_1.txt> -m <amount_instructions_2> -q <arq_path_destiny_2> -r <instruction_file_2.txt>\n");
         exit(1);
     }
 
