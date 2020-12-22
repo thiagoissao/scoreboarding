@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# README
+# Computer Architecture II 
+# Projeto III - Processador de dois núcleos - Scoreboarding
+# Prof.: Anderson Faustino da Silva
+# Alunos:
+# Gabriel Thiago H.Santos - 107774
+# Thiago Issao Yasunaka   - 103069
+# Dezembro 2020
+
+# Intruções necessarias para gerar PDF do relatorio em latex
+# Se preferir pode-se utilizar desde README para ja baixar todos pacotes e gerar o PDF 
+
+# Para isso execute no terminal para dar permissão de execução
+# chmod +x README 
+# E em seguida
+# ./README
+
+# Sera utilizado o PDFLatex ao makefile, para isto necessita de pelo menos os pacotes:
+
+#1 - Para o makefile
+sudo apt install make -y
+
+# 2 - Para execucao do PDFLatex
+sudo apt install texlive -y
+
+# 3 - Para informacoes da compilacao
+sudo apt install texlive-publishers -y
+
+# 4 - Para package usado no projeto
+sudo apt install texlive-lang-portuguese -y
+
+# E entao para enfim gerar o PDF
+make
+
+# Lembrando que o makefile deste deve estar no mesmo diretorio em que os 
+# arquivos do Latex (bare_jrnl.tex; img_Scoreboard.png; img_Scoreboarding.png; arquitetura_implementada.png; threads.png; projeto3.tex; e style.sty)

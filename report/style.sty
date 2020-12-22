@@ -1,0 +1,30 @@
+\makeatletter
+\renewcommand\maketitle{
+    \begin{titlepage}%
+    \begin{center}
+        \let\footnotesize\small
+        \let\footnoterule\relax
+        \let \footnote \thanks
+        \Large\sf Universidade Estadual de Maringá \\
+            Departamento de Informática
+            \rm
+            \vskip 2in
+
+            {\LARGE \sf\textbf{\@title} \par}%
+            \vskip 3em% %% Change this space if you wish
+            {\large
+                \lineskip .75em%
+                \begin{tabular}[t]{c}%
+                \@author
+                \end{tabular}\par%
+            }
+
+            \vskip 20em%   %% Change this space if you wish
+            
+          \sf Arquitetura e organização de Computadores II
+          \linebreak
+          Novembro, 2020
+          \vfil
+          \end{center}
+    \end{titlepage}
+}

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# README
+# Computer Architecture II
+# Projeto III - Processador de dois núcleos - Scoreboarding
+# Prof.: Anderson Faustino da Silva
+# Alunos:
+# Gabriel Thiago H.Santos - 107774
+# Thiago Issao Yasunaka   - 103069
+# Dezembro 2020
+
+
+
+# The code for the Dual-core Processor simulator starts at 'main.c'. 
+
+# * README *
+# Current file with the instructions to start the project; you can run this
+# file as a script to quickly set everything up: `source ./README` You can find
+# the lab instructions are online.
+sudo apt install make -y
+sudo apt install gcc -y
+
+# 5. Test build.
+gcc main.c -D_REENTRANT -lpthread
+
+# 5. Test run.
+#     ./executable -c <configuration_file.txt> -n <amount_instruction_1> -o <arq_path_destiny_1> -p <instruction_file_1.txt> -m <amount_instructions_2> -q <arq_path_destiny_2> -r <instruction_file_2.txt>
+#     <-c >       - archive of config (time/latencia) (txt)
+#     <-n >       - number of program instructions one
+#     <-m >       - number of program instruction two 
+#     <-o > 	  - output file one, will have the results of the tables in each clock of the execution (txt)
+#     <-q >       - output file two, will have the results of the tables in each clock of the execution (txt)
+#     <-p > 	  - instruction file one (txt - no comments just the line instructions)
+#     <-r >       - instruction file two (txt - no comments just the line instructions)
+
+# Example for a test already saved in the current directories
+./a.out -c ./examples/config.txt -n 7 -p ./examples/mnemoniosRAR.txt -o testePthread1.txt -m 7 -r ./examples/mnemoniosRAW.txt -q testePthread2.txt
+
+
+# 6. Add your own settings and instructions and run!
