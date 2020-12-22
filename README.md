@@ -1,6 +1,6 @@
-# **Computer Architecture II** 
-# **Project - Dual-Core Processor - Scoreboarding**
+# Project - Dual-Core Processor - Scoreboarding
 * State University of Maringá  
+* Computer Architecture II
 * Authors:
   * Gabriel Thiago H. Santos 
   * Thiago Issao Yasunaka  
